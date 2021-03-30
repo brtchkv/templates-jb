@@ -1,0 +1,63 @@
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.login-section {
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.auth-btn {
+    width: 100%;
+}
+
+.auth-section input[type="text"], .auth-section input[type="email"], .auth-section input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    list-style: none;
+    justify-content: center;
+}
+
+/* login form header */
+
+.login-form .tabs {
+    display: flex;
+    padding: 2rem 2rem 1rem;
+}
+
+.login-form .tabs {
+    flex-basis: 50%;
+    font-size: 1.2rem;
+}
+
+.login-form .tabs .tab:first-of-type {
+    background: #FFF;
+}
+
+/* login form body */
+
+.login-form-body {
+    padding: 2rem;
+}
+
+.login-form .login-button {
+    width: 100%;
+    margin-top: 1rem;
+}

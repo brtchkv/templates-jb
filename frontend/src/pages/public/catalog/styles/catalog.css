@@ -1,0 +1,16 @@
+.scroll-btn-container > .btn {
+    width: 100%;
+}
+
+.scroll-btn-container {
+    margin: auto;
+    max-width: 1010px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 2rem;
+}
+
+.scroll-btn-container button {
+    border-radius: 4px;
+}
+

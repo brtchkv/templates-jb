@@ -1,0 +1,98 @@
+{
+  "translations": {
+    "util": {
+      "loading": "Загрузка...",
+      "error": "Ошибка",
+      "pageNotFound": "Страница не найдена."
+    },
+    "header": {
+      "publicMenu": {
+        "auth": "Войти / Регистрация",
+        "dashBoard": "Главная"
+      },
+      "authMenu": {
+        "title": "Мой профиль",
+        "myCourses": "Мои курсы",
+        "profile": "Профиль",
+        "logOut": "Выйти",
+        "uniPortal": "Кабинет университета"
+      },
+      "settings": {
+        "a11": "Версия для слабовидящих",
+        "i18": "English version"
+      }
+    },
+    "catalog": {
+      "filterPanel": {
+        "totalCourses": "Всего {{count}}<1> из {{total}}</1>",
+        "filterSelector": {
+          "allUni": "Любой вуз",
+          "allProg": "Все направления",
+          "courseStatus": {
+            "all": "Все статусы",
+            "started": "Сейчас идет",
+            "scheduled": "Скоро старт",
+            "current": "Можно записаться",
+            "archived": "В архиве"
+          },
+          "sorting": {
+            "title": "Сортировка",
+            "options": {
+              "default": "по умолчанию",
+              "durationStart": "по длительности ↑",
+              "durationEnd": "по длительности ↓",
+              "nameStart": "по названию (А-Я)",
+              "nameEnd": "по названию (Я-А)",
+              "newFirst": "сначала новые"
+            }
+          }
+        }
+      },
+      "pagination": {
+        "more": "Еще",
+        "up": "Наверх"
+      }
+    },
+    "profileStudent": {
+      "totalNumberOfCourses": "Всего {{count}} записей"
+    },
+    "bvi": {
+      "fontSize": "Размер шрифта",
+      "theme": "Цвет сайта",
+      "img": "Изображения",
+      "additional": "Дополнительно",
+      "settings": "Настройки",
+      "additionalSettingsOn": "Дополнительные настройки открыты",
+      "additionalSettingsOff": "Дополнительные настройки закрыты",
+      "letterSpacing": "Кернинг",
+      "letterInterval": "Интервал",
+      "serifMenu": "Гарнитура",
+      "standard": "Стандартный",
+      "medium": "Средний",
+      "big": "Большой",
+      "withSerif": "С засечками",
+      "withoutSerif": "Без засечек",
+      "bW": "Ч/Б",
+      "on": "Вкл.",
+      "off": "Выкл.",
+      "onForSpeech": "включены",
+      "offForSpeech": "выключены",
+      "bWForSpeech": "чернобелые",
+      "fontSizeIsX": "Размер шрифта {{size}} пикселей",
+      "themeIsX": "Цвет сайта {{theme}}",
+      "blackOnWhite": "черным по белому",
+      "whiteOnBlack": "белым по черному",
+      "darkBlueOnBlue": "темно-голубым по голубому",
+      "brownOnBeige": "коричневым по бежевому",
+      "greenOnBrown": "зеленым по темно-коричневому",
+      "turnOnSpeech": "Синтез речи включен",
+      "turnOffSpeech": "Синтез речи выключен",
+      "resetTheme": "Стандартный цвет сайта включен",
+      "reset": "Вернуть стандартные настройки",
+      "close": "Закрыть панель",
+      "colorStub": "Ц",
+      "bvi": "Версия сайта для слабовидящих. Выделите текст для его озвучки.",
+      "bviOpened": "Панель для настроек отображения сайта"
+    }
+  }
+}
