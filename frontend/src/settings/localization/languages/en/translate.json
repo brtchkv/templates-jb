@@ -1,0 +1,99 @@
+{
+  "translations": {
+    "util": {
+      "loading": "Loading...",
+      "error": "Error",
+      "pageNotFound": "Page not found."
+    },
+    "header": {
+      "publicMenu": {
+        "auth": "Log In / Register",
+        "dashBoard": "Dashboard"
+      },
+      "authMenu": {
+        "title": "My profile",
+        "myCourses": "My courses",
+        "profile": "Profile",
+        "logOut": "Log out",
+        "uniPortal": "University Panel"
+      },
+      "settings": {
+        "a11": "Visually impaired version",
+        "i18": "Русский язык"
+      }
+    },
+    "catalog": {
+      "filterPanel": {
+        "totalCourses": "Total of {{count}}<1> records out of {{total}}</1>",
+        "filterSelector": {
+          "allUni": "Any university",
+          "allProg": "All programs",
+          "courseStatus": {
+            "all": "All statuses",
+            "started": "Ongoing",
+            "scheduled": "Soon will be started",
+            "current": "Available for subscribe",
+            "archived": "Archived"
+          },
+          "sorting": {
+            "title": "Sorting",
+            "options": {
+              "default": "default",
+              "durationStart": "duration ↑",
+              "durationEnd": "duration ↓",
+              "nameStart": "course name (A-Z)",
+              "nameEnd": "course name (Z-A)",
+              "newFirst": "new first"
+            }
+          }
+        }
+      },
+      "pagination": {
+        "more": "More",
+        "up": "Up"
+      }
+    },
+    "profileStudent": {
+      "totalNumberOfCourses": "Total of {{count}} records"
+    },
+    "bvi": {
+      "fontSize": "Font size",
+      "theme": "Theme color",
+      "img": "Images",
+      "additional": "Additional",
+      "settings": "Settings",
+      "additionalSettings": "Additional Settings",
+      "additionalSettingsOn": "Additional Settings are opened",
+      "additionalSettingsOff": "Additional Settings are closed",
+      "letterSpacing": "Kerning",
+      "letterInterval": "Interval",
+      "serifMenu": "Typeface",
+      "standard": "Standard",
+      "medium": "Medium",
+      "big": "Big",
+      "withSerif": "With serif",
+      "withoutSerif": "Without serif",
+      "bW": "B/W",
+      "on": "On",
+      "off": "Off",
+      "onForSpeech": "are turned on",
+      "offForSpeech": "are turned off",
+      "bWForSpeech": "are black and white",
+      "fontSizeIsX": "Font size is {{size}} pixels",
+      "themeIsX": "Theme color is {{theme}}",
+      "blackOnWhite": "black on white",
+      "whiteOnBlack": "white on black",
+      "darkBlueOnBlue": "dark blue on blue",
+      "brownOnBeige": "brown on beige",
+      "greenOnBrown": "green on dark brown",
+      "turnOnSpeech": "Speech synthesis is turned on",
+      "turnOffSpeech": "Speech synthesis is turned off",
+      "resetTheme": "Theme is reset",
+      "reset": "Reset settings",
+      "close": "Close panel",
+      "colorStub": "C",
+      "bvi": "Website version for visually impaired. Select some text for it pronunciation.",
+      "bviOpened": "Website view settings panel"
+    }
+  }
+}

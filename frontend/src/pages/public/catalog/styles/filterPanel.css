@@ -1,0 +1,71 @@
+/* SEARCH TOOLS FOR COURSES */
+
+.search-tools {
+    padding: 2rem;
+}
+
+.search-tools .title {
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+
+/* filters */
+
+.course-filters {
+    display: flex;
+}
+.course-filters .course-filter {
+    width: 30%;
+    flex-basis: 30%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-right: 1rem;
+}
+
+.course-filters .course-filter:last-child {
+    margin-right: 0;
+}
+
+.sort-label {
+    padding-right: 0.5rem;
+}
+
+/* ordering */
+
+.results-view-settings {
+    display: flex;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.results-view-settings .ordering {
+    display: flex;
+}
+.results-view-settings .ordering .plp-selector .selector-button {
+    padding: 0 1.5rem 0 0.5rem;
+    border: 0 none;
+    background: transparent;
+    color: #415162;
+}
+
+/* columns count */
+
+.results-view-settings .columns-count {
+    display: flex;
+    color: #708293;
+    margin-left: 2rem;
+}
+.results-view-settings .columns-count div {
+    margin-left: 0.5rem;
+    color: #415162;
+    padding: 0 0.4rem;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+}
+.results-view-settings .columns-count div:hover {
+    background: #afbdca;
+}
+.results-view-settings .columns-count div.selected {
+    background: var(--main-color-blue);
+    color: #fff;
+}

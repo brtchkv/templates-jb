@@ -1,0 +1,74 @@
+.main-menu {
+    display: flex;
+}
+
+.company-logo {
+    width: 3rem;
+    height: auto;
+    padding: 1rem 0;
+}
+
+/* MAIN MENU */
+
+.main-menu .top-nav {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.main-menu .nav-item {
+    list-style: none;
+    margin: 1rem;
+}
+
+.main-menu .nav-item a {
+    transition: color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+/* PROFILE */
+
+.header__dropdown-wrapper .dropdown.open {
+    background-color: #fff;
+    -webkit-box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown {
+    cursor: pointer;
+    position: absolute;
+}
+
+.icon {
+    width: 36px;
+    height: 36px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 7px;
+    overflow: hidden;
+}
+
+.profile-icon {
+    background-image: url('profile-icon.png');
+    background-position: 0 0;
+    width: 31px;
+    height: 31px;
+}
+
+.plp-theme .p-button-text-icon-left .p-button-icon-left {
+    height: 1.95rem;
+    left: 0.4em;
+}
+
+.pi-cog::before {
+    display: inline-block;
+    transition: transform .55s ease-in-out;
+}
+
+.pi-cog:hover::before {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
