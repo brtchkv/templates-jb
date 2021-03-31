@@ -65,6 +65,14 @@ export const MenuProfileButtonStyled = styled(Button)`
         border-color: ${({theme}) => theme.styles.header.mainMenu.button.enabled.hover.color} !important;
     }
 `
+export const MenuWrapper = styled.div`
+    && {
+        @media (min-width: 770px){
+            display: none !important;
+        }
+    }
+`
+
 export const MenuStyled = styled(Menu)`
     background: ${({theme}) => theme.styles.header.mainMenu.background} !important;
     color: ${({theme}) => theme.styles.header.mainMenu.color} !important;
@@ -107,5 +115,12 @@ export const StyledHeaderLink = styled(Link)`
         &:hover {
             color: ${({theme}) => theme.styles.header.link.hover.color};
         }
+    }
+`
+
+export const StyledNav = styled.nav`
+    margin-left: auto;
+    @media (max-width: 770px){
+        display: none;
     }
 `

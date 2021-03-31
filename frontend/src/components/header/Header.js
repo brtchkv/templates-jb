@@ -13,10 +13,18 @@ import "../bvi/styles/bvi.css"
 import Fade from "../../helpers/animation/Fade";
 import Image from "../image/Image";
 import jb from "./styles/jetbrains.svg"
-import {HeaderStyled, MenuButtonStyled, MenuProfileButtonStyled, MenuStyled, StyledHeaderLink} from "./styles/header";
+import {
+    HeaderStyled,
+    MenuButtonStyled,
+    MenuProfileButtonStyled,
+    MenuStyled, MenuWrapper,
+    StyledHeaderLink,
+    StyledNav
+} from "./styles/header";
 
 const Header = (props) => {
     let menuProfile = useRef();
+    let menuSettings = useRef();
     const {t, i18n} = useTranslation();
     const [bvi, showBvi] = useState(false);
 
@@ -29,7 +37,7 @@ const Header = (props) => {
     };
 
     const Logo = (props) => (
-        <div className="col">
+        <div className="col-auto px-lg-0">
             <Link to={NonAuthRoutes.landing}>
                 <Image alt="JetBrains" className="company-logo" recolor={true} inver
                        src={jb}/>
@@ -38,12 +46,12 @@ const Header = (props) => {
     );
 
     const HeaderNav = (props) => (
-        <nav>
+        <StyledNav>
             <ul className="top-nav">
                 <MenuButtonStyled onClick={toggleBvi} label={t('header.settings.a11')} icon="pi pi-eye"/>
                 <MenuButtonStyled onClick={changeLang} label={t('header.settings.i18')} icon="pi pi-globe"/>
             </ul>
-        </nav>
+        </StyledNav>
     );
 
     const AuthButtons = (props) => (
@@ -53,8 +61,27 @@ const Header = (props) => {
         </div>
     )
 
+    const Settings = (props) => (
+        <MenuWrapper className="col-2 d-flex">
+            <MenuStyled model={[
+                {
+                    label: t('header.settings.a11'), icon: "pi pi-eye", path: "", command: () => {
+                        showBvi(!bvi)
+                    }, className: "constants-button"
+                },
+                {
+                    label: t('header.settings.i18'), icon: "pi pi-globe", path: "", command: () => {
+                        changeLang()
+                    }
+                }
+            ]} popup={true} ref={menuSettings} id="popup_menu_settings"/>
+            <MenuButtonStyled icon="pi pi-cog" onClick={(event) => menuSettings.current.toggle(event)}
+                              aria-controls="popup_menu_settings" aria-haspopup={true}/>
+        </MenuWrapper>
+    );
+
     const ProfileStudentMenu = (props) => (
-        <>
+        <div className="ml-auto ml-md-0">
             <MenuStyled model={[
                 {label: t('header.authMenu.profile'), url: AuthRoutes.profile, icon: "pi pi-user"},
                 {
@@ -67,7 +94,7 @@ const Header = (props) => {
             <MenuProfileButtonStyled label={t('header.authMenu.title')} icon="fas fa-user-circle fa-2x"
                               onClick={(event) => menuProfile.current.toggle(event)}
                               aria-controls="popup_menu_profile" aria-haspopup={true}/>
-        </>
+        </div>
     );
 
     const ProfileUniversityMenu = (props) => (
@@ -104,6 +131,7 @@ const Header = (props) => {
                                 }
                             }}
                         </userContext.Consumer>
+                        <Settings/>
                         <Fade show={bvi}>
                             <Bvi showToggler={toggleBvi} speechController={props.speechController}
                                  themeController={props.themeController}/>

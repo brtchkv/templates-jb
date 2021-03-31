@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NoDataLabel = styled.h2`
+export const NoDataLabel = styled.h3`
   text-align: center;
   width: 100%;
   color: ${({theme}) => theme.styles.main.catalog.dataTable.color}

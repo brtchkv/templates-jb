@@ -6,6 +6,7 @@ export const Table = styled.table`
   border: 1px solid ${({theme}) => theme.styles.main.button.border};
   color: ${({theme}) => theme.styles.main.catalog.dataTable.color};
   border-collapse: collapse;
+  
 `;
 export const Td = styled.td`
   padding: 5px;

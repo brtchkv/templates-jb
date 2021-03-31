@@ -5,7 +5,7 @@ import Image from "../../../../components/image/Image";
 
 
 export const AuthPanelStyled = styled.div`
-    width: 30rem;
+    max-width: 30rem;
     margin: 4rem auto;
     background-color: ${({theme}) => theme.styles.main.authentication.background};
     box-shadow: ${({theme}) => theme.styles.main.authentication.boxShadow}; 

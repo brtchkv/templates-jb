@@ -58,7 +58,11 @@
         "product": "Product",
         "minUsage": "Minimal Usage",
         "maxUsage": "Maximum Usage",
-        "averageUsage": "Average Usage"
+        "averageUsage": "Mean Usage",
+        "productMobile": "IDE",
+        "minUsageMobile": "Min.",
+        "maxUsageMobile": "Max.",
+        "averageUsageMobile": "Mean"
       }
     },
     "profileStudent": {

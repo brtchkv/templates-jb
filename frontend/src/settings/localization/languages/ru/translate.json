@@ -54,7 +54,11 @@
         "product": "Приложение",
         "minUsage": "Миниальное количество использований",
         "maxUsage": "Максимальное количество использований",
-        "averageUsage": "Среднее количество использований"
+        "averageUsage": "Среднее количество использований",
+        "productMobile": "IDE",
+        "minUsageMobile": "Мин.",
+        "maxUsageMobile": "Макс.",
+        "averageUsageMobile": "Среднее"
       },
       "pagination": {
         "more": "Еще",
