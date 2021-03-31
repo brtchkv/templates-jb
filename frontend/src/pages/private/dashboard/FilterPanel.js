@@ -16,34 +16,13 @@ function FilterPanel(props) {
     );
     const [visibleAlert, setVisibleAlert] = useState(false);
 
-    //TODO: серварная подгрузка опций фильтров
-
-    const uniList = [
-        {value: "-1", label: t('dashboard.filterPanel.filterSelector.allUni')},
-        {value: "1", label: "ИТМО"},
-        {value: "3", label: "Тюменский индустриальный университет"},
-        {value: "2", label: "Уральский университет"}
-    ];
     const sortMethod = [
-        {value: "all", label: t('dashboard.filterPanel.filterSelector.sorting.options.default')},
-        {value: "dateFromNew", label: t('dashboard.filterPanel.filterSelector.sorting.options.durationStart')},
-        {value: "dateFromOld", label: t('dashboard.filterPanel.filterSelector.sorting.options.durationEnd')},
-        {value: "nameStart", label: t('dashboard.filterPanel.filterSelector.sorting.options.nameStart')},
-        {value: "nameEnd", label: t('dashboard.filterPanel.filterSelector.sorting.options.nameEnd')},
-        {value: "newFirst", label: t('dashboard.filterPanel.filterSelector.sorting.options.newFirst')}
-    ];
-    const groupList = [
-        {value: "-1", label: t('dashboard.filterPanel.filterSelector.allProg')},
-        {value: "3", label: "Физика и астрономия"},
-        {value: "5", label: "Техника и технологии строительства"},
-    ];
-
-    const courseStatus = [
-        {value: "all", label: t('dashboard.filterPanel.filterSelector.courseStatus.all')},
-        {value: "started", label: t('dashboard.filterPanel.filterSelector.courseStatus.started')},
-        {value: "scheduled", label: t('dashboard.filterPanel.filterSelector.courseStatus.scheduled')},
-        {value: "current", label: t('dashboard.filterPanel.filterSelector.courseStatus.current')},
-        {value: "archived", label: t('dashboard.filterPanel.filterSelector.courseStatus.archived')}
+        {value: "day", label: t('dashboard.filterPanel.filterSelector.sorting.options.day')},
+        {value: "week", label: t('dashboard.filterPanel.filterSelector.sorting.options.week')},
+        {value: "month", label: t('dashboard.filterPanel.filterSelector.sorting.options.month')},
+        {value: "quarter", label: t('dashboard.filterPanel.filterSelector.sorting.options.quarter')},
+        {value: "year", label: t('dashboard.filterPanel.filterSelector.sorting.options.year')},
+        {value: "all", label: t('dashboard.filterPanel.filterSelector.sorting.options.all')}
     ];
 
     const showAlert = () => {
@@ -76,32 +55,8 @@ function FilterPanel(props) {
                         className="plp-selector" custom
                     >
                         {
-                            uniList.map(function (uni) {
-                                return <option key={uni.value} value={uni.value}>{uni.label}</option>
-                            })
-                        }
-                    </Form.Control>
-                </div>
-                <div className="course-filter">
-                    <Form.Control
-                        name="groupFilter" as={SelectorStyled} ref={register({type: 'custom'})}
-                        className="plp-selector" custom
-                    >
-                        {
-                            groupList.map(function (group) {
-                                return <option key={group.value} value={group.value}>{group.label}</option>
-                            })
-                        }
-                    </Form.Control>
-                </div>
-                <div className="course-filter">
-                    <Form.Control
-                        name="courseStatusFilter" as={SelectorStyled} ref={register}
-                        className="plp-selector" custom
-                    >
-                        {
-                            courseStatus.map(function (status) {
-                                return <option key={status.value} value={status.value}>{status.label}</option>
+                            sortMethod.map(function (sort) {
+                                return <option key={sort.value} value={sort.value}>{sort.label}</option>
                             })
                         }
                     </Form.Control>
@@ -125,7 +80,7 @@ function FilterPanel(props) {
             {
                 visibleAlert &&
                 <Alert variant="warning">
-                    Нет соединения с сервером
+                    {t('util.noServerConnection')}
                 </Alert>
             }
         </form>

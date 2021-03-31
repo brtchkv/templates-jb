@@ -47,7 +47,7 @@ function DashBoard() {
                     <div className="container">
                         <h2 className="title">
                             <Trans
-                                i18nKey="catalog.filterPanel.totalCourses"
+                                i18nKey="dashboard.filterPanel.totalCourses"
                                 values={{count: items.length, total: items.length}}
                                 components={{1: <span className="comment"/>}}
                             />

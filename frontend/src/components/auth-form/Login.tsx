@@ -5,6 +5,7 @@ import Alert from "react-bootstrap/Alert";
 import * as API from "../../service/api/serviceAPI";
 import {User, userContext} from "../../settings/user/userContext";
 import {AuthPanelButtonStyled, AuthPanelLabelStyled} from "../../pages/public/login/styles/styles";
+import {useTranslation} from "react-i18next";
 
 let pattern = {
     minLength: 8,
@@ -30,13 +31,14 @@ function Login() {
     const {register, handleSubmit, errors} = useForm();
     const [loginStatus, setLoginStatus] = useState("");
     const [loginMessage, setLoginMessage] = useState("");
+    const {t} = useTranslation();
 
     const onSubmit = (data) => {
         API.login(data.username, data.password)
             .then((response) => {
                 if (response.success) {
                     setLoginStatus("success");
-                    setLoginMessage("Вход успешен");
+                    setLoginMessage(t('successLogin'));
                     localStorage.setItem('user', JSON.stringify(response));
                     context.setUser({
                         token: response.token,
@@ -44,7 +46,7 @@ function Login() {
                     });
                 } else {
                     setLoginStatus("danger");
-                    setLoginMessage("Неправильный пароль или имейл!");
+                    setLoginMessage(t('wrongCredentials'));
                 }
             })
             .catch(function (error) {
@@ -56,19 +58,19 @@ function Login() {
         <div className="auth-section">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <AuthPanelLabelStyled>Логин или e-mail:</AuthPanelLabelStyled>
+                    <AuthPanelLabelStyled>{t('auth.enterUsernameOrEmail')}</AuthPanelLabelStyled>
                     <input type="text" name="username"
                            style={{borderColor: errors.username && "red"}}
                            ref={register(schema.properties.username)}/>
                     {
                         errors.username && errors.username.type === "validate" &&
                         <Alert variant="danger">
-                            This email address already exists
+                            {t('auth.emailExists')}
                         </Alert>
                     }
                 </div>
                 <div>
-                    <AuthPanelLabelStyled>Пароль</AuthPanelLabelStyled>
+                    <AuthPanelLabelStyled>{t('auth.password')}</AuthPanelLabelStyled>
                     <input type="password" name="password" style={{borderColor: errors.password && "red"}}
                            ref={register(schema.properties.password)}
                     />
@@ -79,7 +81,7 @@ function Login() {
                         {loginMessage}
                     </Alert>
                 }
-                <AuthPanelButtonStyled type="submit" className="auth-btn">Войти</AuthPanelButtonStyled>
+                <AuthPanelButtonStyled type="submit" className="auth-btn">{t('auth.login')}</AuthPanelButtonStyled>
             </form>
         </div>
     );

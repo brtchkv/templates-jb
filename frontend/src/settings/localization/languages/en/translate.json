@@ -3,7 +3,18 @@
     "util": {
       "loading": "Loading...",
       "error": "Error",
-      "pageNotFound": "Page not found."
+      "pageNotFound": "Page not found",
+      "noServerConnection": "No connection to the server"
+    },
+    "auth": {
+      "login": "Log in",
+      "emailExists": "This username or email address already exists",
+      "enterUsernameOrEmail": "Username or email:",
+      "password": "Password",
+      "wrongCredentials": "There's a mistake in password or email!",
+      "successLogin": "Logged in successfully!",
+      "firstTime": "First time here?",
+      "registerMe": "Ask an administrator to create an account for you"
     },
     "header": {
       "publicMenu": {
@@ -12,38 +23,27 @@
       },
       "authMenu": {
         "title": "My profile",
-        "myCourses": "My courses",
         "profile": "Profile",
-        "logOut": "Log out",
-        "uniPortal": "University Panel"
+        "logOut": "Log out"
       },
       "settings": {
         "a11": "Visually impaired version",
         "i18": "Русский язык"
       }
     },
-    "catalog": {
+    "dashboard": {
       "filterPanel": {
         "totalCourses": "Total of {{count}}<1> records out of {{total}}</1>",
         "filterSelector": {
-          "allUni": "Any university",
-          "allProg": "All programs",
-          "courseStatus": {
-            "all": "All statuses",
-            "started": "Ongoing",
-            "scheduled": "Soon will be started",
-            "current": "Available for subscribe",
-            "archived": "Archived"
-          },
           "sorting": {
             "title": "Sorting",
             "options": {
-              "default": "default",
-              "durationStart": "duration ↑",
-              "durationEnd": "duration ↓",
-              "nameStart": "course name (A-Z)",
-              "nameEnd": "course name (Z-A)",
-              "newFirst": "new first"
+              "all": "all time",
+              "week": "week",
+              "month": "month",
+              "quarter": "quarter",
+              "year": "year",
+              "day": "day"
             }
           }
         }

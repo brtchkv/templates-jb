@@ -3,7 +3,18 @@
     "util": {
       "loading": "Загрузка...",
       "error": "Ошибка",
-      "pageNotFound": "Страница не найдена."
+      "pageNotFound": "Страница не найдена",
+      "noServerConnection": "Нет соединения с сервером"
+    },
+    "auth": {
+      "login": "Войти",
+      "emailExists": "Пользователь с такой почтой или таким паролем уже существует",
+      "enterUsernameOrEmail": "Логин или e-mail:",
+      "password": "Пароль",
+      "wrongCredentials": "Неправильный пароль или имейл!",
+      "successLogin": "Вход успешен!",
+      "firstTime": "Впервые на платформе?",
+      "registerMe": "Попросите администратора создать вам аккаунт"
     },
     "header": {
       "publicMenu": {
@@ -12,38 +23,27 @@
       },
       "authMenu": {
         "title": "Мой профиль",
-        "myCourses": "Мои курсы",
         "profile": "Профиль",
-        "logOut": "Выйти",
-        "uniPortal": "Кабинет университета"
+        "logOut": "Выйти"
       },
       "settings": {
         "a11": "Версия для слабовидящих",
         "i18": "English version"
       }
     },
-    "catalog": {
+    "dashboard": {
       "filterPanel": {
         "totalCourses": "Всего {{count}}<1> из {{total}}</1>",
         "filterSelector": {
-          "allUni": "Любой вуз",
-          "allProg": "Все направления",
-          "courseStatus": {
-            "all": "Все статусы",
-            "started": "Сейчас идет",
-            "scheduled": "Скоро старт",
-            "current": "Можно записаться",
-            "archived": "В архиве"
-          },
           "sorting": {
             "title": "Сортировка",
             "options": {
-              "default": "по умолчанию",
-              "durationStart": "по длительности ↑",
-              "durationEnd": "по длительности ↓",
-              "nameStart": "по названию (А-Я)",
-              "nameEnd": "по названию (Я-А)",
-              "newFirst": "сначала новые"
+              "all": "за все время",
+              "week": "неделя",
+              "month": "месяц",
+              "quarter": "квартал",
+              "year": "год",
+              "day": "день"
             }
           }
         }
