@@ -1,17 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form'
 import "./styles/filterPanel.css"
-import * as API from "../../../service/api/serviceAPI.ts";
-import Alert from "react-bootstrap/Alert";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
-import {OrderLabelStyled, SelectorStyled, FilterForm, Button, ButtonContainer} from "./styles/filterPanel";
+import {SelectorStyled, FilterForm, Button, ButtonContainer} from "./styles/filterPanel";
 import left from "./images/left.png";
 import right from "./images/right.png";
 import Image from "../../../components/image/Image";
 
 function FilterPanel(props) {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const {register, handleSubmit} = useForm({
             mode: 'onChange'
@@ -45,7 +43,7 @@ function FilterPanel(props) {
             <div className="course-filters">
                 <ButtonContainer>
                     <Button onClick={prevDate}>
-                        <Image src={left} size={{width: "25px"}}/>
+                        <Image src={left} size={{width: "25px"}} recolor={true} invert={true}/>
                     </Button>
                 </ButtonContainer>
                 <div className="course-filter">
@@ -62,7 +60,7 @@ function FilterPanel(props) {
                 </div>
                 <ButtonContainer>
                     <Button onClick={nextDate}>
-                        <Image src={right} size={{width: "25px"}}/>
+                        <Image src={right} size={{width: "25px"}} recolor={true} invert={true}/>
                     </Button>
                 </ButtonContainer>
             </div>

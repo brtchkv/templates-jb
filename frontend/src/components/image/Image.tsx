@@ -18,7 +18,7 @@ function Image(props) {
 
     return (
         <ImageContainer size={props.size || dimensions}>
-            <ImageStyled src={props.src} size={props.size || dimensions} onLoad={onImgLoad} className={`${props.className}`} recolor={props.recolor}/>
+            <ImageStyled src={props.src} size={props.size || dimensions} onLoad={onImgLoad} className={`${props.className}`} recolor={props.recolor} invert={props.invert}/>
         </ImageContainer>
     );
 }

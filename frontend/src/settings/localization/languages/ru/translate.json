@@ -34,6 +34,7 @@
     "dashboard": {
       "filterPanel": {
         "totalCourses": "Всего {{count}}<1> записей из {{total}} возможных</1>",
+        "dateRange": "От {{start}}<1> до {{end}}</1>",
         "filterSelector": {
           "sorting": {
             "title": "Сортировка",

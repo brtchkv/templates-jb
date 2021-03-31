@@ -1,4 +1,5 @@
 import {
+    blackTheme,
     mainTheme
 } from "../constants/colors";
 
@@ -96,7 +97,13 @@ export const theme = {
             }
         },
         catalog: {
-            background: mainTheme.mainColorBright
+            background: mainTheme.mainColorBright,
+            dataTable: {
+                color: mainTheme.mainColorText
+            },
+            graph: {
+                color: mainTheme.mainColorText
+            }
         },
         button: {
             background: mainTheme.mainColorBright,
@@ -141,14 +148,6 @@ export const theme = {
             },
             label: {
                 color: mainTheme.mainColorText
-            }
-        },
-        menu: {
-            color: mainTheme.mainColorTextDark,
-            borderLeft: mainTheme.mainColorLighter,
-            active: {
-                color: mainTheme.mainColorText,
-                borderLeft: mainTheme.mainColorText
             }
         },
         authentication: {

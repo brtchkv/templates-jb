@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const ImageStyled = styled.img`
-  filter: ${props => getFilter(props.theme.images, props.recolor, props.theme.themeName)};
+  filter: ${props => getFilter(props.theme.images, props.recolor, props.theme.themeName, props.invert)};
   max-height: ${props => props.size.height};
   max-width: ${props => props.size.width};
   background-color: transparent !important;
@@ -12,10 +12,15 @@ export const ImageContainer = styled.div`
   overflow: hidden;
 `
 
-function getFilter(mode, recolor, theme){
+function getFilter(mode, recolor, theme, invert){
     if (recolor) {
-        if (theme === "dark") return "grayscale(1)";
-        else if (theme === "white") return "grayscale(1) invert(1)";
+        if (!invert) {
+            if (theme === "dark") return "grayscale(1)";
+            else if (theme === "white") return "grayscale(1) invert(1)";
+        } else {
+            if (theme === "dark") return "invert(1)";
+            else if (theme === "white") return "grayscale(1)";
+        }
     }
     if (mode === "on"){
         return "none"
@@ -41,7 +46,8 @@ ImageStyled.defaultProps = {
         height: "100%",
         width: "100%"
     },
-    recolor: false
+    recolor: false,
+    invert: false
 }
 
 ImageContainer.defaultProps = {

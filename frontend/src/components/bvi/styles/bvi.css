@@ -945,8 +945,8 @@ a:hover.bvi-panel-team {
 .bvi-panel-btn.active {
     outline: 0;
     background-image: none;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    /*-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);*/
+    /*box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);*/
 }
 .bvi-panel-btn.disabled,
 .bvi-panel-btn[disabled],

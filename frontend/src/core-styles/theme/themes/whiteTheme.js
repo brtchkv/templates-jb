@@ -96,39 +96,12 @@ export const theme = {
             }
         },
         catalog: {
-            background: whiteTheme.mainColor
-        },
-        courseCard: {
-            boxShadow: "none",
-            border: `1px solid ${whiteTheme.mainColorDarker}`,
             background: whiteTheme.mainColor,
-            color: whiteTheme.mainColorText,
-            button: {
-                background: whiteTheme.mainColorBright,
-                color: whiteTheme.mainColorText,
-                icon: {
-                    color: whiteTheme.mainColorText
-                },
-                hover: {
-                    background: whiteTheme.mainColorLighter
-                }
-            },
-            newCourseLabel: {
-                background: whiteTheme.mainColor,
+            dataTable: {
                 color: whiteTheme.mainColorText
             },
-            date: {
+            graph: {
                 color: whiteTheme.mainColorText
-            },
-            duration: {
-                color: whiteTheme.mainColorText
-            },
-            status: {
-                color: whiteTheme.mainColorTextDark
-            },
-            label: {
-                color: whiteTheme.mainColorText,
-                background: whiteTheme.mainColor
             }
         },
         button: {
@@ -174,110 +147,6 @@ export const theme = {
             },
             label: {
                 color: whiteTheme.mainColorText
-            }
-        },
-        courseHeader: {
-            color: whiteTheme.mainColorText,
-            label: {
-                color: whiteTheme.mainColorTextDark
-            },
-            color: whiteTheme.mainColorText,
-            link: {
-                color: whiteTheme.mainColorTextDark,
-                hover: {
-                    color: whiteTheme.mainColorText
-                }
-            },
-            title: {
-                color: whiteTheme.mainColorText
-            },
-            button: {
-                color: whiteTheme.mainColorText,
-                background: whiteTheme.mainColor,
-                border: whiteTheme.mainColorBright,
-                focus: {
-                    color: whiteTheme.mainColorText,
-                    background: whiteTheme.mainColor,
-                    border: whiteTheme.mainColor
-                },
-                hover: {
-                    color: whiteTheme.mainColorText,
-                    background: whiteTheme.mainColor,
-                    border: whiteTheme.mainColor
-                }
-            },
-            dropdown: {
-                color: whiteTheme.mainColorText,
-                border: whiteTheme.mainColorBright,
-                background: whiteTheme.mainColor,
-                item: {
-                    background: whiteTheme.mainColor,
-                    color: whiteTheme.mainColorText,
-                    border: whiteTheme.mainColorBright,
-                    hover: {
-                        background: "#d9d9d9",
-                        color: whiteTheme.mainColorText,
-                        border: whiteTheme.mainColorDarker
-                    }
-                }
-            }
-        },
-        courseDetails: {
-            color: whiteTheme.mainColorText,
-            label: {
-                color: whiteTheme.mainColorTextDark
-            },
-            tabs: {
-                color: whiteTheme.mainColorText,
-                background: whiteTheme.mainColor,
-                tabView : {
-                    seperator: {
-                        borderBottom: whiteTheme.mainColorBright
-                    },
-                    title: {
-                        background: whiteTheme.mainColor,
-                        color: whiteTheme.mainColorText,
-                        hover: {
-                            background: whiteTheme.mainColor,
-                            color: whiteTheme.mainColorText
-                        },
-                        highlighted: {
-                            background: whiteTheme.mainColor,
-                            color: whiteTheme.mainColorText,
-                            hover: {
-                                background: whiteTheme.mainColor,
-                                color: whiteTheme.mainColorText
-                            },
-                            after: {
-                                background: whiteTheme.mainColorText
-                            }
-                        },
-                        active: {
-                            background: whiteTheme.mainColor
-                        }
-                    }
-                }
-            },
-            universityPanel: {
-                border: whiteTheme.mainColorDarker,
-                color: whiteTheme.mainColorText
-            },
-            icon: {
-                color: whiteTheme.mainColorText
-            },
-            link: {
-                color: whiteTheme.mainColorTextDark,
-                hover: {
-                    color: whiteTheme.mainColorText
-                }
-            }
-        },
-        menu: {
-            color: whiteTheme.mainColorText,
-            borderLeft: whiteTheme.mainColorText,
-            active: {
-                color: whiteTheme.mainColorText,
-                borderLeft: whiteTheme.mainColorText
             }
         },
         authentication: {

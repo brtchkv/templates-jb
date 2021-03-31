@@ -45,7 +45,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_ENV=production BABEL_ENV=production webpack --mode production --config webpack.config.js",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "watch": "NODE_ENV=development BABEL_ENV=development webpack --watch"
   },

@@ -31,7 +31,7 @@ const Header = (props) => {
     const Logo = (props) => (
         <div className="col">
             <Link to={NonAuthRoutes.landing}>
-                <Image alt="JetBrains" className="company-logo" recolor={true}
+                <Image alt="JetBrains" className="company-logo" recolor={true} inver
                        src={jb}/>
             </Link>
         </div>

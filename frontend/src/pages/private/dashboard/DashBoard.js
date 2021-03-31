@@ -6,13 +6,14 @@ import FilterPanel from "./FilterPanel";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {Trans, useTranslation} from 'react-i18next'
 import {FilterPanelContainerStyled} from "./styles/filterPanel";
-import {AnchorContainerStyled, FirstTr, NoDataLabel, Table, Td} from "./styles/dashBoard";
+import {AnchorContainerStyled, NoDataLabel} from "./styles/dashBoard";
 import _ from "lodash";
 import dayjs from 'dayjs';
 import {userContext} from "../../../settings/user/userContext";
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import Graph from "../../../components/graph/graph";
+import ProductTable from "../../../components/table/ProductTable";
 
 require('dayjs/locale/ru')
 require('dayjs/locale/en')
@@ -44,7 +45,6 @@ function DashBoard() {
                     let goLandData = _.map(response, (row) => {
                         return {usage: _.parseInt(row.goLand), timestamp: row.timeStamp}
                     });
-                    console.log(items, ideaData, webStormData, goLandData)
                     setItems([
                         {data: ideaData, name: "IntelliJ IDEA"},
                         {data: webStormData, name: "WebStorm"},
@@ -80,7 +80,6 @@ function DashBoard() {
     } else if (!isLoaded) {
         return <Loading/>;
     } else {
-        console.log(items);
         return (
             <>
                 <div id="top-of-catalog"/>
@@ -88,10 +87,14 @@ function DashBoard() {
                     <div className="container">
                         <div className="row d-flex flex-row justify-content-between">
                             <h2 className="title">
-                                От {startDate.locale(i18n.language).format('LL')} &nbsp;
-                                <span className="comment">
-                                    до {startDate.add(1, filterOption).subtract(1, 'day').locale(i18n.language).format('LL')}
-                                </span>
+                                <Trans
+                                    i18nKey="dashboard.filterPanel.dateRange"
+                                    values={{
+                                        start: startDate.locale(i18n.language).format('LL'),
+                                        end: startDate.add(1, filterOption).subtract(1, 'day').locale(i18n.language).format('LL')
+                                    }}
+                                    components={{1: <span className="comment"/>}}
+                                />
                             </h2>
 
                             <h2 className="title">
@@ -111,24 +114,7 @@ function DashBoard() {
                 <div className="container courses-container cols-4">
                     {(count > 0) ?
                         <>
-                            <Table>
-                                <tbody>
-                                <FirstTr>
-                                    <Td>{t('dashboard.table.product')}</Td>
-                                    <Td>{t('dashboard.table.minUsage')}</Td>
-                                    <Td>{t('dashboard.table.maxUsage')}</Td>
-                                    <Td>{t('dashboard.table.averageUsage')}</Td>
-                                </FirstTr>
-                                {items.map((element, index) =>
-                                    <tr key={index}>
-                                        <Td>{element.name}</Td>
-                                        <Td>{_.size(element.data) !== 0 ? _.minBy(element.data, 'usage').usage : 0}</Td>
-                                        <Td>{_.size(element.data) !== 0 ? _.maxBy(element.data, 'usage').usage : 0}</Td>
-                                        <Td>{_.size(element.data) !== 0 ? parseInt(_.meanBy(element.data, 'usage')) : 0} </Td>
-                                    </tr>
-                                )}
-                                </tbody>
-                            </Table>
+                            <ProductTable data={items}/>
                             <Graph data={items}/>
                         </>
                         :
