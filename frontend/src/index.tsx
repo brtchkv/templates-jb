@@ -1,6 +1,5 @@
 import React, {Suspense} from 'react';
 import ReactDOM from 'react-dom';
-import './core-styles/index.css';
 import * as serviceWorker from './serviceWorker';
 import App from "./app";
 import 'primereact/resources/themes/nova/theme.css';

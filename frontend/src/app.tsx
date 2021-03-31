@@ -1,5 +1,4 @@
 import React, {lazy, useEffect, useState} from 'react';
-import './core-styles/index.css';
 import DashBoard from './pages/private/dashboard/DashBoard.js'
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Header from "./components/header/Header";
