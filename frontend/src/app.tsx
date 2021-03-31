@@ -14,8 +14,7 @@ import {GlobalStyles} from "./core-styles/global";
 import {ThemeProvider} from 'styled-components';
 import {handleTextSelected} from "./helpers/bvi/speechSynthesis";
 import {useTheme} from "./core-styles/theme/useTheme";
-
-const Profile = lazy(() => import('./pages/private/profile/Profile'));
+import Profile from './pages/private/profile/Profile';
 
 function App() {
     const [loginUser, setLoginUser] = useState<UserCredentials>(checkLocalStorage());
