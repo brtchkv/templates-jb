@@ -50,10 +50,12 @@ function FilterPanel(props) {
     };
 
     const prevDate = (e) => {
+        e.preventDefault();
         // setDate(date.subtract(1, range));
     }
 
     const nextDate = (e) => {
+        e.preventDefault();
         // setDate(date.add(1, range));
     }
 
@@ -66,9 +68,8 @@ function FilterPanel(props) {
                     </Button>
                 </ButtonContainer>
                 <div className="course-filter">
-                    {/*<OrderLabelStyled className="sort-label">{t('dashboard.filterPanel.filterSelector.sorting.title')}:</OrderLabelStyled>*/}
                     <Form.Control
-                        name="uniFilter" as={SelectorStyled} ref={register({type: 'custom'})}
+                        name="range" as={SelectorStyled} ref={register({type: 'custom'})}
                         className="plp-selector" custom
                     >
                         {

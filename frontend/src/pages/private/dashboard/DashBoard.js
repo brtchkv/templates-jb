@@ -18,7 +18,7 @@ function DashBoard() {
     const [count, setCount] = useState(0);
     const [filterOption, setFilterOption] = useState("week");
     const [startDate, setStartDate] = useState(dayjs().toISOString());
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
     const context = useContext(userContext);
 
     useEffect(() => {
@@ -59,12 +59,21 @@ function DashBoard() {
     } else if (!isLoaded) {
         return <Loading/>;
     } else {
+        let localizedFormat = require('dayjs/plugin/localizedFormat')
+        dayjs.extend(localizedFormat)
         return (
             <>
                 <div id="top-of-catalog"/>
                 <FilterPanelContainerStyled className="search-tools">
                     <div className="container">
-                        <div className="row">
+                        <div className="row d-flex flex-row justify-content-between">
+                            <h2 className="title">
+                                От {dayjs(startDate).locale(i18n.language).format('LL')} &nbsp;
+                                <span className="comment">
+                                    до {dayjs(startDate).add(1, filterOption).subtract(1, 'day').locale(i18n.language).format('LL')}
+                                </span>
+                            </h2>
+
                             <h2 className="title">
                                 <Trans
                                     i18nKey="dashboard.filterPanel.totalCourses"
