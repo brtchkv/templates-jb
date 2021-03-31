@@ -10,47 +10,66 @@ import {AnchorContainerStyled, FirstTr, NoDataLabel, Table, Td} from "./styles/d
 import _ from "lodash";
 import dayjs from 'dayjs';
 import {userContext} from "../../../settings/user/userContext";
+import quarterOfYear from 'dayjs/plugin/quarterOfYear'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+require('dayjs/locale/ru')
+require('dayjs/locale/en')
 
 function DashBoard() {
+    dayjs.extend(quarterOfYear)
+    dayjs.extend(localizedFormat)
     const [error, setError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
-    const [filterOption, setFilterOption] = useState("week");
-    const [startDate, setStartDate] = useState(dayjs().toISOString());
+    const [maxRecords, setMaxRecords] = useState(0);
+    const [filterOption, setFilterOption] = useState("day");
+    const [startDate, setStartDate] = useState(dayjs().startOf("month"));
     const {t, i18n} = useTranslation();
     const context = useContext(userContext);
 
     useEffect(() => {
-        API.getFilteredStatData(context.user, filterOption, startDate)
+        API.getFilteredStatData(context.user, filterOption, startDate.toISOString())
             .then(
-                (result) => {
+                (response) => {
                     setIsLoaded(true);
-                    setItems(result);
-                    console.log(result)
+                    let ideaData = _.map(response, (row) => {
+                        return {usage: _.parseInt(row.idea), timestamp: row.timeStamp}
+                    });
+                    let webStormData = _.map(response, (row) => {
+                        return {usage: _.parseInt(row.webStorm), timestamp: row.timeStamp}
+                    });
+                    let goLandData = _.map(response, (row) => {
+                        return {usage: _.parseInt(row.goLand), timestamp: row.timeStamp}
+                    });
+                    console.log(items, ideaData, webStormData, goLandData)
+                    setItems([
+                        {data: ideaData, name: "IntelliJ IDEA"},
+                        {data: webStormData, name: "WebStorm"},
+                        {data: goLandData, name: "GoLand"}
+                    ]);
+                    setCount(response.length);
                 },
                 (error) => {
                     setIsLoaded(true);
                     setError(true);
                 }
             )
-    }, [filterOption]);
-
-    useEffect(() => {
         API.getAllStatDataCount(context.user)
             .then(
                 (result) => {
-                    setCount(parseInt(result))
+                    setMaxRecords(parseInt(result))
                 },
                 (error) => {
                     setIsLoaded(true);
                     setError(true);
                 }
             )
-    }, []);
+    }, [filterOption, startDate]);
 
-    const setFilteredData = (value, filter) => {
-        setItems(value)
+
+    const setFilteredData = (date, filter) => {
+        setStartDate(date);
         setFilterOption(filter);
     };
 
@@ -59,8 +78,7 @@ function DashBoard() {
     } else if (!isLoaded) {
         return <Loading/>;
     } else {
-        let localizedFormat = require('dayjs/plugin/localizedFormat')
-        dayjs.extend(localizedFormat)
+        console.log(items);
         return (
             <>
                 <div id="top-of-catalog"/>
@@ -68,27 +86,27 @@ function DashBoard() {
                     <div className="container">
                         <div className="row d-flex flex-row justify-content-between">
                             <h2 className="title">
-                                От {dayjs(startDate).locale(i18n.language).format('LL')} &nbsp;
+                                От {startDate.locale(i18n.language).format('LL')} &nbsp;
                                 <span className="comment">
-                                    до {dayjs(startDate).add(1, filterOption).subtract(1, 'day').locale(i18n.language).format('LL')}
+                                    до {startDate.add(1, filterOption).subtract(1, 'day').locale(i18n.language).format('LL')}
                                 </span>
                             </h2>
 
                             <h2 className="title">
                                 <Trans
                                     i18nKey="dashboard.filterPanel.totalCourses"
-                                    values={{count: items ? items.length : 0, total: count}}
+                                    values={{count: count, total: maxRecords}}
                                     components={{1: <span className="comment"/>}}
                                 />
                             </h2>
                         </div>
                         <div className="row">
-                            <FilterPanel setFilteredData={setFilteredData} className="col-12"/>
+                            <FilterPanel setFilteredData={setFilteredData} className="col-12" startDate={startDate} filterOption={filterOption}/>
                         </div>
                     </div>
                 </FilterPanelContainerStyled>
                 <div className="container courses-container cols-4">
-                    {(items > 0) ?
+                    {(count > 0) ?
                         <Table>
                             <tbody>
                             <FirstTr>
@@ -113,7 +131,7 @@ function DashBoard() {
                         </NoDataLabel>
                     }
                 </div>
-                {(items > 0) ?
+                {(count > 0) ?
                     <div className="scroll-btn-container">
                         <AnchorContainerStyled>
                             <AnchorLink href="#top-of-catalog" offset='130'

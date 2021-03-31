@@ -151,7 +151,7 @@ public class DumbController {
                                     && c.getTimeStamp().getMonth() == date.getMonth()));
                     break;
                 case "week":
-                    int noOfDays = 14; // two weeks
+                    int noOfDays = 7;
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(date);
                     calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
@@ -160,13 +160,17 @@ public class DumbController {
                             staticsStream.filter(c -> (c.getTimeStamp().getYear() == date.getYear()
                                     && c.getTimeStamp().getMonth() == date.getMonth()
                                     && c.getTimeStamp().compareTo(date) > 0
-                                    && nextWeek.compareTo(c.getTimeStamp()) == 0));
+                                    && nextWeek.compareTo(c.getTimeStamp()) <= 0));
                     break;
                 case "quarter":
                     int quarter = (date.getMonth() / 3) + 1;
                     staticsStream =
                             staticsStream.filter(c -> (c.getTimeStamp().getYear() == date.getYear() &&
                                     ((c.getTimeStamp().getMonth() / 3) + 1) == quarter));
+                    break;
+                case "year":
+                    staticsStream =
+                            staticsStream.filter(c -> (c.getTimeStamp().getYear() == date.getYear()));
                     break;
             }
             return staticsStream.collect(Collectors.toList());

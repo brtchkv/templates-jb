@@ -17,7 +17,6 @@ function FilterPanel(props) {
             mode: 'onChange'
         }
     );
-    const [visibleAlert, setVisibleAlert] = useState(false);
 
     const sortMethod = [
         {value: "day", label: t('dashboard.filterPanel.filterSelector.sorting.options.day')},
@@ -25,38 +24,20 @@ function FilterPanel(props) {
         {value: "month", label: t('dashboard.filterPanel.filterSelector.sorting.options.month')},
         {value: "quarter", label: t('dashboard.filterPanel.filterSelector.sorting.options.quarter')},
         {value: "year", label: t('dashboard.filterPanel.filterSelector.sorting.options.year')},
-        {value: "all", label: t('dashboard.filterPanel.filterSelector.sorting.options.all')}
     ];
 
-    const showAlert = () => {
-        setVisibleAlert(true, () => {
-            window.setTimeout(() => {
-                setVisibleAlert(false);
-            }, 4000)
-        });
-    };
-
     const onSubmit = (preferences) => {
-        // API.filterCoursesBy(preferences)
-        //     .then(
-        //         (response) => {
-        //             console.log(response);
-        //             props.setFilteredData(response, preferences);
-        //         })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //         showAlert()
-        //     });
+        props.setFilteredData(props.startDate.startOf(), preferences.range);
     };
 
     const prevDate = (e) => {
         e.preventDefault();
-        // setDate(date.subtract(1, range));
+        props.setFilteredData(props.startDate.subtract(1, props.filterOption), props.filterOption);
     }
 
     const nextDate = (e) => {
         e.preventDefault();
-        // setDate(date.add(1, range));
+        props.setFilteredData(props.startDate.add(1, props.filterOption), props.filterOption,);
     }
 
     return (
@@ -70,7 +51,7 @@ function FilterPanel(props) {
                 <div className="course-filter">
                     <Form.Control
                         name="range" as={SelectorStyled} ref={register({type: 'custom'})}
-                        className="plp-selector" custom
+                        className="plp-selector" custom defaultValue={props.filterOption}
                     >
                         {
                             sortMethod.map(function (sort) {
@@ -85,12 +66,6 @@ function FilterPanel(props) {
                     </Button>
                 </ButtonContainer>
             </div>
-            {
-                visibleAlert &&
-                <Alert variant="warning">
-                    {t('util.noServerConnection')}
-                </Alert>
-            }
         </FilterForm>
     );
 }

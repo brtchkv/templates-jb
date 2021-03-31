@@ -27,20 +27,6 @@ class Courses extends React.Component {
                     isLoaded: true,
                     data: response
                 });
-
-                let ideaData = _.map(response, (el) => {
-                    return {usage: _.parseInt(el.idea), timestamp: el.timeStamp}
-                });
-                let webStormData = _.map(response, (el) => {
-                    return {usage: _.parseInt(el.webStorm), timestamp: el.timeStamp}
-                });
-                let goLandData = _.map(response, (el) => {
-                    return {usage: _.parseInt(el.goLand), timestamp: el.timeStamp}
-                });
-
-                console.log("ideaData", ideaData);
-                console.log("webstormData", webStormData);
-                console.log("golandData", goLandData);
             },
             (error) => {
                 this.setState({
