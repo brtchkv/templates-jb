@@ -36,7 +36,7 @@ const StudentCourses = (props) => {
             <div className="container">
                 <h2>{context.user.role}</h2>
                 <div>
-                    <h5 className="pr-3">{t("profile.uploadLabel")}</h5>
+                    <h5 className="pr-3 pb-3">{t("profile.uploadLabel")}</h5>
                     <ButtonStyled mode="basic" name="csv" uploadHandler={sendFile}
                                   customUpload chooseLabel={t("profile.upload")}/>
                 </div>
