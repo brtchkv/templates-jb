@@ -64,7 +64,7 @@ function DashBoard() {
                 <div className="scroll-btn-container">
                     <AnchorContainerStyled>
                         <AnchorLink href="#top-of-catalog" offset='130'
-                                    className="scroll-to-btn">{t('catalog.pagination.up')}</AnchorLink>
+                                    className="scroll-to-btn">{t('dashboard.pagination.up')}</AnchorLink>
                     </AnchorContainerStyled>
                 </div>
             </>

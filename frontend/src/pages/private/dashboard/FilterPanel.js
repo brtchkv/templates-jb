@@ -19,31 +19,31 @@ function FilterPanel(props) {
     //TODO: серварная подгрузка опций фильтров
 
     const uniList = [
-        {value: "-1", label: t('catalog.filterPanel.filterSelector.allUni')},
+        {value: "-1", label: t('dashboard.filterPanel.filterSelector.allUni')},
         {value: "1", label: "ИТМО"},
         {value: "3", label: "Тюменский индустриальный университет"},
         {value: "2", label: "Уральский университет"}
     ];
     const sortMethod = [
-        {value: "all", label: t('catalog.filterPanel.filterSelector.sorting.options.default')},
-        {value: "dateFromNew", label: t('catalog.filterPanel.filterSelector.sorting.options.durationStart')},
-        {value: "dateFromOld", label: t('catalog.filterPanel.filterSelector.sorting.options.durationEnd')},
-        {value: "nameStart", label: t('catalog.filterPanel.filterSelector.sorting.options.nameStart')},
-        {value: "nameEnd", label: t('catalog.filterPanel.filterSelector.sorting.options.nameEnd')},
-        {value: "newFirst", label: t('catalog.filterPanel.filterSelector.sorting.options.newFirst')}
+        {value: "all", label: t('dashboard.filterPanel.filterSelector.sorting.options.default')},
+        {value: "dateFromNew", label: t('dashboard.filterPanel.filterSelector.sorting.options.durationStart')},
+        {value: "dateFromOld", label: t('dashboard.filterPanel.filterSelector.sorting.options.durationEnd')},
+        {value: "nameStart", label: t('dashboard.filterPanel.filterSelector.sorting.options.nameStart')},
+        {value: "nameEnd", label: t('dashboard.filterPanel.filterSelector.sorting.options.nameEnd')},
+        {value: "newFirst", label: t('dashboard.filterPanel.filterSelector.sorting.options.newFirst')}
     ];
     const groupList = [
-        {value: "-1", label: t('catalog.filterPanel.filterSelector.allProg')},
+        {value: "-1", label: t('dashboard.filterPanel.filterSelector.allProg')},
         {value: "3", label: "Физика и астрономия"},
         {value: "5", label: "Техника и технологии строительства"},
     ];
 
     const courseStatus = [
-        {value: "all", label: t('catalog.filterPanel.filterSelector.courseStatus.all')},
-        {value: "started", label: t('catalog.filterPanel.filterSelector.courseStatus.started')},
-        {value: "scheduled", label: t('catalog.filterPanel.filterSelector.courseStatus.scheduled')},
-        {value: "current", label: t('catalog.filterPanel.filterSelector.courseStatus.current')},
-        {value: "archived", label: t('catalog.filterPanel.filterSelector.courseStatus.archived')}
+        {value: "all", label: t('dashboard.filterPanel.filterSelector.courseStatus.all')},
+        {value: "started", label: t('dashboard.filterPanel.filterSelector.courseStatus.started')},
+        {value: "scheduled", label: t('dashboard.filterPanel.filterSelector.courseStatus.scheduled')},
+        {value: "current", label: t('dashboard.filterPanel.filterSelector.courseStatus.current')},
+        {value: "archived", label: t('dashboard.filterPanel.filterSelector.courseStatus.archived')}
     ];
 
     const showAlert = () => {
@@ -109,7 +109,7 @@ function FilterPanel(props) {
             </div>
             <div className="results-view-settings">
                 <div className="ordering">
-                    <OrderLabelStyled className="sort-label">{t('catalog.filterPanel.filterSelector.sorting.title')}:</OrderLabelStyled>
+                    <OrderLabelStyled className="sort-label">{t('dashboard.filterPanel.filterSelector.sorting.title')}:</OrderLabelStyled>
                     <Form.Control
                         name="sortMethodFilter" as={SelectorStyled}
                         className="plp-selector" ref={register} custom

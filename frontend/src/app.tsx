@@ -1,8 +1,8 @@
 import React, {lazy, useEffect, useState} from 'react';
 import './core-styles/index.css';
-import DashBoard from './pages/public/catalog/DashBoard.js'
+import DashBoard from './pages/private/dashboard/DashBoard.js'
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
-import Header from "./pages/include/header/Header";
+import Header from "./components/header/Header";
 import AuthForm from "./pages/public/login/AuthForm";
 import PageNotFound from "./pages/stubs/PageNotFound";
 import {userContext, UserCredentials} from './settings/user/userContext';
@@ -15,7 +15,7 @@ import {ThemeProvider} from 'styled-components';
 import {handleTextSelected} from "./helpers/bvi/speechSynthesis";
 import {useTheme} from "./core-styles/theme/useTheme";
 
-const Profile = lazy(() => import(/* webpackChunkName: "profile" */ './pages/student/profile/Profile'));
+const Profile = lazy(() => import(/* webpackChunkName: "profile" */ './pages/private/profile/Profile'));
 
 function App() {
     const [loginUser, setLoginUser] = useState<UserCredentials>(checkLocalStorage());

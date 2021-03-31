@@ -2,7 +2,7 @@ import React from 'react';
 import {getPrivateCourses, getAllStatData} from "../../../service/api/serviceAPI.ts";
 import "./style/courses.css"
 import {userContext} from "../../../settings/user/userContext.ts";
-import Loading from "../../../pages/stubs/Loading";
+import Loading from "../../stubs/Loading";
 import _ from "lodash";
 import {withTranslation} from "react-i18next";
 import Image from "../../../components/image/Image";

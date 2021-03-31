@@ -1,17 +1,17 @@
 import React, {useRef, useState} from "react";
 import {Link} from "react-router-dom";
-import {userContext} from "../../../settings/user/userContext.ts";
-import {userRoles} from "../../../settings/roles/userRoles.ts";
-import * as API from "../../../service/api/serviceAPI.ts";
-import {AuthRoutes, NonAuthRoutes} from "../../../settings/urls/pathTypes.ts";
+import {userContext} from "../../settings/user/userContext.ts";
+import {userRoles} from "../../settings/roles/userRoles.ts";
+import * as API from "../../service/api/serviceAPI.ts";
+import {AuthRoutes, NonAuthRoutes} from "../../settings/urls/pathTypes.ts";
 import "./styles/header.css"
 import {Menu} from "primereact/menu";
-import {checkLocalStorage} from "../../../helpers/user";
+import {checkLocalStorage} from "../../helpers/user";
 import {useTranslation} from 'react-i18next';
-import Bvi from "../../../components/bvi/bvi";
-import "../../../components/bvi/styles/bvi.css"
-import Fade from "../../../helpers/animation/Fade";
-import Image from "../../../components/image/Image";
+import Bvi from "../bvi/bvi";
+import "../bvi/styles/bvi.css"
+import Fade from "../../helpers/animation/Fade";
+import Image from "../image/Image";
 import jb from "./styles/jetbrains.svg"
 import {HeaderStyled, MenuButtonStyled, MenuProfileButtonStyled, MenuStyled, StyledHeaderLink} from "./styles/header";
 

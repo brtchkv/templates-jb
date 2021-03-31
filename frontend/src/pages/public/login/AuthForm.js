@@ -8,7 +8,7 @@ import "./styles/Auth.css"
 import {Nav, Tab} from 'react-bootstrap';
 import {NonAuthRoutes} from "../../../settings/urls/pathTypes.ts";
 import {AuthImageContainer, AuthImageLogo, AuthPanelStyled, AuthPanelTabStyled, Lable} from "./styles/styles";
-import jb from "../../include/header/styles/jetbrains.svg";
+import jb from "../../../components/header/styles/jetbrains.svg";
 import Image from "../../../components/image/Image";
 
 class AuthForm extends React.Component {
