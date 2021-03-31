@@ -23,5 +23,6 @@ export const mainTheme = {
     mainColorBright: "#e3e3e3",
     mainColorText: "#000000",
     mainColorTextDark: "#415162",
-    mainColorButtons: "#d1d1d1"
+    mainColorButtons: "#d1d1d1",
+    dashBoardBorders: "#b4b4b4"
 }

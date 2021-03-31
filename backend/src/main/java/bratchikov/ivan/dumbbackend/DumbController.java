@@ -17,6 +17,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -97,6 +100,18 @@ public class DumbController {
         return storageBean.getUserStatistics().get(user.getId());
     }
 
+    @RequestMapping("/statistics/count")
+    public int getAllStatCount(@RequestHeader("X-Authentication") String token) {
+        User user = getUser(token);
+
+        if (user == null) {
+            logger.error("[getAllStat] User lookup failed");
+            return 0;
+        }
+
+        return storageBean.getUserStatistics().get(user.getId()).size();
+    }
+
     @RequestMapping("/statistics")
     public List<StatData> getFilteredStat(@RequestParam(value = "range") String range,
                                         @RequestParam(value = "date") String dateString,
@@ -117,7 +132,9 @@ public class DumbController {
             Date date;
 
             try {
-                date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX").parse(dateString);
+                TemporalAccessor ta = DateTimeFormatter.ISO_INSTANT.parse(dateString);
+                Instant i = Instant.from(ta);
+                date = Date.from(i);
             } catch (Exception e) {
                 logger.error(e.toString());
                 return null;

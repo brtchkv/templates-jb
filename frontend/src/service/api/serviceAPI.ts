@@ -61,15 +61,24 @@ export function getAllStatData(user) {
         .then(res => res.json());
 }
 
-export function getFilteredStatData(user, preferences) {
+export function getAllStatDataCount(user) {
+    const requestOptions = {
+        method: 'GET',
+        headers: {'X-Authentication': user.token},
+    };
+    return fetch(baseURL + "statistics/count", requestOptions)
+        .then(res => res.json());
+}
+
+export function getFilteredStatData(user, range, date) {
     const requestOptions = {
         method: 'GET',
         headers: {'X-Authentication': user.token},
     };
 
-    let url = baseURL + `statistics?` +
-        `&range=${preferences.range}` +
-        `&date=${preferences.date}`;
+    let url = `statistics?` +
+        `&range=${range}` +
+        `&date=${date}`;
 
     return fetch(baseURL + url, requestOptions)
         .then(res => res.json());

@@ -33,7 +33,7 @@
     },
     "dashboard": {
       "filterPanel": {
-        "totalCourses": "Всего {{count}}<1> из {{total}}</1>",
+        "totalCourses": "Всего {{count}}<1> записей из {{total}} возможных</1>",
         "filterSelector": {
           "sorting": {
             "title": "Сортировка",
@@ -47,6 +47,13 @@
             }
           }
         }
+      },
+      "table": {
+        "noRecords": "Данных Нет",
+        "product": "Приложение",
+        "minUsage": "Миниальное количество использований",
+        "maxUsage": "Максимальное количество использований",
+        "averageUsage": "Среднее количество использований"
       },
       "pagination": {
         "more": "Еще",

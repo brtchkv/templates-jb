@@ -1,38 +1,57 @@
-import React, {useEffect, useState} from "react";
-import './styles/catalog.css';
+import React, {useContext, useEffect, useState} from "react";
+import './styles/dashBoard.css';
 import Loading from "../../stubs/Loading";
 import * as API from '../../../service/api/serviceAPI.ts';
 import FilterPanel from "./FilterPanel";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {Trans, useTranslation} from 'react-i18next'
 import {FilterPanelContainerStyled} from "./styles/filterPanel";
-import {AnchorContainerStyled} from "./styles/catalog";
+import {AnchorContainerStyled, FirstTr, NoDataLabel, Table, Td} from "./styles/dashBoard";
+import _ from "lodash";
+import dayjs from 'dayjs';
+import {userContext} from "../../../settings/user/userContext";
 
 function DashBoard() {
     const [error, setError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
-    const [filterOption, setFilterOptions] = useState("week");
+    const [filterOption, setFilterOption] = useState("week");
+    const [startDate, setStartDate] = useState(dayjs().toISOString());
     const {t} = useTranslation();
+    const context = useContext(userContext);
 
     useEffect(() => {
-        // API.fetchPageData("courses", filterOption)
-        //     .then(
-        //         (result) => {
-        //             setIsLoaded(true);
-        //             setIsLoaded(result)
-        //         },
-        //         (error) => {
-        //             setIsLoaded(true);
-        //             setError(true);
-        //         }
-        //     )
+        API.getFilteredStatData(context.user, filterOption, startDate)
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setItems(result);
+                    console.log(result)
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(true);
+                }
+            )
     }, [filterOption]);
 
-    const setFilteredData = (value, preferences) => {
+    useEffect(() => {
+        API.getAllStatDataCount(context.user)
+            .then(
+                (result) => {
+                    setCount(parseInt(result))
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(true);
+                }
+            )
+    }, []);
+
+    const setFilteredData = (value, filter) => {
         setItems(value)
-        setFilteredData(preferences);
+        setFilterOption(filter);
     };
 
     if (error) {
@@ -45,28 +64,55 @@ function DashBoard() {
                 <div id="top-of-catalog"/>
                 <FilterPanelContainerStyled className="search-tools">
                     <div className="container">
-                        <h2 className="title">
-                            <Trans
-                                i18nKey="dashboard.filterPanel.totalCourses"
-                                values={{count: items.length, total: items.length}}
-                                components={{1: <span className="comment"/>}}
-                            />
-                        </h2>
-                        <FilterPanel setFilteredData={setFilteredData}/>
+                        <div className="row">
+                            <h2 className="title">
+                                <Trans
+                                    i18nKey="dashboard.filterPanel.totalCourses"
+                                    values={{count: items ? items.length : 0, total: count}}
+                                    components={{1: <span className="comment"/>}}
+                                />
+                            </h2>
+                        </div>
+                        <div className="row">
+                            <FilterPanel setFilteredData={setFilteredData} className="col-12"/>
+                        </div>
                     </div>
                 </FilterPanelContainerStyled>
-                {/*<div className="container courses-container cols-4">*/}
-                {/*    {items.map(item => (*/}
-                {/*        <Card key={item.code} item={item}/>*/}
-                {/*    ))*/}
-                {/*    }*/}
-                {/*</div>*/}
-                <div className="scroll-btn-container">
-                    <AnchorContainerStyled>
-                        <AnchorLink href="#top-of-catalog" offset='130'
-                                    className="scroll-to-btn">{t('dashboard.pagination.up')}</AnchorLink>
-                    </AnchorContainerStyled>
+                <div className="container courses-container cols-4">
+                    {(items > 0) ?
+                        <Table>
+                            <tbody>
+                            <FirstTr>
+                                <Td>{t('dashboard.table.product')}</Td>
+                                <Td>{t('dashboard.table.minUsage')}</Td>
+                                <Td>{t('dashboard.table.maxUsage')}</Td>
+                                <Td>{t('dashboard.table.averageUsage')}</Td>
+                            </FirstTr>
+                            {items.map((element, index) =>
+                                <tr key={index}>
+                                    <Td>{element.name}</Td>
+                                    <Td>{_.size(element.data) !== 0 ? _.minBy(element.data, 'usage').usage : 0}</Td>
+                                    <Td>{_.size(element.data) !== 0 ? _.maxBy(element.data, 'usage').usage : 0}</Td>
+                                    <Td>{_.size(element.data) !== 0 ? parseInt(_.meanBy(element.data, 'usage')) : 0} </Td>
+                                </tr>
+                            )}
+                            </tbody>
+                        </Table>
+                        :
+                        <NoDataLabel className="title">
+                            {t('dashboard.table.noRecords')}
+                        </NoDataLabel>
+                    }
                 </div>
+                {(items > 0) ?
+                    <div className="scroll-btn-container">
+                        <AnchorContainerStyled>
+                            <AnchorLink href="#top-of-catalog" offset='130'
+                                        className="scroll-to-btn">{t('dashboard.pagination.up')}</AnchorLink>
+                        </AnchorContainerStyled>
+                    </div>
+                    : <></>
+                }
             </>
         );
     }

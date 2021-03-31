@@ -100,7 +100,7 @@ export const theme = {
         },
         button: {
             background: mainTheme.mainColorBright,
-            border: mainTheme.mainColorBright,
+            border: mainTheme.dashBoardBorders,
             color: mainTheme.mainColorText,
             focus: {
                 color: mainTheme.mainColorText,

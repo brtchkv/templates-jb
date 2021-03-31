@@ -5,7 +5,10 @@ import * as API from "../../../service/api/serviceAPI.ts";
 import Alert from "react-bootstrap/Alert";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
-import {OrderLabelStyled, SelectorStyled} from "./styles/filterPanel";
+import {OrderLabelStyled, SelectorStyled, FilterForm, Button, ButtonContainer} from "./styles/filterPanel";
+import left from "./images/left.png";
+import right from "./images/right.png";
+import Image from "../../../components/image/Image";
 
 function FilterPanel(props) {
     const {t, i18n} = useTranslation();
@@ -46,10 +49,24 @@ function FilterPanel(props) {
         //     });
     };
 
+    const prevDate = (e) => {
+        // setDate(date.subtract(1, range));
+    }
+
+    const nextDate = (e) => {
+        // setDate(date.add(1, range));
+    }
+
     return (
-        <form onChange={handleSubmit(onSubmit)}>
+        <FilterForm onChange={handleSubmit(onSubmit)}>
             <div className="course-filters">
+                <ButtonContainer>
+                    <Button onClick={prevDate}>
+                        <Image src={left} size={{width: "25px"}}/>
+                    </Button>
+                </ButtonContainer>
                 <div className="course-filter">
+                    {/*<OrderLabelStyled className="sort-label">{t('dashboard.filterPanel.filterSelector.sorting.title')}:</OrderLabelStyled>*/}
                     <Form.Control
                         name="uniFilter" as={SelectorStyled} ref={register({type: 'custom'})}
                         className="plp-selector" custom
@@ -61,21 +78,11 @@ function FilterPanel(props) {
                         }
                     </Form.Control>
                 </div>
-            </div>
-            <div className="results-view-settings">
-                <div className="ordering">
-                    <OrderLabelStyled className="sort-label">{t('dashboard.filterPanel.filterSelector.sorting.title')}:</OrderLabelStyled>
-                    <Form.Control
-                        name="sortMethodFilter" as={SelectorStyled}
-                        className="plp-selector" ref={register} custom
-                    >
-                        {
-                            sortMethod.map(function (method) {
-                                return <option key={method.value} value={method.value}>{method.label}</option>
-                            })
-                        }
-                    </Form.Control>
-                </div>
+                <ButtonContainer>
+                    <Button onClick={nextDate}>
+                        <Image src={right} size={{width: "25px"}}/>
+                    </Button>
+                </ButtonContainer>
             </div>
             {
                 visibleAlert &&
@@ -83,7 +90,7 @@ function FilterPanel(props) {
                     {t('util.noServerConnection')}
                 </Alert>
             }
-        </form>
+        </FilterForm>
     );
 }
 

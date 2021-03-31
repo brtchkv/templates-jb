@@ -13,6 +13,21 @@ export const FilterPanelContainerStyled = styled.div`
     }
 `
 
+export const FilterForm = styled.form`
+    width: 100%;
+`
+
+export const Button = styled.button`
+  cursor: pointer;
+  border: none;
+  vertical-align:middle;
+  background-color: inherit;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+`;
+
 export const SelectorStyled = styled.select`
     font-size: ${({theme}) => theme.fontSize};
     font-family: ${({theme}) => theme.fontSerif};
