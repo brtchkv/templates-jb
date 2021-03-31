@@ -54,23 +54,16 @@ const Header = (props) => {
         </StyledNav>
     );
 
-    const AuthButtons = (props) => (
-        <div className="nav-item">
-            <StyledHeaderLink to={NonAuthRoutes.login}
-                              className="sign-in-button"> {t('header.publicMenu.auth')} </StyledHeaderLink>
-        </div>
-    )
-
     const Settings = (props) => (
         <MenuWrapper className="col-2 d-flex">
             <MenuStyled model={[
                 {
-                    label: t('header.settings.a11'), icon: "pi pi-eye", path: "", command: () => {
+                    label: t('header.settings.a11'), icon: "pi pi-eye", command: () => {
                         showBvi(!bvi)
-                    }, className: "constants-button"
+                    }
                 },
                 {
-                    label: t('header.settings.i18'), icon: "pi pi-globe", path: "", command: () => {
+                    label: t('header.settings.i18'), icon: "pi pi-globe", command: () => {
                         changeLang()
                     }
                 }
@@ -98,12 +91,11 @@ const Header = (props) => {
     );
 
     const ProfileUniversityMenu = (props) => (
-        <>
+        <div className="ml-auto ml-md-0">
             <Menu model={[
                 {label: t('header.authMenu.profile'), url: AuthRoutes.profile, icon: "pi pi-user"},
-                {label: t('header.authMenu.uniPortal'), url: AuthRoutes.universityPanel, icon: "pi pi-home"},
                 {
-                    label: t('header.authMenu.logOut'), icon: "pi pi-sign-out", path: "", command: () => {
+                    label: t('header.authMenu.logOut'), icon: "pi pi-sign-out", command: () => {
                         API.logOut();
                         props.entity.setUser(checkLocalStorage);
                     }
@@ -112,7 +104,7 @@ const Header = (props) => {
             <MenuButtonStyled label={t('header.authMenu.title')} icon="fas fa-user-circle fa-2x"
                               onClick={(event) => menuProfile.current.toggle(event)}
                               aria-controls="popup_menu_profile" aria-haspopup={true}/>
-        </>
+        </div>
     );
 
     return (

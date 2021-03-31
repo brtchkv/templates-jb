@@ -1,5 +1,4 @@
 import React, {useContext, useRef} from 'react';
-import "./style/courses.css"
 import {useTranslation} from "react-i18next";
 import {userContext} from "../../../settings/user/userContext";
 import {ButtonStyled} from "./style/profile"
@@ -14,7 +13,7 @@ const StudentCourses = (props) => {
     const sendFile = props => {
         API.putFile(context.user, props.files[0])
             .then(
-                (result) => {
+                (response) => {
                     toast.current.show({
                         severity: 'info',
                         summary: `${t("profile.success")}`,
@@ -22,11 +21,12 @@ const StudentCourses = (props) => {
                     });
                 }
             ).catch((error) => {
-            toast.current.show({
-                severity: 'info',
-                summary: `${t("profile.success")}`,
-                detail: `${t("profile.fileUploaded")}`
-            });
+                console.log(error)
+                toast.current.show({
+                    severity: 'error',
+                    summary: `${t("profile.error")}`,
+                    detail: `${t("profile.errorUpload")}`
+                });
         });
     };
 

@@ -9,6 +9,4 @@ export enum AuthRoutes {
     profile = "/profile",
     myCourses = "/my",
     logout = "/logout",
-    myStatistics = "/my-statistics",
-    universityPanel = "/admin-panel"
 };

@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,6 +52,7 @@ public class DumbController {
     }
 
     @PostMapping("/upload-csv-file")
+    @ResponseStatus(HttpStatus.OK)
     public String uploadCSVFileForUser(@RequestParam("file") MultipartFile file, @RequestHeader("X-Authentication") String token) {
         List<StatData> statistics = new ArrayList();
         User user = getUser(token);
@@ -69,7 +71,7 @@ public class DumbController {
                     logger.error(e.toString());
                 }
             }
-            return "OK";
+            return "{'status': 'OK'}";
         } else {
             return null;
         }

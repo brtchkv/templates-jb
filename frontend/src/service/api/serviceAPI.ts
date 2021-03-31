@@ -15,21 +15,7 @@ export function validateUserToken(token) {
 }
 
 export function logOut() {
-    console.log("Logged out");
     localStorage.removeItem('user');
-}
-
-export function checkRegistration(username, password) {
-    //TODO:реальная проверка имейла (доделать на бэке)
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, password})
-    };
-
-    return fetch(baseURL + "register/check", requestOptions)
-        .then(res => res.json());
 }
 
 export function getAllStatData(user) {
@@ -49,8 +35,7 @@ export function putFile(user, file) {
         headers: {'X-Authentication': user.token},
         body: formData
     };
-    return fetch(baseURL + "upload-csv-file", requestOptions)
-        .then(res => res.json());
+    return fetch(baseURL + "upload-csv-file", requestOptions);
 }
 
 export function getAllStatDataCount(user) {
