@@ -1,35 +1,48 @@
-import React from 'react';
+import React, {useContext, useRef} from 'react';
 import "./style/courses.css"
-import Loading from "../../stubs/Loading";
-import stub from "../../stubs/img/toBeDeveloped.png"
-import {withTranslation} from "react-i18next";
-import Image from "../../../components/image/Image";
+import {useTranslation} from "react-i18next";
+import {userContext} from "../../../settings/user/userContext";
+import {ButtonStyled} from "./style/profile"
+import * as API from "../../../service/api/serviceAPI";
+import {Toast} from "primereact/toast";
 
-class StudentCourses extends React.Component {
+const StudentCourses = (props) => {
+    const {t} = useTranslation();
+    const toast = useRef(null);
+    const context = useContext(userContext);
 
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            error: null,
-            isLoaded: true,
-        };
-    }
+    const sendFile = props => {
+        API.putFile(context.user, props.files[0])
+            .then(
+                (result) => {
+                    toast.current.show({
+                        severity: 'info',
+                        summary: `${t("profile.success")}`,
+                        detail: `${t("profile.fileUploaded")}`
+                    });
+                }
+            ).catch((error) => {
+            toast.current.show({
+                severity: 'info',
+                summary: `${t("profile.success")}`,
+                detail: `${t("profile.fileUploaded")}`
+            });
+        });
+    };
 
-    render() {
-        const { t } = this.props;
-        const {error, isLoaded} = this.state;
-        if (error) {
-            return <div>{t('dashboard.util.error')} {error.message}</div>;
-        } else if (!isLoaded) {
-            return <Loading/>;
-        } else {
-            return (
-                <div className="container">
-                    <Image className="picture img-circle" alt="" src={stub} size={{width: "400px", height: "400px"}}/>
+    return (
+        <>
+            <Toast ref={toast}/>
+            <div className="container">
+                <h2>{context.user.role}</h2>
+                <div>
+                    <h5 className="pr-3">{t("profile.uploadLabel")}</h5>
+                    <ButtonStyled mode="basic" name="csv" uploadHandler={sendFile}
+                                  customUpload chooseLabel={t("profile.upload")}/>
                 </div>
-            );
-        }
-    }
+            </div>
+        </>
+    );
 }
 
-export default withTranslation()(StudentCourses);
+export default StudentCourses;

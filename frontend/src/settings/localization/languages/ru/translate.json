@@ -65,8 +65,13 @@
         "up": "Наверх"
       }
     },
-    "profileStudent": {
-      "totalNumberOfCourses": "Всего {{count}} записей"
+    "profile": {
+      "uploadLabel": "Пожалуйста загрузити свою статистику:",
+      "upload": "Загрузить",
+      "success": "Успех",
+      "error": "Обишка",
+      "fileUploaded": "Файл загружен",
+      "errorUpload": "Что-то плохое произошло"
     },
     "bvi": {
       "fontSize": "Размер шрифта",

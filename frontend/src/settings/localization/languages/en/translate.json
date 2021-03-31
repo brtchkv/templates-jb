@@ -65,8 +65,13 @@
         "averageUsageMobile": "Mean"
       }
     },
-    "profileStudent": {
-      "totalNumberOfCourses": "Total of {{count}} records"
+    "profile": {
+      "uploadLabel": "Please Upload Your Personal Statistics:",
+      "upload": "Upload",
+      "success": "Success",
+      "error": "Error",
+      "fileUploaded": "File Uploaded",
+      "errorUpload": "Something bad happened"
     },
     "bvi": {
       "fontSize": "Font size",

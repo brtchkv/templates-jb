@@ -59,11 +59,12 @@ public class DumbController {
             return null;
         }
         if (!storageBean.getUserTokens().containsKey(user.getId())) {
-            logger.error("[uploadCSVFileForUser] New Stats for user -- ".concat(user.getUsername()));
+            logger.info("[uploadCSVFileForUser] New Stats for user -- ".concat(user.getUsername()));
             if (!file.isEmpty()) {
                 try (Reader inputReader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     statistics = parseCSVStatData(inputReader);
                     storageBean.getUserStatistics().put(user.getId(), statistics);
+                    logger.info("size ".concat(String.valueOf(storageBean.getUserStatistics().size())));
                 } catch (Exception e) {
                     logger.error(e.toString());
                 }

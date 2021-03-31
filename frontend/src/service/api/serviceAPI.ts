@@ -1,15 +1,5 @@
 const baseURL = "http://localhost:8080/";
 
-export function fetchPageData(path, start, count, filterOptions) {
-    let url = baseURL + path + `?` +
-        `start=${start}&count=${count}` +
-        `&uniFilter=${filterOptions.uniFilter}` +
-        `&sortMethodFilter=${filterOptions.sortMethodFilter}` +
-        `&courseStatusFilter=${filterOptions.courseStatusFilter}` +
-        `&groupFilter=${filterOptions.groupFilter}`;
-    return fetch(url).then(res => res.json());
-}
-
 export function login(username, password) {
     const requestOptions = {
         method: 'POST',
@@ -42,22 +32,24 @@ export function checkRegistration(username, password) {
         .then(res => res.json());
 }
 
-export function filterCoursesBy(preferences) {
-    let url = baseURL + `courses?` +
-        `start=0&count=2` +
-        `&uniFilter=${preferences.uniFilter}` +
-        `&sortMethodFilter=${preferences.sortMethodFilter}` +
-        `&courseStatusFilter=${preferences.courseStatusFilter}` +
-        `&groupFilter=${preferences.groupFilter}`;
-    return fetch(url).then(res => res.json());
-}
-
 export function getAllStatData(user) {
     const requestOptions = {
         method: 'GET',
         headers: {'X-Authentication': user.token},
     };
     return fetch(baseURL + "statistics/all", requestOptions)
+        .then(res => res.json());
+}
+
+export function putFile(user, file) {
+    let formData = new FormData();
+    formData.append(`file`, file);
+    const requestOptions = {
+        method: 'POST',
+        headers: {'X-Authentication': user.token},
+        body: formData
+    };
+    return fetch(baseURL + "upload-csv-file", requestOptions)
         .then(res => res.json());
 }
 

@@ -7,7 +7,7 @@ const ProductTable = (props) => {
     const {t} = useTranslation();
     return (
         <>
-            <Table className={"d-none d-md-block"}>
+            <Table className={"d-none d-md-table"}>
                 <tbody>
                 <FirstTr>
                     <Td>{t('dashboard.table.product')}</Td>
