@@ -12,6 +12,8 @@ import dayjs from 'dayjs';
 import {userContext} from "../../../settings/user/userContext";
 import quarterOfYear from 'dayjs/plugin/quarterOfYear'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import Graph from "../../../components/graph/graph";
+
 require('dayjs/locale/ru')
 require('dayjs/locale/en')
 
@@ -48,7 +50,7 @@ function DashBoard() {
                         {data: webStormData, name: "WebStorm"},
                         {data: goLandData, name: "GoLand"}
                     ]);
-                    setCount(response.length);
+                    setCount(_.size(response));
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -101,30 +103,34 @@ function DashBoard() {
                             </h2>
                         </div>
                         <div className="row">
-                            <FilterPanel setFilteredData={setFilteredData} className="col-12" startDate={startDate} filterOption={filterOption}/>
+                            <FilterPanel setFilteredData={setFilteredData} className="col-12" startDate={startDate}
+                                         filterOption={filterOption}/>
                         </div>
                     </div>
                 </FilterPanelContainerStyled>
                 <div className="container courses-container cols-4">
                     {(count > 0) ?
-                        <Table>
-                            <tbody>
-                            <FirstTr>
-                                <Td>{t('dashboard.table.product')}</Td>
-                                <Td>{t('dashboard.table.minUsage')}</Td>
-                                <Td>{t('dashboard.table.maxUsage')}</Td>
-                                <Td>{t('dashboard.table.averageUsage')}</Td>
-                            </FirstTr>
-                            {items.map((element, index) =>
-                                <tr key={index}>
-                                    <Td>{element.name}</Td>
-                                    <Td>{_.size(element.data) !== 0 ? _.minBy(element.data, 'usage').usage : 0}</Td>
-                                    <Td>{_.size(element.data) !== 0 ? _.maxBy(element.data, 'usage').usage : 0}</Td>
-                                    <Td>{_.size(element.data) !== 0 ? parseInt(_.meanBy(element.data, 'usage')) : 0} </Td>
-                                </tr>
-                            )}
-                            </tbody>
-                        </Table>
+                        <>
+                            <Table>
+                                <tbody>
+                                <FirstTr>
+                                    <Td>{t('dashboard.table.product')}</Td>
+                                    <Td>{t('dashboard.table.minUsage')}</Td>
+                                    <Td>{t('dashboard.table.maxUsage')}</Td>
+                                    <Td>{t('dashboard.table.averageUsage')}</Td>
+                                </FirstTr>
+                                {items.map((element, index) =>
+                                    <tr key={index}>
+                                        <Td>{element.name}</Td>
+                                        <Td>{_.size(element.data) !== 0 ? _.minBy(element.data, 'usage').usage : 0}</Td>
+                                        <Td>{_.size(element.data) !== 0 ? _.maxBy(element.data, 'usage').usage : 0}</Td>
+                                        <Td>{_.size(element.data) !== 0 ? parseInt(_.meanBy(element.data, 'usage')) : 0} </Td>
+                                    </tr>
+                                )}
+                                </tbody>
+                            </Table>
+                            <Graph data={items}/>
+                        </>
                         :
                         <NoDataLabel className="title">
                             {t('dashboard.table.noRecords')}

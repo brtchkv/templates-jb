@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import './core-styles/index.css';
 import * as serviceWorker from './serviceWorker';
 import App from "./app";
-import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/themes/nova/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Loading from "./pages/stubs/Loading";
 import {I18nextProvider} from "react-i18next";
 import i18n from "./settings/localization/i18n";
-// @ts-ignore
 
 ReactDOM.render((
     <Suspense fallback={<Loading/>}>

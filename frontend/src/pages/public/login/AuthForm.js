@@ -1,6 +1,5 @@
 import React from 'react';
 import TabPane from "react-bootstrap/TabPane";
-import Register from "../../../components/auth-form/Register.tsx";
 import TabContainer from "react-bootstrap/TabContainer";
 import Login from "../../../components/auth-form/Login.tsx";
 import {Link, withRouter} from "react-router-dom";
@@ -28,9 +27,6 @@ function AuthForm(props) {
                             <Tab.Pane eventKey="login">
                                 <Login className="login-form-body"/>
                             </Tab.Pane>
-                            <TabPane eventKey="register">
-                                <Register className="login-form-body"/>
-                            </TabPane>
                         </Tab.Content>
                     </TabContainer>
                 </div>

@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const htmlPlugin = new HtmlWebPackPlugin({
     template: "./public/index.html",
@@ -14,11 +15,8 @@ module.exports = {
         app: path.join(__dirname, 'src', 'index.tsx')
     },
     output: {
-        // `filename` provides a template for naming your bundles (remember to use `[name]`)
         filename: '[name].bundle.js',
-        // `chunkFilename` provides a template for naming code-split bundles (optional)
         chunkFilename: '[name].bundle.js',
-        // `path` is the folder where Webpack will place your bundles
         path: path.resolve(__dirname, 'build')
     },
     devtool: 'inline-source-map',
@@ -82,5 +80,12 @@ module.exports = {
             }
         ],
     },
-    plugins: [new CleanWebpackPlugin(), htmlPlugin]
+    plugins: [
+        htmlPlugin,
+        new HtmlWebpackPlugin({
+            hash: true,
+            template: './src/index.html',
+        }),
+        new CleanWebpackPlugin()
+    ],
 };
