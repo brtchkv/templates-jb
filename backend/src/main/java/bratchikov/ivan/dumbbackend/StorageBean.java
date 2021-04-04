@@ -4,17 +4,19 @@ import bratchikov.ivan.dumbbackend.model.*;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import com.univocity.parsers.common.processor.BeanListProcessor;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
+import static org.springframework.core.io.ResourceLoader.CLASSPATH_URL_PREFIX;
 
 @Data
 @Component
@@ -32,8 +34,9 @@ public class StorageBean {
         users.add(student);
         users.add(privateUser);
 
-        try (Reader inputReader = new BufferedReader(new InputStreamReader(new FileInputStream(ResourceUtils.getFile("classpath:fls-data" +
-                ".csv"))))) {
+        try (Reader inputReader =
+                     new BufferedReader
+                             (new BufferedReader(new InputStreamReader(new ClassPathResource("fls-data.csv").getInputStream())))) {
             BeanListProcessor<StatData> rowProcessor = new BeanListProcessor<StatData>(StatData.class);
             CsvParserSettings settings = new CsvParserSettings();
             settings.setHeaderExtractionEnabled(true);
@@ -43,6 +46,7 @@ public class StorageBean {
             CsvParser parser = new CsvParser(settings);
             parser.parse(inputReader);
             statistics = rowProcessor.getBeans();
+            logger.info("Opened File");
         } catch (Exception e) {
             logger.error(e.toString());
         }

@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id "com.github.node-gradle.node" version "3.0.1"
+}
+
+apply plugin: 'base'
+
+node {
+    version = '12.19.0'
+    download = true
+}
+
+task bundle(type: YarnTask, dependsOn: yarn_install) {
+    args = ['run', 'build']
+}
+
+task run(type: YarnTask) {
+    args = ['start']
+}
+
+task appNpmBuild(type: YarnTask) {
+    args = ['build']
+}
+
+assemble.dependsOn(appNpmBuild)
+
+task webjar(type: Jar) {
+    from(fileTree('build')) {
+        into 'META-INF/resources'
+    }
+}
+jar.dependsOn(bundle)
+jar.finalizedBy('webjar')
