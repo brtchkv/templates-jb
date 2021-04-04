@@ -1,10 +1,8 @@
-import React from "react";
-import {Link} from 'react-router-dom'
 import "./styles/stubs.css"
-import {Trans, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 
-function PageNotFound(props) {
-    const {t, i18n} = useTranslation();
+function PageNotFound() {
+    const {t} = useTranslation();
 
     return (
             <div className="mainbox">

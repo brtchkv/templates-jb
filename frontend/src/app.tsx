@@ -1,7 +1,7 @@
-import React, {lazy, useEffect, useState} from 'react';
-import DashBoard from './pages/private/dashboard/DashBoard.js'
+import {useEffect, useState} from 'react';
+import DashBoard from './pages/private/dashboard/DashBoard'
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import Header from "./components/header/Header";
+import Header from "./components/header/Header.js";
 import AuthForm from "./pages/public/login/AuthForm";
 import PageNotFound from "./pages/stubs/PageNotFound";
 import {userContext, UserCredentials} from './settings/user/userContext';
@@ -64,7 +64,7 @@ function App() {
                                     <PrivateRoute path={[NonAuthRoutes.login, NonAuthRoutes.register]}
                                                   component={AuthForm}
                                                   requiredRoles={[String(UserRolesEntities.anon)]}/>
-                                    <PrivateRoute excect path={NonAuthRoutes.landing} component={DashBoard}
+                                    <PrivateRoute exact path={NonAuthRoutes.landing} component={DashBoard}
                                                   requiredRoles={[String(UserRolesEntities.student), String(UserRolesEntities.basic)]}/>
                                     <Route component={PageNotFound}/>
                                 </Switch>

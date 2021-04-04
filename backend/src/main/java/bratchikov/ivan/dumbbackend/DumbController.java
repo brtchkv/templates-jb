@@ -181,7 +181,7 @@ public class DumbController {
         return null;
     }
 
-    @RequestMapping("/register/check") //TODO:сделать регистрацию, по факту ее нет, только проверка на занятость email
+    @RequestMapping("/auth/register/check") //TODO:сделать регистрацию, по факту ее нет, только проверка на занятость
     public AuthenticationResponse checkRegister(@RequestBody AuthenticationRequest req) {
         Optional<User> userOpt = storageBean.getUsers().stream()
                 .filter((u) -> u.getUsername().equals(req.username)).findAny();
@@ -195,7 +195,7 @@ public class DumbController {
         return new AuthenticationResponse(false, null, null);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/auth/login")
     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest req) {
         Optional<User> userOpt = storageBean.getUsers().stream()
                 .filter((u) -> u.getUsername().equals(req.username) && u.getPassword().equals(req.password)).findAny();
@@ -209,7 +209,7 @@ public class DumbController {
         return new AuthenticationResponse(false, null, null);
     }
 
-    @RequestMapping("/check")
+    @RequestMapping("/auth/check")
     public AuthenticationResponse checkAuthentication(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
         if (user == null) {

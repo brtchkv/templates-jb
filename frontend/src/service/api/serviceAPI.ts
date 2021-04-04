@@ -1,62 +1,62 @@
-const baseURL = "http://localhost:8080/";
+import Axios, {AxiosResponse} from 'axios';
+import apiUrl from "./apiURLs";
+import {FileWithPath} from 'file-selector';
+import {User} from "../../settings/user/userContext";
 
-export function login(username, password) {
-    const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, password})
-    };
-    return fetch(baseURL + "login", requestOptions).then(res => res.json());
-}
+export const login = (
+    username: string,
+    password: string
+): Promise<AxiosResponse> => {
+    const body = JSON.stringify({username, password});
+    return Axios.post(apiUrl.auth.signIn, body, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+};
 
-export function validateUserToken(token) {
-    //TODO:реальная проверка токена на валидность и уровень доступа (доделать на бэке)
-    return true;
-}
+export const getAllStatDataCount = (
+    context: User
+): Promise<AxiosResponse> => {
+    const authHeaders = apiUrl.buildAuthHeaders(context);
+    return Axios.get(apiUrl.statistics.countAll, {
+        headers: {
+            "X-Authentication": authHeaders
+        }
+    });
+};
+
+export const getFilteredStatData = (
+    context: User,
+    range: string,
+    date: string
+): Promise<AxiosResponse> => {
+    const authHeaders = apiUrl.buildAuthHeaders(context);
+    return Axios.get(apiUrl.statistics.filtered, {
+        params: {
+            range: range,
+            date: date
+        },
+        headers: {
+            "X-Authentication": authHeaders
+        }
+    });
+};
+
+export const uploadCSV = (
+    file: FileWithPath,
+    context: User
+): Promise<AxiosResponse> => {
+    const authHeaders = apiUrl.buildAuthHeaders(context);
+    const formData = new FormData();
+    formData.append(`file`, file);
+    return Axios.post(apiUrl.uploaderUrl.uploadCSV, formData, {
+        headers: {
+            "X-Authentication": authHeaders
+        }
+    });
+};
 
 export function logOut() {
     localStorage.removeItem('user');
-}
-
-export function getAllStatData(user) {
-    const requestOptions = {
-        method: 'GET',
-        headers: {'X-Authentication': user.token},
-    };
-    return fetch(baseURL + "statistics/all", requestOptions)
-        .then(res => res.json());
-}
-
-export function putFile(user, file) {
-    let formData = new FormData();
-    formData.append(`file`, file);
-    const requestOptions = {
-        method: 'POST',
-        headers: {'X-Authentication': user.token},
-        body: formData
-    };
-    return fetch(baseURL + "upload-csv-file", requestOptions);
-}
-
-export function getAllStatDataCount(user) {
-    const requestOptions = {
-        method: 'GET',
-        headers: {'X-Authentication': user.token},
-    };
-    return fetch(baseURL + "statistics/count", requestOptions)
-        .then(res => res.json());
-}
-
-export function getFilteredStatData(user, range, date) {
-    const requestOptions = {
-        method: 'GET',
-        headers: {'X-Authentication': user.token},
-    };
-
-    let url = `statistics?` +
-        `&range=${range}` +
-        `&date=${date}`;
-
-    return fetch(baseURL + url, requestOptions)
-        .then(res => res.json());
 }

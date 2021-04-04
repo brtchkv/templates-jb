@@ -81,7 +81,7 @@ export const MenuStyled = styled(Menu)`
     letter-spacing: ${({theme}) => theme.fontKerning};
     line-height: ${({theme}) => theme.fontInterval};
     border: none;
-    
+        
     & .p-menuitem-link { 
         color: ${({theme}) => theme.styles.header.mainMenu.primeItem.color} !important;
         .p-menuitem-icon {

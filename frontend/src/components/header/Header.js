@@ -1,11 +1,10 @@
-import React, {useRef, useState} from "react";
+import {Dispatch, SetStateAction, useRef, useState} from "react";
 import {Link} from "react-router-dom";
-import {userContext} from "../../settings/user/userContext.ts";
-import {userRoles} from "../../settings/roles/userRoles.ts";
-import * as API from "../../service/api/serviceAPI.ts";
-import {AuthRoutes, NonAuthRoutes} from "../../settings/urls/pathTypes.ts";
+import {userContext, UserCredentials} from "../../settings/user/userContext";
+import {userRoles} from "../../settings/roles/userRoles";
+import * as API from "../../service/api/serviceAPI";
+import {AuthRoutes, NonAuthRoutes} from "../../settings/urls/pathTypes";
 import "./styles/header.css"
-import {Menu} from "primereact/menu";
 import {checkLocalStorage} from "../../helpers/user";
 import {useTranslation} from 'react-i18next';
 import Bvi from "../bvi/bvi";
@@ -17,35 +16,34 @@ import {
     HeaderStyled,
     MenuButtonStyled,
     MenuProfileButtonStyled,
-    MenuStyled, MenuWrapper,
-    StyledHeaderLink,
+    MenuStyled,
+    MenuWrapper,
     StyledNav
 } from "./styles/header";
 
 const Header = (props) => {
-    let menuProfile = useRef();
-    let menuSettings = useRef();
+    let menuProfile = useRef(null);
+    let menuSettings = useRef(null);
     const {t, i18n} = useTranslation();
     const [bvi, showBvi] = useState(false);
 
-    const toggleBvi = props => {
+    const toggleBvi = () => {
         showBvi(!bvi)
     };
 
-    const changeLang = props => {
+    const changeLang = () => {
         i18n.changeLanguage(i18n.languages[0] === "ru" ? "en" : "ru");
     };
 
-    const Logo = (props) => (
-        <div className="col-auto px-lg-0">
+    const Logo = () => (
+        <div className="col-auto px-sm-0">
             <Link to={NonAuthRoutes.landing}>
-                <Image alt="JetBrains" className="company-logo" recolor={true} inver
-                       src={jb}/>
+                <Image className="company-logo" recolor={true} src={jb}/>
             </Link>
         </div>
     );
 
-    const HeaderNav = (props) => (
+    const HeaderNav = () => (
         <StyledNav>
             <ul className="top-nav">
                 <MenuButtonStyled onClick={toggleBvi} label={t('header.settings.a11')} icon="pi pi-eye"/>
@@ -54,8 +52,8 @@ const Header = (props) => {
         </StyledNav>
     );
 
-    const Settings = (props) => (
-        <MenuWrapper className="col-2 d-flex">
+    const Settings = () => (
+        <MenuWrapper className="col-auto d-flex">
             <MenuStyled model={[
                 {
                     label: t('header.settings.a11'), icon: "pi pi-eye", command: () => {
@@ -68,7 +66,7 @@ const Header = (props) => {
                     }
                 }
             ]} popup={true} ref={menuSettings} id="popup_menu_settings"/>
-            <MenuButtonStyled icon="pi pi-cog" onClick={(event) => menuSettings.current.toggle(event)}
+            <MenuButtonStyled icon="pi pi-cog" onClick={(event) => menuSettings.current?.toggle(event)}
                               aria-controls="popup_menu_settings" aria-haspopup={true}/>
         </MenuWrapper>
     );
@@ -76,23 +74,29 @@ const Header = (props) => {
     const ProfileStudentMenu = (props) => (
         <div className="ml-auto ml-md-0">
             <MenuStyled model={[
-                {label: t('header.authMenu.profile'), url: AuthRoutes.profile, icon: "pi pi-user"},
                 {
-                    label: t('header.authMenu.logOut'), path: "", icon: "pi pi-sign-out", command: () => {
+                    label: t('header.authMenu.profile'),
+                    url: AuthRoutes.profile,
+                    icon: "pi pi-user"
+                },
+                {
+                    label: t('header.authMenu.logOut'),
+                    icon: "pi pi-sign-out",
+                    command: () => {
                         API.logOut();
                         props.entity.setUser(checkLocalStorage);
                     }
                 }
             ]} popup={true} ref={menuProfile} id="popup_menu_profile"/>
             <MenuProfileButtonStyled label={t('header.authMenu.title')} icon="fas fa-user-circle fa-2x"
-                              onClick={(event) => menuProfile.current.toggle(event)}
-                              aria-controls="popup_menu_profile" aria-haspopup={true}/>
+                                     onClick={(event) => menuProfile.current?.toggle(event)}
+                                     aria-controls="popup_menu_profile" aria-haspopup={true}/>
         </div>
     );
 
     const ProfileUniversityMenu = (props) => (
         <div className="ml-auto ml-md-0">
-            <Menu model={[
+            <MenuStyled model={[
                 {label: t('header.authMenu.profile'), url: AuthRoutes.profile, icon: "pi pi-user"},
                 {
                     label: t('header.authMenu.logOut'), icon: "pi pi-sign-out", command: () => {
@@ -102,7 +106,7 @@ const Header = (props) => {
                 }
             ]} popup={true} ref={menuProfile} id="popup_menu_profile"/>
             <MenuButtonStyled label={t('header.authMenu.title')} icon="fas fa-user-circle fa-2x"
-                              onClick={(event) => menuProfile.current.toggle(event)}
+                              onClick={(event) => menuProfile.current?.toggle(event)}
                               aria-controls="popup_menu_profile" aria-haspopup={true}/>
         </div>
     );
@@ -121,6 +125,7 @@ const Header = (props) => {
                                 } else if (userRoles.admins.includes(value.user.role)) {
                                     return <ProfileUniversityMenu entity={value}/>
                                 }
+                                return <></>
                             }}
                         </userContext.Consumer>
                         <Settings/>

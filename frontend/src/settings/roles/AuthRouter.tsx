@@ -1,13 +1,18 @@
 import React, {useContext} from 'react';
-import {Redirect, Route} from 'react-router-dom';
-import {NonAuthRoutes} from "../urls/pathTypes.ts";
-import {userContext} from "../user/userContext.ts";
-import * as API from "../../service/api/serviceAPI.ts";
-import {userRoles} from "./userRoles.ts";
+import {Redirect, Route, RouteComponentProps} from 'react-router-dom';
+import {NonAuthRoutes} from "../urls/pathTypes";
+import {userContext} from "../user/userContext";
+import {userRoles} from "./userRoles";
 
-const PrivateRoute = ({ component: Component, serverValidation = false, path, exact = false, requiredRoles, ...rest }) => {
+interface PrivateRouterProps {
+    component: React.FC<RouteComponentProps> | React.ComponentType<any>,
+    path: string | Array<string>,
+    exact?: boolean,
+    requiredRoles: Array<string>
+}
+
+const PrivateRoute = ({ component: Component, path, exact = false, requiredRoles, ...rest }: PrivateRouterProps): JSX.Element => {
     const {user} =  useContext(userContext);
-    const isAuth = serverValidation ? API.validateUserToken(user.token) : true;
     const userHasRequiredRole = requiredRoles.includes(user.role);
     const registeredRole = userRoles.registered.includes(user.role);
     const message = userHasRequiredRole ?
@@ -19,7 +24,7 @@ const PrivateRoute = ({ component: Component, serverValidation = false, path, ex
         exact={exact}
         {...rest}
         render={props =>
-            (isAuth && userHasRequiredRole)
+            (userHasRequiredRole)
                 ? <Component {...props} />
                 : <Redirect to={{
                     pathname: userHasRequiredRole || registeredRole ? NonAuthRoutes.landing

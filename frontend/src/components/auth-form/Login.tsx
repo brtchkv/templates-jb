@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import {useContext, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import "../../pages/public/login/styles/Auth.css"
 import Alert from "react-bootstrap/Alert";
@@ -6,13 +6,6 @@ import * as API from "../../service/api/serviceAPI";
 import {User, userContext} from "../../settings/user/userContext";
 import {AuthPanelButtonStyled, AuthPanelLabelStyled} from "../../pages/public/login/styles/styles";
 import {useTranslation} from "react-i18next";
-
-let pattern = {
-    minLength: 8,
-    maxLength: 60,
-    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
-    message: "Введите почтовый адресс в стандартном формате, например, ivan@ivan.ru"
-};
 
 let schema = {
     properties: {
@@ -26,6 +19,11 @@ let schema = {
     }
 };
 
+interface UserFormData {
+    username: string,
+    password: string
+}
+
 function Login() {
     const context = useContext<User>(userContext);
     const {register, handleSubmit, errors} = useForm();
@@ -33,24 +31,25 @@ function Login() {
     const [loginMessage, setLoginMessage] = useState("");
     const {t} = useTranslation();
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: UserFormData) => {
         API.login(data.username, data.password)
             .then((response) => {
-                if (response.success) {
                     setLoginStatus("success");
                     setLoginMessage(t('successLogin'));
-                    localStorage.setItem('user', JSON.stringify(response));
+                    let user = {
+                        token: response.data.token,
+                        role: response.data.role.toString().toLowerCase()
+                    }
+                    localStorage.setItem('user', JSON.stringify(user));
                     context.setUser({
-                        token: response.token,
-                        role: response.role.toString().toLowerCase()
+                        token: response.data.token,
+                        role: response.data.role.toString().toLowerCase()
                     });
-                } else {
-                    setLoginStatus("danger");
-                    setLoginMessage(t('wrongCredentials'));
                 }
-            })
-            .catch(function (error) {
+            ).catch(function (error) {
                 console.log(error);
+                setLoginStatus("danger");
+                setLoginMessage(t('wrongCredentials'));
             });
     };
 

@@ -1,9 +1,20 @@
 import styled from 'styled-components'
 
-export const ImageStyled = styled.img`
+interface dimensions {
+    readonly height?: string,
+    readonly width?: string
+}
+
+interface ImageStyledProps {
+    readonly size?: dimensions,
+    readonly recolor: boolean,
+    readonly invert: boolean,
+};
+
+export const ImageStyled = styled.img<ImageStyledProps>`
   filter: ${props => getFilter(props.theme.images, props.recolor, props.theme.themeName, props.invert)};
-  max-height: ${props => props.size.height};
-  max-width: ${props => props.size.width};
+  max-height: ${props => props.size ? props.size.height : "100%"};
+  max-width: ${props => props.size ? props.size.width : "100%"};
   background-color: transparent !important;
   opacity: ${props => props.theme.images === "off" ? 0 : 1};
 `
@@ -12,7 +23,7 @@ export const ImageContainer = styled.div`
   overflow: hidden;
 `
 
-function getFilter(mode, recolor, theme, invert){
+function getFilter(mode: string, recolor: boolean, theme: string, invert: boolean){
     if (recolor) {
         if (!invert) {
             if (theme === "dark") return "grayscale(1)";
@@ -22,6 +33,7 @@ function getFilter(mode, recolor, theme, invert){
             else if (theme === "white") return "grayscale(1)";
         }
     }
+
     if (mode === "on"){
         return "none"
     } else if (mode === "grayscale"){
@@ -33,9 +45,9 @@ function getFilter(mode, recolor, theme, invert){
             "filter: grayscale(100%);" +
             "filter: grayscale(1);" +
             "filter: gray;"
-    } else {
-        return "none"
     }
+
+    return "none"
 }
 
 ImageStyled.defaultProps = {
@@ -48,11 +60,4 @@ ImageStyled.defaultProps = {
     },
     recolor: false,
     invert: false
-}
-
-ImageContainer.defaultProps = {
-    size: {
-        height: "100%",
-        width: "100%"
-    }
 }

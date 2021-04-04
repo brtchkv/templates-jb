@@ -8,6 +8,9 @@ export const FilterPanelContainerStyled = styled.div`
     letter-spacing: ${({theme}) => theme.fontKerning};
     line-height: ${({theme}) => theme.fontInterval};
     
+    padding-left: 15px;
+    padding-right: 15px;
+    
     & .title span {
         color: ${({theme}) => theme.styles.main.filterPanel.title.color};
     }

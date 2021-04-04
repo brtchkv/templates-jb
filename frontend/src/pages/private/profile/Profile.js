@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react';
+import {useContext, useRef} from 'react';
 import {useTranslation} from "react-i18next";
 import {userContext} from "../../../settings/user/userContext";
 import {ButtonStyled} from "./style/profile"
@@ -11,7 +11,7 @@ const StudentCourses = (props) => {
     const context = useContext(userContext);
 
     const sendFile = props => {
-        API.putFile(context.user, props.files[0])
+        API.uploadCSV(props.files[0], context)
             .then(
                 (response) => {
                     toast.current.show({
@@ -19,15 +19,15 @@ const StudentCourses = (props) => {
                         summary: `${t("profile.success")}`,
                         detail: `${t("profile.fileUploaded")}`
                     });
-                }
-            ).catch((error) => {
-                console.log(error)
-                toast.current.show({
-                    severity: 'error',
-                    summary: `${t("profile.error")}`,
-                    detail: `${t("profile.errorUpload")}`
+                },
+                (error) => {
+                    console.log(error)
+                    toast.current.show({
+                        severity: 'error',
+                        summary: `${t("profile.error")}`,
+                        detail: `${t("profile.errorUpload")}`
+                    })
                 });
-        });
     };
 
     return (

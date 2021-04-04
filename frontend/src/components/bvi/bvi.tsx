@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
 import {speak} from "../../helpers/bvi/speechSynthesis";
 import {BviButtonResetStyled, BviPanelStyled, BviSeparatorStyled, BviButtonStyled} from "./styles/bvi";
@@ -6,7 +6,13 @@ import {theme as themeDefault} from "../../core-styles/theme/themes/defaultTheme
 import {theme as themeDark} from "../../core-styles/theme/themes/darkTheme"
 import {theme as themeWhite} from "../../core-styles/theme/themes/whiteTheme"
 
-function Bvi(props) {
+interface BviProps {
+    showToggler: any,
+    speechController: any,
+    themeController: any
+}
+
+function Bvi(props: BviProps) {
     const {t} = useTranslation();
     const [additionalSettings, setAdditionalSettings] = useState(false);
     const [resetImageAnimation, setResetImageAnimation] = useState(false);
