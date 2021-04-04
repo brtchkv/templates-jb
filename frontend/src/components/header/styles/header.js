@@ -43,6 +43,14 @@ export const MenuButtonStyled = styled(Button)`
         background-color: ${({theme}) => theme.styles.header.mainMenu.button.enabled.hover.background} !important;
         border-color: ${({theme}) => theme.styles.header.mainMenu.button.enabled.hover.color} !important;
     }
+    
+    @media (max-width: 325px){
+        && {
+            .p-button-label {
+                display: none;
+            }
+        }
+    }
 `
 
 export const MenuProfileButtonStyled = styled(Button)`
@@ -102,19 +110,6 @@ export const MenuStyled = styled(Menu)`
     
     &.p-menu-overlay {
         border-color: ${({theme}) => theme.styles.header.mainMenu.primeItem.overlay.border} !important;
-    }
-`
-
-export const StyledHeaderLink = styled(Link)`
-    && {
-        color: ${({theme}) => theme.styles.header.link.color};
-        font-size: ${({theme}) => theme.fontSize};
-        font-family: ${({theme}) => theme.fontSerif};
-        letter-spacing: ${({theme}) => theme.fontKerning};
-        line-height: ${({theme}) => theme.fontInterval};
-        &:hover {
-            color: ${({theme}) => theme.styles.header.link.hover.color};
-        }
     }
 `
 
