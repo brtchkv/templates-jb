@@ -14,7 +14,7 @@ const apiUrl: any = {
     auth: {
         signIn: `${baseUrlApp}/auth/login`, // GET
         signUp: `${baseUrlApp}/auth/signup`, // TO BE RELEASED
-        validateToken: `${baseUrlApp}/auth/validate_token`, // NOT RELEASED
+        validateToken: `${baseUrlApp}/auth/validate_token`, // TO BE RELEASED
     },
     statistics: {
         all: `${baseUrlApp}/statistics/all`, // GET
