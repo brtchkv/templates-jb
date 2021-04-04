@@ -10,6 +10,10 @@ buildscript {
     }
 }
 
+subprojects {
+    apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
+}
+
 allprojects {
     repositories {
         mavenCentral()
