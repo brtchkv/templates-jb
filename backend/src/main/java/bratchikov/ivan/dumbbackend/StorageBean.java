@@ -48,6 +48,7 @@ public class StorageBean {
         }
 
         userStatistics.put(student.getId(), statistics);
+        userStatistics.put(privateUser.getId(), statistics);
 
         logger.info("Initial data loaded");
     }

@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import DashBoard from './pages/private/dashboard/DashBoard'
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import Header from "./components/header/Header.js";
+import Header from "./components/header/Header";
 import AuthForm from "./pages/public/login/AuthForm";
 import PageNotFound from "./pages/stubs/PageNotFound";
 import {userContext, UserCredentials} from './settings/user/userContext';
@@ -11,34 +11,13 @@ import PrivateRoute from "./settings/roles/AuthRouter";
 import {checkLocalStorage} from "./helpers/user";
 import {GlobalStyles} from "./core-styles/global";
 import {ThemeProvider} from 'styled-components';
-import {handleTextSelected} from "./helpers/bvi/speechSynthesis";
 import {useTheme} from "./core-styles/theme/useTheme";
-import Profile from './pages/private/profile/Profile';
+
+const Profile = React.lazy(/* profile */() => import('./pages/private/profile/Profile'));
 
 function App() {
     const [loginUser, setLoginUser] = useState<UserCredentials>(checkLocalStorage());
     const [theme, setTheme] = useTheme();
-    const [speechSynthesisVolume, setSpeechSynthesisVolume] = useState(false);
-    const [speechSynthesis, setSpeechSynthesis] = useState(false);
-
-    const speechController = {
-        speechSynthesis: speechSynthesis,
-        setSpeechSynthesis: setSpeechSynthesis,
-        speechSynthesisVolume: speechSynthesisVolume,
-        setSpeechSynthesisVolume: setSpeechSynthesisVolume
-    };
-
-    useEffect(() => {
-        window.localStorage.setItem('bvi-speech', JSON.stringify(speechSynthesisVolume));
-        if (!speechSynthesisVolume){
-            window.removeEventListener('mouseup', handleTextSelected);
-        } else {
-            window.addEventListener('mouseup', handleTextSelected);
-        }
-        return () => {
-            window.removeEventListener('mouseup', handleTextSelected);
-        };
-    }, [speechSynthesisVolume]);
 
     const value = {
         user: loginUser,
@@ -57,7 +36,7 @@ function App() {
                     <GlobalStyles/>
                         <userContext.Provider value={value}>
                             <div className="plp-theme">
-                                <Header themeController={themeController} speechController={speechController}/>
+                                <Header themeController={themeController}/>
                                 <Switch>
                                     <PrivateRoute path={AuthRoutes.profile} component={Profile}
                                                   requiredRoles={[String(UserRolesEntities.student), String(UserRolesEntities.basic)]}/>

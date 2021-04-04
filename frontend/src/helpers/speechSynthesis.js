@@ -2,7 +2,7 @@ import i18next from "i18next";
 
 setTimeout(() => {
     console.log(window.speechSynthesis.getVoices());
-}, 10);
+}, 100);
 
 function findVoice(voices, lang) {
     for (let i = 0; i < voices.length; i++) {

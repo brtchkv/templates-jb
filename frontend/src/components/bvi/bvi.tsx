@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useTranslation} from "react-i18next";
-import {speak} from "../../helpers/bvi/speechSynthesis";
+import {speak} from "../../helpers/speechSynthesis";
 import {BviButtonResetStyled, BviPanelStyled, BviSeparatorStyled, BviButtonStyled} from "./styles/bvi";
 import {theme as themeDefault} from "../../core-styles/theme/themes/defaultTheme"
 import {theme as themeDark} from "../../core-styles/theme/themes/darkTheme"
@@ -288,7 +288,8 @@ function Bvi(props: BviProps) {
         if (speechController.speechSynthesisVolume) {
             speak(t('bvi.bviOpened'))
         }
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [speechSynthesis]);
 
     return (
         <div className="bvi-panel-menu">

@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useRef, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {userContext, UserCredentials} from "../../settings/user/userContext";
 import {userRoles} from "../../settings/roles/userRoles";
@@ -20,12 +20,46 @@ import {
     MenuWrapper,
     StyledNav
 } from "./styles/header";
+import {handleTextSelected} from "../../helpers/speechSynthesis";
 
-const Header = (props) => {
+interface HeaderProps {
+    themeController: any
+}
+
+const Header = (props: HeaderProps) => {
     let menuProfile = useRef(null);
     let menuSettings = useRef(null);
     const {t, i18n} = useTranslation();
     const [bvi, showBvi] = useState(false);
+    const [speechSynthesisVolume, setSpeechSynthesisVolume] = useState(getMute());
+    const [speechSynthesis, setSpeechSynthesis] = useState(false);
+
+    const speechController = {
+        speechSynthesis: speechSynthesis,
+        setSpeechSynthesis: setSpeechSynthesis,
+        speechSynthesisVolume: speechSynthesisVolume,
+        setSpeechSynthesisVolume: setSpeechSynthesisVolume
+    };
+
+    function getMute(): boolean  {
+        const localBvi = window.localStorage.getItem('bvi-speech');
+        if (localBvi) {
+            return JSON.parse(localBvi);
+        }
+        return true;
+    }
+
+    useEffect(() => {
+        window.localStorage.setItem('bvi-speech', JSON.stringify(speechSynthesisVolume));
+        if (!speechSynthesisVolume || !speechSynthesis){
+            window.removeEventListener('mouseup', handleTextSelected);
+        } else if (speechSynthesis && speechSynthesisVolume){
+            window.addEventListener('mouseup', handleTextSelected);
+        }
+        return () => {
+            window.removeEventListener('mouseup', handleTextSelected);
+        };
+    }, [speechSynthesisVolume]);
 
     const toggleBvi = () => {
         showBvi(!bvi)
@@ -34,6 +68,21 @@ const Header = (props) => {
     const changeLang = () => {
         i18n.changeLanguage(i18n.languages[0] === "ru" ? "en" : "ru");
     };
+
+    const toggleSettings = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // @ts-ignore
+        menuSettings.current.toggle(event)
+    }
+
+    const toggleProfileStudent = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // @ts-ignore
+        menuProfile.current.toggle(event)
+    }
+
+    const toggleProfileUni = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // @ts-ignore
+        menuProfile.current.toggle(event)
+    }
 
     const Logo = () => (
         <div className="col-auto px-sm-0">
@@ -66,12 +115,12 @@ const Header = (props) => {
                     }
                 }
             ]} popup={true} ref={menuSettings} id="popup_menu_settings"/>
-            <MenuButtonStyled icon="pi pi-cog" onClick={(event) => menuSettings.current?.toggle(event)}
+            <MenuButtonStyled icon="pi pi-cog" onClick={toggleSettings}
                               aria-controls="popup_menu_settings" aria-haspopup={true}/>
         </MenuWrapper>
     );
 
-    const ProfileStudentMenu = (props) => (
+    const ProfileStudentMenu = (props: { entity: { setUser: Dispatch<SetStateAction<UserCredentials>> } }) => (
         <div className="ml-auto ml-md-0">
             <MenuStyled model={[
                 {
@@ -89,12 +138,12 @@ const Header = (props) => {
                 }
             ]} popup={true} ref={menuProfile} id="popup_menu_profile"/>
             <MenuProfileButtonStyled label={t('header.authMenu.title')} icon="fas fa-user-circle fa-2x"
-                                     onClick={(event) => menuProfile.current?.toggle(event)}
+                                     onClick={toggleProfileStudent}
                                      aria-controls="popup_menu_profile" aria-haspopup={true}/>
         </div>
     );
 
-    const ProfileUniversityMenu = (props) => (
+    const ProfileBasicMenu = (props: { entity: { setUser: Dispatch<SetStateAction<UserCredentials>> } }) => (
         <div className="ml-auto ml-md-0">
             <MenuStyled model={[
                 {label: t('header.authMenu.profile'), url: AuthRoutes.profile, icon: "pi pi-user"},
@@ -106,10 +155,11 @@ const Header = (props) => {
                 }
             ]} popup={true} ref={menuProfile} id="popup_menu_profile"/>
             <MenuButtonStyled label={t('header.authMenu.title')} icon="fas fa-user-circle fa-2x"
-                              onClick={(event) => menuProfile.current?.toggle(event)}
+                              onClick={toggleProfileUni}
                               aria-controls="popup_menu_profile" aria-haspopup={true}/>
         </div>
     );
+
 
     return (
         <HeaderStyled className="header">
@@ -122,15 +172,15 @@ const Header = (props) => {
                             {(value) => {
                                 if (userRoles.student.includes(value.user.role)) {
                                     return <ProfileStudentMenu entity={value}/>
-                                } else if (userRoles.admins.includes(value.user.role)) {
-                                    return <ProfileUniversityMenu entity={value}/>
+                                } else if (userRoles.registered.includes(value.user.role)) {
+                                    return <ProfileBasicMenu entity={value}/>
                                 }
                                 return <></>
                             }}
                         </userContext.Consumer>
                         <Settings/>
                         <Fade show={bvi}>
-                            <Bvi showToggler={toggleBvi} speechController={props.speechController}
+                            <Bvi showToggler={toggleBvi} speechController={speechController}
                                  themeController={props.themeController}/>
                         </Fade>
                     </div>

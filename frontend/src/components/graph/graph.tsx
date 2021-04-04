@@ -1,4 +1,3 @@
-import React from 'react';
 import {Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 import dayjs from 'dayjs';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -11,7 +10,17 @@ require('dayjs/locale/en')
 dayjs.extend(localizedFormat);
 dayjs.extend(utc)
 
-const Graph = (props) => {
+interface ItemsI {
+    data: Array<{
+        data: Array<{
+            usage: number,
+            timestamp: string
+        }>,
+        name: string
+    }>
+}
+
+const Graph = (props: ItemsI) => {
     const {i18n} = useTranslation();
     return (
         <>

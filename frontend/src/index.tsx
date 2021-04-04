@@ -11,7 +11,7 @@ import {I18nextProvider} from "react-i18next";
 import i18n from "./settings/localization/i18n";
 
 ReactDOM.render((
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<div className="plp-theme"><Loading/></div>}>
         <I18nextProvider i18n={i18n}>
             <App/>
         </I18nextProvider>

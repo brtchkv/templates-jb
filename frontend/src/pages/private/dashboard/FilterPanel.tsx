@@ -6,8 +6,17 @@ import {SelectorStyled, FilterForm, Button, ButtonContainer} from "./styles/filt
 import left from "./images/left.png";
 import right from "./images/right.png";
 import Image from "../../../components/image/Image";
+import {Dayjs} from "dayjs";
+import {addRange, getStartOf, subtractRange} from "../../../helpers/date";
 
-function FilterPanel(props) {
+interface PropsFilter {
+    startDate: Dayjs,
+    setFilteredData: any,
+    filterOption: string,
+    className?: string
+}
+
+function FilterPanel(props: PropsFilter) {
     const {t} = useTranslation();
 
     const {register, handleSubmit} = useForm({
@@ -23,31 +32,31 @@ function FilterPanel(props) {
         {value: "year", label: t('dashboard.filterPanel.filterSelector.sorting.options.year')},
     ];
 
-    const onSubmit = (preferences) => {
-        props.setFilteredData(props.startDate.startOf(), preferences.range);
+    const onSubmit = (preferences: {range: string}) => {
+        props.setFilteredData(getStartOf(props.startDate), preferences.range);
     };
 
-    const prevDate = (e) => {
+    const prevDate = (e: any) => {
         e.preventDefault();
-        props.setFilteredData(props.startDate.subtract(1, props.filterOption), props.filterOption);
+        props.setFilteredData(subtractRange(props.startDate, props.filterOption), props.filterOption);
     }
 
-    const nextDate = (e) => {
+    const nextDate = (e: any) => {
         e.preventDefault();
-        props.setFilteredData(props.startDate.add(1, props.filterOption), props.filterOption,);
+        props.setFilteredData(addRange(props.startDate, props.filterOption), props.filterOption,);
     }
 
     return (
         <FilterForm onChange={handleSubmit(onSubmit)}>
             <div className="course-filters">
                 <ButtonContainer>
-                    <Button onClick={prevDate}>
+                    <Button onClick={(event) => prevDate(event)}>
                         <Image src={left} size={{width: "25px"}} recolor={true} invert={true}/>
                     </Button>
                 </ButtonContainer>
                 <div className="course-filter">
                     <Form.Control
-                        name="range" as={SelectorStyled} ref={register({type: 'custom'})}
+                        name="range" as={SelectorStyled} ref={register}
                         className="plp-selector" custom defaultValue={props.filterOption}
                     >
                         {
@@ -58,7 +67,7 @@ function FilterPanel(props) {
                     </Form.Control>
                 </div>
                 <ButtonContainer>
-                    <Button onClick={nextDate}>
+                    <Button onClick={(event)  => nextDate(event)}>
                         <Image src={right} size={{width: "25px"}} recolor={true} invert={true}/>
                     </Button>
                 </ButtonContainer>

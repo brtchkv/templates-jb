@@ -1,5 +1,5 @@
 export enum UserRolesEntities {
-    basic = "basic",
+    basic = "regular",
     student = "student",
     anon = "anonymous",
     admin = "admin"

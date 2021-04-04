@@ -77,7 +77,6 @@ function DashBoard() {
         API.getAllStatDataCount(context)
             .then(
                 (response) => {
-                    console.log(response.data);
                     setMaxRecords(parseInt(response.data));
                 },
                 (error) => {

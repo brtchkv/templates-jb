@@ -109,7 +109,7 @@
       "reset": "Reset settings",
       "close": "Close panel",
       "colorStub": "C",
-      "bvi": "Website version for visually impaired. Select some text for it pronunciation.",
+      "bvi": "Website version for visually impaired.",
       "bviOpened": "Website view settings panel"
     }
   }
