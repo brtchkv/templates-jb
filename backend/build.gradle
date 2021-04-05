@@ -33,6 +33,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
+/**
+     * Adds front build files to jar recourses
+ */
 processResources {
     from("$rootProject.projectDir/frontend/build") {
         into 'META-INF/resources'

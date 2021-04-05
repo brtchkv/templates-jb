@@ -38,6 +38,12 @@ public class DumbController {
         this.fileStorageBean = fileStorageBean;
     }
 
+    /**
+     * Method for testing csv parse with statistics bean.
+     *
+     * @param  file  file which will be uploaded to the for parser test
+     * @return       parsed collection
+     */
     @PostMapping("/upload-csv-file-test")
     public String uploadCSVFileTest(@RequestParam("file") MultipartFile file) {
         List<StatData> statistics = new ArrayList();
@@ -51,6 +57,13 @@ public class DumbController {
         return Arrays.toString(statistics.toArray());
     }
 
+    /**
+     * Method for csv stats file upload for a user based on the auth token.
+     *
+     * @param  file  file which will be uploaded to the for parser test
+     * @param  token X-Authentication token from the request header
+     * @return       response status
+     */
     @PostMapping("/upload-csv-file")
     @ResponseStatus(HttpStatus.OK)
     public String uploadCSVFileForUser(@RequestParam("file") MultipartFile file, @RequestHeader("X-Authentication") String token) {
@@ -91,6 +104,12 @@ public class DumbController {
         return statistics;
     }
 
+    /**
+     * Get all the stats for a given user.
+     *
+     * @param  token X-Authentication token from the request header
+     * @return       list of statData rows
+     */
     @RequestMapping("/statistics/all")
     public List<StatData> getAllStat(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
@@ -103,6 +122,12 @@ public class DumbController {
         return storageBean.getUserStatistics().get(user.getId());
     }
 
+    /**
+     * Get the total count of statistics records for a given user.
+     *
+     * @param  token X-Authentication token from the request header
+     * @return       int
+     */
     @RequestMapping("/statistics/count")
     public int getAllStatCount(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
@@ -115,6 +140,12 @@ public class DumbController {
         return storageBean.getUserStatistics().get(user.getId()).size();
     }
 
+    /**
+     * Get the total count of statistics records for a given user.
+     *
+     * @param  token X-Authentication token from the request header
+     * @return       int
+     */
     @RequestMapping("/statistics")
     public List<StatData> getFilteredStat(@RequestParam(value = "range") String range,
                                         @RequestParam(value = "date") String dateString,

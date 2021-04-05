@@ -1,9 +1,17 @@
-// const isProduction = process.env.REACT_APP_ENV === 'production';
-// const isStaging = process.env.REACT_APP_ENV === 'staging';
+const configs = {
+    development: {
+        SERVER_URI: 'http://localhost:8080',
+    },
+    production: {
+        SERVER_URI: 'https://fls-bratchikov.herokuapp.com',
+    },
+};
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 import {User} from "../../settings/user/userContext";
 
-const BASE_API_URL = process.env.REACT_APP_SERVER_URL;
+const BASE_API_URL = isProduction ? configs.production.SERVER_URI :  configs.development.SERVER_URI;
 
 let baseUrlApp = `${BASE_API_URL}`;
 

@@ -26,6 +26,7 @@ clean.dependsOn(cleanAll)
      * Packs project with yarn build command
  */
 task bundle(type: YarnTask, dependsOn: yarn_install) {
+    environment = ["NODE_ENV": "production"]
     args = ['build']
 }
 
