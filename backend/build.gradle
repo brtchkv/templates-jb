@@ -32,3 +32,20 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-security'
 }
+
+processResources {
+    from(':frontend/build') {
+        into 'META-INF/resources'
+    }
+}
+
+/**
+ * Cleans everything that is created by the gradle, i.e. the node installation and the spring and .gradle
+ * folder.
+ */
+task cleanAll(type: Delete){
+    delete "build"
+    delete ".gradle"
+}
+
+clean.dependsOn(cleanAll)
