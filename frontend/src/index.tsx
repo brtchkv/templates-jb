@@ -6,12 +6,12 @@ import 'primereact/resources/themes/nova/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Loading from "./pages/stubs/Loading";
 import {I18nextProvider} from "react-i18next";
 import i18n from "./settings/localization/i18n";
+import LoadingFallback from "./pages/stubs/LoadingFallback";
 
 ReactDOM.render((
-    <Suspense fallback={<div className="plp-theme"><Loading/></div>}>
+    <Suspense fallback={LoadingFallback}>
         <I18nextProvider i18n={i18n}>
             <App/>
         </I18nextProvider>

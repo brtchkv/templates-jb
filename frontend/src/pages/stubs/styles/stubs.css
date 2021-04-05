@@ -4,8 +4,6 @@
 }
 
 .err {
-    color: #489acc;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 11rem;
     position:absolute;
     left: 20%;
@@ -14,12 +12,9 @@
 
 .mainbox .far {
     font-size: 8.5rem;
-    color: #489acc;
 }
 
 .err2 {
-    color: #489acc;
-    font-family: 'Nunito Sans', sans-serif;
     font-size: 11rem;
     position:absolute;
     left: 68%;

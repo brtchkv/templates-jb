@@ -1,5 +1,4 @@
 import {
-    blackTheme,
     mainTheme
 } from "../constants/colors";
 
@@ -88,6 +87,9 @@ export const theme = {
                 }
             }
         }
+    },
+    loader: {
+        color: mainTheme.loaderColor
     },
     main: {
         link: {

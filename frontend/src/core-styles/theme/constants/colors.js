@@ -4,7 +4,8 @@ export const blackTheme = {
     mainColorLighter: "#1e1e1e",
     mainColorText: "#fff",
     mainColorTextDark: "#777777",
-    mainColorBright: "#4e5255"
+    mainColorBright: "#4e5255",
+    loaderColor: "#fff"
 }
 
 export const whiteTheme = {
@@ -13,7 +14,8 @@ export const whiteTheme = {
     mainColorLighter: "#fff",
     mainColorText: "#000000",
     mainColorTextDark: "#000000",
-    mainColorBright: "#777777"
+    mainColorBright: "#777777",
+    loaderColor: "#000000"
 }
 
 export const mainTheme = {
@@ -24,5 +26,6 @@ export const mainTheme = {
     mainColorText: "#000000",
     mainColorTextDark: "#415162",
     mainColorButtons: "#d1d1d1",
-    dashBoardBorders: "#b4b4b4"
+    dashBoardBorders: "#b4b4b4",
+    loaderColor: "#489acc"
 }

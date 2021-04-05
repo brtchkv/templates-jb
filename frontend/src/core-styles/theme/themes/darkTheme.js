@@ -88,6 +88,9 @@ export const theme = {
             }
         }
     },
+    loader: {
+        color: blackTheme.loaderColor
+    },
     main: {
         link: {
             color: blackTheme.mainColorText,
