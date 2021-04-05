@@ -26,7 +26,15 @@ clean.dependsOn(cleanAll)
      * Packs project with yarn build command
  */
 task bundle(type: YarnTask, dependsOn: yarn_install) {
-    environment = ["NODE_ENV": "production"]
+    environment = ["NODE_ENV": "development"]
+    if (project.hasProperty('env')) {
+        if (project.property('env').toString() == "prod") {
+            environment = ["NODE_ENV": "production"]
+            println "Building prod front package"
+        } else {
+            println "Building dev front package"
+        }
+    }
     args = ['build']
 }
 
