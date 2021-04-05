@@ -141,10 +141,12 @@ public class DumbController {
     }
 
     /**
-     * Get the total count of statistics records for a given user.
+     * Get filtered statistics base on range and start date of a slice for a given user.
      *
      * @param  token X-Authentication token from the request header
-     * @return       int
+     * @param  range Range of a slice: day, week, month, quarter or a year
+     * @param  dateString Starting date of a range slice in ISO timestamp format
+     * @return       list for stat data
      */
     @RequestMapping("/statistics")
     public List<StatData> getFilteredStat(@RequestParam(value = "range") String range,
@@ -212,20 +214,12 @@ public class DumbController {
         return null;
     }
 
-    @RequestMapping("/auth/register/check") //TODO:сделать регистрацию, по факту ее нет, только проверка на занятость
-    public AuthenticationResponse checkRegister(@RequestBody AuthenticationRequest req) {
-        Optional<User> userOpt = storageBean.getUsers().stream()
-                .filter((u) -> u.getUsername().equals(req.username)).findAny();
-        if (!userOpt.isPresent()) {
-            String token = SessionsUtils.createNewToken();
-            storageBean.getUserTokens().put(token, userOpt.get().getId());
-            logger.info("[checkRegister] Successful registration ".concat(req.username));
-            return new AuthenticationResponse(true, token, userOpt.get().getRole());
-        }
-        logger.error("[checkRegister] Login failed");
-        return new AuthenticationResponse(false, null, null);
-    }
-
+    /**
+     * Get filtered statistics base on range and start date of a slice for a given user.
+     *
+     * @param req JSON of user data in the format of {username: string, password: string}
+     * @return     Object of user token and role in the format of {token: string, role: string}
+     */
     @PostMapping("/auth/login")
     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest req) {
         Optional<User> userOpt = storageBean.getUsers().stream()
@@ -240,6 +234,12 @@ public class DumbController {
         return new AuthenticationResponse(false, null, null);
     }
 
+    /**
+     * Check whether user exists with a given token.
+     *
+     * @param token JX-Authentication token from the request header
+     * @return      Object of user token and role in the format of {token: string, role: string}
+     */
     @RequestMapping("/auth/check")
     public AuthenticationResponse checkAuthentication(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
