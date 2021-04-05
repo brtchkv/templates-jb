@@ -36,16 +36,5 @@ task run(type: YarnTask) {
     args = ['start']
 }
 
-
-/**
-     * Copies files from yarn build to jar resources when backend is building
- * */
-task webjar(type: Jar) {
-    from(fileTree('build')) {
-        into 'META-INF/resources'
-    }
-}
-
 assemble.dependsOn(bundle)
 jar.dependsOn(bundle)
-jar.finalizedBy('webjar')
