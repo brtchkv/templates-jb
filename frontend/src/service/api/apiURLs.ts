@@ -1,3 +1,5 @@
+import {User} from "../../settings/user/userContext";
+
 const configs = {
     development: {
         SERVER_URI: 'http://localhost:8080',
@@ -8,9 +10,6 @@ const configs = {
 };
 
 const isProduction = process.env.NODE_ENV === 'production';
-
-import {User} from "../../settings/user/userContext";
-
 const BASE_API_URL = isProduction ? configs.production.SERVER_URI :  configs.development.SERVER_URI;
 
 let baseUrlApp = `${BASE_API_URL}`;
