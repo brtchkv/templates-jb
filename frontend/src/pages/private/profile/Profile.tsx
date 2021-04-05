@@ -1,7 +1,7 @@
 import {useContext, useRef} from 'react';
 import {useTranslation} from "react-i18next";
 import {userContext} from "../../../settings/user/userContext";
-import {ButtonStyled} from "./style/profile"
+import {ButtonStyled, WrapperStyled} from "./style/profile"
 import * as API from "../../../service/api/serviceAPI";
 import {Toast} from "primereact/toast";
 import {FileWithPath} from "file-selector";
@@ -43,14 +43,14 @@ const StudentCourses = () => {
     return (
         <>
             <Toast ref={toast}/>
-            <div className="container px-md-0">
+            <WrapperStyled className="container px-md-0">
                 <h2>User Role: {context.user.role}</h2>
                 <div>
                     <h5 className="pr-3 pb-3">{t("profile.uploadLabel")}</h5>
                     <ButtonStyled mode="basic" name="csv" uploadHandler={sendFile}
                                   customUpload chooseLabel={t("profile.upload")}/>
                 </div>
-            </div>
+            </WrapperStyled>
         </>
     );
 }

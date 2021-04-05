@@ -20,3 +20,7 @@ export const ButtonStyled = styled(FileUpload)`
         }
     }
 `
+
+export const WrapperStyled = styled.div`
+    color: ${({theme}) => theme.styles.header.color}
+`
