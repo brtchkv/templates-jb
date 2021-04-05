@@ -18,16 +18,12 @@ task run(type: YarnTask) {
     args = ['start']
 }
 
-task appYarnBuild(type: YarnTask) {
-    args = ['build']
+task webjar(type: Jar) {
+    from(fileTree('build')) {
+        into 'META-INF/resources'
+    }
 }
 
-assemble.dependsOn(appYarnBuild)
-
-task copyToLib(type: Copy) {
-    into 'META-INF/resources'
-    from(fileTree('build'))
-}
-
+assemble.dependsOn(bundle)
 jar.dependsOn(bundle)
-jar.finalizedBy('copyToLib')
+jar.finalizedBy('webjar')
