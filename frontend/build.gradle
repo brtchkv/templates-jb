@@ -25,9 +25,8 @@ task appYarnBuild(type: YarnTask) {
 assemble.dependsOn(appYarnBuild)
 
 task webjar(type: Jar) {
-    from(fileTree('build')) {
-        into 'META-INF/resources'
-    }
+    into 'META-INF/resources'
+    from(fileTree('build'))
 }
 
 jar.dependsOn(bundle)
