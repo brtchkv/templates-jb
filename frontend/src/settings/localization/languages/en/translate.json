@@ -71,7 +71,8 @@
       "success": "Success",
       "error": "Error",
       "fileUploaded": "File Uploaded",
-      "errorUpload": "Something bad happened"
+      "errorUpload": "Something bad happened",
+      "userRole": "User role: "
     },
     "bvi": {
       "fontSize": "Font size",

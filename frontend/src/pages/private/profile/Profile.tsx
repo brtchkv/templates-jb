@@ -44,7 +44,7 @@ const StudentCourses = () => {
         <>
             <Toast ref={toast}/>
             <WrapperStyled className="container px-md-0">
-                <h2>User Role: {context.user.role}</h2>
+                <h2>${t("profile.userRole")} {context.user.role}</h2>
                 <div>
                     <h5 className="pr-3 pb-3">{t("profile.uploadLabel")}</h5>
                     <ButtonStyled mode="basic" name="csv" uploadHandler={sendFile}
