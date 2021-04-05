@@ -34,7 +34,7 @@ dependencies {
 }
 
 processResources {
-    from(':frontend/build') {
+    from("$rootProject.projectDir/frontend/build") {
         into 'META-INF/resources'
     }
 }
