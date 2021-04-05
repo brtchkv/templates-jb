@@ -165,7 +165,7 @@ const Header = (props: HeaderProps) => {
         <HeaderStyled className="header">
             <div className="main-menu">
                 <div className="container">
-                    <div className="row align-items-center">
+                    <div className="row align-items-center justify-content-between">
                         <Logo/>
                         <HeaderNav/>
                         <userContext.Consumer>
