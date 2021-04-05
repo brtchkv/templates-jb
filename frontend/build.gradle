@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'com.coditory.webjar' version '1.0.3'
+    id "com.github.node-gradle.node" version "3.0.1"
 }
 
 apply plugin: 'base'
@@ -8,21 +8,6 @@ apply plugin: 'base'
 node {
     version = '12.19.0'
     download = true
-}
-
-webjar {
-    // Directory where npm puts the result
-    distDir = "build"
-    // Directory with npm results in the jar
-    webjarDir = 'META-INF/resources'
-
-    // NPM Task names
-    taskNames {
-        clean = "clean"
-        build = "build"
-        lint = "lint"
-        watch = "watch"
-    }
 }
 
 task bundle(type: YarnTask, dependsOn: yarn_install) {
@@ -39,4 +24,10 @@ task appYarnBuild(type: YarnTask) {
 
 assemble.dependsOn(appYarnBuild)
 
+task copyToLib(type: Copy) {
+    into 'META-INF/resources'
+    from(fileTree('build'))
+}
+
 jar.dependsOn(bundle)
+jar.finalizedBy('copyToLib')
