@@ -6,7 +6,7 @@
 
 
 #### Production build: 
-Доступна по [ссылке](http://fls-bratchikov.herokuapp.com/) на хостинге *herokuapp*
+Доступен по [ссылке](http://fls-bratchikov.herokuapp.com/) на хостинге *herokuapp*
 
 ##### Для роли студента:
     Логин: student
@@ -17,7 +17,7 @@
     Пароль: 123   
 
 #### Local build: 
-* Сборка:
+* Процесс ручной сборки на *Linux*/*macOS*:
     1. В корне проекта запустить ```./gradlew clean :backend:bootRun -Denv=development```
     2. Перейти на http://localhost:8080/
 
