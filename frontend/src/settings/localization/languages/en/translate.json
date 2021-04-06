@@ -11,10 +11,10 @@
       "emailExists": "This username or email address already exists",
       "enterUsernameOrEmail": "Username or email:",
       "password": "Password",
-      "wrongCredentials": "There's a mistake in password or email!",
-      "successLogin": "Logged in successfully!",
+      "successLogin": "Logged in successfully",
       "firstTime": "First time here?",
-      "registerMe": "Ask an administrator to create an account for you"
+      "registerMe": "Ask an administrator to create an account for you",
+      "wrongCredentials": "Wrong login or password"
     },
     "header": {
       "publicMenu": {
@@ -51,7 +51,7 @@
       },
       "toast": {
         "success": "Success",
-        "errorGettingData": "Error in fetching statistics, please re-login",
+        "errorGettingData": "Error in fetching statistics, please, try to re-login",
         "errorCount": "Error in fetching stats count"
       },
       "pagination": {

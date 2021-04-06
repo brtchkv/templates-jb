@@ -35,7 +35,7 @@ function Login() {
         API.login(data.username, data.password)
             .then((response) => {
                     setLoginStatus("success");
-                    setLoginMessage(t('successLogin'));
+                    setLoginMessage(t('auth.successLogin'));
                     let user = {
                         token: response.data.token,
                         role: response.data.role.toString().toLowerCase()
@@ -49,7 +49,7 @@ function Login() {
             ).catch(function (error) {
                 console.log(error);
                 setLoginStatus("danger");
-                setLoginMessage(t('wrongCredentials'));
+                setLoginMessage(t('auth.wrongCredentials'));
             });
     };
 

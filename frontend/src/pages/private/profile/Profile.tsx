@@ -5,18 +5,19 @@ import {ButtonStyled, WrapperStyled} from "./style/profile"
 import * as API from "../../../service/api/serviceAPI";
 import {Toast} from "primereact/toast";
 import {FileWithPath} from "file-selector";
+import {checkLocalStorage} from "../../../helpers/user";
 
 const StudentCourses = () => {
     const {t} = useTranslation();
     const toast = useRef(null);
     const context = useContext(userContext);
 
-    const showErrorToast = (error: {message: string}) => {
+    const showErrorToast = (message:  string) => {
         // @ts-ignore
         toast.current.show({
             severity: 'error',
             summary: `${t("profile.error")}`,
-            detail: error.message
+            detail: message
         })
     }
 
@@ -36,7 +37,11 @@ const StudentCourses = () => {
                     showSuccessToast();
                 },
                 (error) => {
-                    showErrorToast(error);
+                    if (error.response.status === 403) {
+                        API.logOut();
+                        context.setUser(checkLocalStorage());
+                    }
+                    showErrorToast(error.response.data.message);
                 });
     };
 

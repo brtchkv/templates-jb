@@ -15,6 +15,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import Graph from "../../../components/graph/graph";
 import ProductTable from "../../../components/table/ProductTable";
 import {getEndRange} from "../../../helpers/date";
+import {checkLocalStorage} from "../../../helpers/user";
 
 require('dayjs/locale/ru')
 require('dayjs/locale/en')
@@ -70,6 +71,10 @@ function DashBoard() {
                     setCount(_.size(response.data));
                 },
                 (error) => {
+                    if (error.response.status === 403) {
+                        API.logOut();
+                        context.setUser(checkLocalStorage());
+                    }
                     console.error(error);
                     setIsLoaded(true);
                     setError(true);
@@ -81,6 +86,10 @@ function DashBoard() {
                     setMaxRecords(parseInt(response.data));
                 },
                 (error) => {
+                    if (error.response.status === 403) {
+                        API.logOut();
+                        context.setUser(checkLocalStorage());
+                    }
                     console.error(error);
                     setIsLoaded(true);
                     setError(true);
@@ -98,7 +107,7 @@ function DashBoard() {
         return (
             <div className="container courses-container cols-4">
                 <NoDataLabel className="title">
-                {t('util.error')}: {t('dashboard.toast.errorGettingData')}
+                    {t('dashboard.toast.errorGettingData')}
                 </NoDataLabel>
             </div>
         );
