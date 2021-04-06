@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
+import React, {Dispatch, SetStateAction, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {userContext, UserCredentials} from "../../settings/user/userContext";
 import {userRoles} from "../../settings/roles/userRoles";
@@ -20,7 +20,6 @@ import {
     StyledMoon,
     StyledNav, StyledSun, ThemeSwitcherStyled,
 } from "./styles/header";
-import {handleTextSelected} from "../../helpers/speechSynthesis";
 import {theme as themeDark} from "../../core-styles/theme/themes/darkTheme";
 import {theme as themeDefault} from "../../core-styles/theme/themes/defaultTheme";
 
@@ -50,18 +49,6 @@ const Header = (props: HeaderProps) => {
         }
         return true;
     }
-
-    useEffect(() => {
-        window.localStorage.setItem('bvi-speech', JSON.stringify(speechSynthesisVolume));
-        if (!speechSynthesisVolume || !speechSynthesis) {
-            window.removeEventListener('mouseup', handleTextSelected);
-        } else if (speechSynthesis && speechSynthesisVolume) {
-            window.addEventListener('mouseup', handleTextSelected);
-        }
-        return () => {
-            window.removeEventListener('mouseup', handleTextSelected);
-        };
-    });
 
     const toggleBvi = () => {
         showBvi(!bvi)
