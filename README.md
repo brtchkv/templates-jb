@@ -17,7 +17,8 @@
     Пароль: 123   
 
 #### Local build: 
-* Процесс ручной сборки на *Linux*/*macOS*:
+* Процесс ручной сборки на *Linux* / *macOS*:
+
     1. В корне проекта запустить ```./gradlew clean :backend:bootRun -Denv=development```
     2. Перейти на http://localhost:8080/
 
