@@ -6,7 +6,7 @@
 
 
 #### Production build: 
-Доступен по [ссылке](http://fls-bratchikov.herokuapp.com/) на хостинге *herokuapp*
+Доступен по [ссылке](https://fls-bratchikov.herokuapp.com/) на хостинге *herokuapp*
 
 ##### Для роли студента:
     Логин: student
