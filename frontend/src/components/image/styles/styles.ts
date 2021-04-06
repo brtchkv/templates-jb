@@ -26,11 +26,11 @@ export const ImageContainer = styled.div`
 function getFilter(mode: string, recolor: boolean, theme: string, invert: boolean){
     if (recolor) {
         if (!invert) {
-            if (theme === "dark") return "grayscale(1)";
-            else if (theme === "white") return "grayscale(1) invert(1)";
+            if (theme === "dark-bvi") return "grayscale(1)";
+            else if (theme === "white-bvi") return "grayscale(1) invert(1)";
         } else {
-            if (theme === "dark") return "invert(1)";
-            else if (theme === "white") return "grayscale(1)";
+            if (theme === "dark-bvi") return "invert(1)";
+            else if (theme === "white-bvi") return "grayscale(1)";
         }
     }
 

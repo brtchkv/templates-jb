@@ -54,7 +54,7 @@ export const MenuButtonStyled = styled(Button)`
     transition: background 0.2s ease-in-out;
     border: 1px solid ${({theme}) => theme.styles.header.mainMenu.button.border} !important;
     &&& {
-        padding: 1rem;
+        padding: 0.7rem 1rem;
         .p-button-text {
             padding-left: 25px;
             padding-right: 0px;

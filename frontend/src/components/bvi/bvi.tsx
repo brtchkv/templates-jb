@@ -29,7 +29,7 @@ function Bvi(props: BviProps) {
             {
                 ...theme,
                 styles: themeDark,
-                themeName: "dark"
+                themeName: "dark-bvi"
             }
         )
         if (speechController.speechSynthesisVolume) {
@@ -55,7 +55,7 @@ function Bvi(props: BviProps) {
             {
                 ...theme,
                 styles: themeWhite,
-                themeName: "white"
+                themeName: "white-bvi"
             }
         )
         if (speechController.speechSynthesisVolume) {
