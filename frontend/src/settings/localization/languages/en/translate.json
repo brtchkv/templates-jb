@@ -51,7 +51,7 @@
       },
       "toast": {
         "success": "Success",
-        "errorGettingData": "Error in fetching statistics",
+        "errorGettingData": "Error in fetching statistics, please re-login",
         "errorCount": "Error in fetching stats count"
       },
       "pagination": {

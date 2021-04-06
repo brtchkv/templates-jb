@@ -21,7 +21,7 @@ export const apiUrl: any = {
     auth: {
         signIn: `${baseUrlApp}/api/auth/login`, // GET
         signUp: `${baseUrlApp}/api/auth/signup`, // TO BE RELEASED
-        validateToken: `${baseUrlApp}/api/auth/validate_token`, // TO BE RELEASED
+        validateToken: `${baseUrlApp}/api/auth/check`, // GET
     },
     statistics: {
         all: `${baseUrlApp}/api/statistics/all`, // GET

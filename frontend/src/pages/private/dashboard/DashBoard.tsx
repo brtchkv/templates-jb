@@ -32,7 +32,8 @@ interface ItemsI {
     name: string
 }
 
-interface EnumItemsI extends Array<ItemsI> {}
+interface EnumItemsI extends Array<ItemsI> {
+}
 
 function DashBoard() {
     dayjs.extend(quarterOfYear)
@@ -94,7 +95,13 @@ function DashBoard() {
     };
 
     if (error) {
-        return <div>{t('util.error')}: {t('dashboard.toast.errorGettingData')}</div>;
+        return (
+            <div className="container courses-container cols-4">
+                <NoDataLabel className="title">
+                {t('util.error')}: {t('dashboard.toast.errorGettingData')}
+                </NoDataLabel>
+            </div>
+        );
     } else if (!isLoaded) {
         return <Loading/>;
     } else {

@@ -246,8 +246,10 @@ public class DumbController {
     public AuthenticationResponse checkAuthentication(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
         if (user == null) {
+            logger.info("[checkAuthentication] Unsuccessful check");
             return new AuthenticationResponse(false, null, null);
         }
+        logger.info("[checkAuthentication] Successful check");
         return new AuthenticationResponse(true, token, user.getRole());
     }
 

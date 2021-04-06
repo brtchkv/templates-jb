@@ -15,6 +15,16 @@ export const login = (
     });
 };
 
+export const checkToken = (
+    token: string
+): Promise<AxiosResponse> => {
+    return Axios.get(apiUrl.auth.validateToken, {
+        headers: {
+            "X-Authentication": token
+        }
+    });
+};
+
 export const getAllStatDataCount = (
     context: User
 ): Promise<AxiosResponse> => {
