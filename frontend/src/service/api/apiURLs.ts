@@ -9,8 +9,8 @@ const configs = {
     },
 };
 
-const isProduction = process.env.API_ENV === 'production';
-const BASE_API_URL = (process.env.API_ENV && isProduction) ? configs.production.SERVER_URI :  configs.development.SERVER_URI;
+const isProduction = process.env.REACT_APP_API_ENV === 'production';
+const BASE_API_URL = (process.env.REACT_APP_API_ENV && isProduction) ? configs.production.SERVER_URI :  configs.development.SERVER_URI;
 
 let baseUrlApp = `${BASE_API_URL}`;
 

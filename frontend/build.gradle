@@ -47,7 +47,11 @@ task bundle(type: YarnTask, dependsOn: yarn_install) {
  */
 task run(type: YarnTask) {
     environment = ["API_ENV": mode]
-    args = ["start", "--API_ENV=${mode}"]
+    if (mode == "production") {
+        args = ["start-prod"]
+    } else {
+        args = ["start-dev"]
+    }
     doLast {
         println "Running ${mode} build"
     }

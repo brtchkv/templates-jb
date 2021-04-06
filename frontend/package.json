@@ -50,13 +50,12 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build-dev": "API_ENV=development react-scripts build",
-    "build-prod": "API_ENV=production react-scripts build",
+    "start-dev": "REACT_APP_API_ENV=development react-scripts start",
+    "start-prod": "REACT_APP_API_ENV=production react-scripts start",
+    "build-dev": "REACT_APP_API_ENV=development react-scripts build",
+    "build-prod": "REACT_APP_API_ENV=production react-scripts build",
     "test": "NODE_ENV=test BABEL_ENV=test react-scripts -r @cypress/instrument-cra start",
-    "cypress": "API_ENV=development NODE_ENV=development BABEL_ENV=development cypress open",
-    "watch": "NODE_ENV=development BABEL_ENV=development webpack --watch",
-    "check-env": "node -e 'console.log(process.env)' | grep API"
+    "cypress": "API_ENV=development NODE_ENV=development BABEL_ENV=development cypress open"
   },
   "eslintConfig": {
     "extends": [
