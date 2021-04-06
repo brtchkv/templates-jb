@@ -31,11 +31,9 @@ public class DumbController {
     Logger logger = LoggerFactory.getLogger(DumbController.class);
 
     private final StorageBean storageBean;
-    private final FileStorageBean fileStorageBean;
 
-    public DumbController(StorageBean storageBean, FileStorageBean fileStorageBean) {
+    public DumbController(StorageBean storageBean) {
         this.storageBean = storageBean;
-        this.fileStorageBean = fileStorageBean;
     }
 
     /**
