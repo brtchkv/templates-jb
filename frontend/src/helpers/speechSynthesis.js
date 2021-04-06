@@ -15,6 +15,7 @@ function findVoice(voices, lang) {
 
 export const handleTextSelected = event => {
     if (!window.getSelection().toString()) return;
+    console.log(window.getSelection().toString());
     speak(window.getSelection().toString());
 };
 

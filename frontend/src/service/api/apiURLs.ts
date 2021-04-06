@@ -9,24 +9,24 @@ const configs = {
     },
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
-const BASE_API_URL = isProduction ? configs.production.SERVER_URI :  configs.development.SERVER_URI;
+const isProduction = process.env.API_ENV === 'production';
+const BASE_API_URL = (process.env.API_ENV && isProduction) ? configs.production.SERVER_URI :  configs.development.SERVER_URI;
 
 let baseUrlApp = `${BASE_API_URL}`;
 
-const apiUrl: any = {
+export const apiUrl: any = {
     uploaderUrl: {
-        uploadCSV: `${baseUrlApp}/upload-csv-file`, // POST
+        uploadCSV: `${baseUrlApp}/api/upload-csv-file`, // POST
     },
     auth: {
-        signIn: `${baseUrlApp}/auth/login`, // GET
-        signUp: `${baseUrlApp}/auth/signup`, // TO BE RELEASED
-        validateToken: `${baseUrlApp}/auth/validate_token`, // TO BE RELEASED
+        signIn: `${baseUrlApp}/api/auth/login`, // GET
+        signUp: `${baseUrlApp}/api/auth/signup`, // TO BE RELEASED
+        validateToken: `${baseUrlApp}/api/auth/validate_token`, // TO BE RELEASED
     },
     statistics: {
-        all: `${baseUrlApp}/statistics/all`, // GET
-        filtered: `${baseUrlApp}/statistics`, // GET
-        countAll: `${baseUrlApp}/statistics/count`, // GET
+        all: `${baseUrlApp}/api/statistics/all`, // GET
+        filtered: `${baseUrlApp}/api/statistics`, // GET
+        countAll: `${baseUrlApp}/api/statistics/count`, // GET
     },
     buildAuthHeaders: (context: User) => {
         return context.user.token

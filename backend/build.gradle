@@ -1,12 +1,9 @@
-plugins {
-    id 'java'
-}
-
+apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'bratchikov.ivan'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -15,11 +12,17 @@ configurations {
     }
 }
 
+bootJar {
+    archiveBaseName = 'fls-sert'
+    archiveVersion =  '0.1.0'
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    runtimeOnly project(':frontend')
     implementation project(':frontend')
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -31,16 +34,32 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation project(':frontend')
 }
 
 /**
-     * Adds front build files to jar recourses
+     * Adds front build files to jar recourses for production
  */
 processResources {
     from("$rootProject.projectDir/frontend/build") {
         into 'META-INF/resources'
     }
 }
+
+/**
+    * Adds front build files to jar recourses for development
+ */
+task copyFrontBuildForRun(type: Copy) {
+    project.copy {
+        from "$rootProject.projectDir/frontend/build"
+        into "$rootProject.projectDir/backend/build/resources/main/META-INF/resources"
+    }
+
+    doFirst {
+        println "Copied frontend build to Spring recourses"
+    }
+}
+bootRun.dependsOn(copyFrontBuildForRun)
 
 /**
  * Cleans everything that is created by the gradle, i.e. the node installation and the spring and .gradle

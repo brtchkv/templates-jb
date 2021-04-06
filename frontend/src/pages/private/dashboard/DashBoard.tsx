@@ -94,7 +94,7 @@ function DashBoard() {
     };
 
     if (error) {
-        return <div>{t('util.error')}: {error}</div>;
+        return <div>{t('util.error')}: {t('dashboard.toast.errorGettingData')}</div>;
     } else if (!isLoaded) {
         return <Loading/>;
     } else {

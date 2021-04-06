@@ -13,8 +13,8 @@ i18n
             ru: languageRU
         },
         lookupLocalStorage: 'i18nextLng',
-        lng:  window.localStorage.i18nextLng ? window.localStorage.i18nextLng : "ru",
-        fallbackLng: "ru",
+        lng:  window.localStorage.i18nextLng ? window.localStorage.i18nextLng : "en",
+        fallbackLng: "en",
         ns: ["translations"],
         defaultNS: "translations",
         keySeparator: ".",

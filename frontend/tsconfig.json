@@ -33,7 +33,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": ["cypress", "cypress-file-upload"]
   },
   "include": [
     "src"

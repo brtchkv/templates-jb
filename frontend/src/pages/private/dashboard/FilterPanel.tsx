@@ -48,13 +48,13 @@ function FilterPanel(props: PropsFilter) {
 
     return (
         <FilterForm onChange={handleSubmit(onSubmit)}>
-            <div className="course-filters">
+            <div className="date-filters">
                 <ButtonContainer>
-                    <Button onClick={(event) => prevDate(event)}>
+                    <Button id="prev-date" onClick={(event) => prevDate(event)}>
                         <Image src={left} size={{width: "25px"}} recolor={true} invert={true}/>
                     </Button>
                 </ButtonContainer>
-                <div className="course-filter">
+                <div className="date-filter">
                     <Form.Control
                         name="range" as={SelectorStyled} ref={register}
                         className="plp-selector" custom defaultValue={props.filterOption}
@@ -67,7 +67,7 @@ function FilterPanel(props: PropsFilter) {
                     </Form.Control>
                 </div>
                 <ButtonContainer>
-                    <Button onClick={(event)  => nextDate(event)}>
+                    <Button id="next-date" onClick={(event)  => nextDate(event)}>
                         <Image src={right} size={{width: "25px"}} recolor={true} invert={true}/>
                     </Button>
                 </ButtonContainer>

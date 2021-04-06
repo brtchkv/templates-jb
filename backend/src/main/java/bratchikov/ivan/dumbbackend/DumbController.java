@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
@@ -44,7 +44,7 @@ public class DumbController {
      * @param  file  file which will be uploaded to the for parser test
      * @return       parsed collection
      */
-    @PostMapping("/upload-csv-file-test")
+    @PostMapping("/api/upload-csv-file-test")
     public String uploadCSVFileTest(@RequestParam("file") MultipartFile file) {
         List<StatData> statistics = new ArrayList();
         if (!file.isEmpty()) {
@@ -62,16 +62,15 @@ public class DumbController {
      *
      * @param  file  file which will be uploaded to the for parser test
      * @param  token X-Authentication token from the request header
-     * @return       response status
+     * @return       response status or {'message': string} in case of error
      */
-    @PostMapping("/upload-csv-file")
-    @ResponseStatus(HttpStatus.OK)
-    public String uploadCSVFileForUser(@RequestParam("file") MultipartFile file, @RequestHeader("X-Authentication") String token) {
+    @PostMapping("/api/upload-csv-file")
+    public ResponseEntity uploadCSVFileForUser(@RequestParam("file") MultipartFile file, @RequestHeader("X-Authentication") String token) {
         List<StatData> statistics = new ArrayList();
         User user = getUser(token);
         if (user == null) {
             logger.error("[uploadCSVFileForUser] User lookup failed");
-            return null;
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ResponseMessage("No user found"));
         }
         if (!storageBean.getUserTokens().containsKey(user.getId())) {
             logger.info("[uploadCSVFileForUser] New Stats for user -- ".concat(user.getUsername()));
@@ -82,11 +81,14 @@ public class DumbController {
                     logger.info("size ".concat(String.valueOf(storageBean.getUserStatistics().size())));
                 } catch (Exception e) {
                     logger.error(e.toString());
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Wrong file " +
+                            "format: parse error"));
                 }
             }
-            return "{'status': 'OK'}";
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("Successfully uploaded"));
         } else {
-            return null;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("No file section for this " +
+                    "user"));
         }
     }
 
@@ -105,63 +107,63 @@ public class DumbController {
     }
 
     /**
-     * Get all the stats for a given user.
+     * Get all stats for a given user.
      *
      * @param  token X-Authentication token from the request header
-     * @return       list of statData rows
+     * @return       list of statData rows or {'message': string} in case of error
      */
-    @RequestMapping("/statistics/all")
-    public List<StatData> getAllStat(@RequestHeader("X-Authentication") String token) {
+    @RequestMapping("/api/statistics/all")
+    public ResponseEntity getAllStat(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
 
         if (user == null) {
             logger.error("[getAllStat] User lookup failed");
-            return null;
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ResponseMessage("No user found"));
         }
 
-        return storageBean.getUserStatistics().get(user.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(storageBean.getUserStatistics().get(user.getId()));
     }
 
     /**
      * Get the total count of statistics records for a given user.
      *
      * @param  token X-Authentication token from the request header
-     * @return       int
+     * @return       int or {'message': string} in case of error
      */
-    @RequestMapping("/statistics/count")
-    public int getAllStatCount(@RequestHeader("X-Authentication") String token) {
+    @RequestMapping("/api/statistics/count")
+    public ResponseEntity getAllStatCount(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
 
         if (user == null) {
             logger.error("[getAllStat] User lookup failed");
-            return 0;
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ResponseMessage("No user found"));
         }
 
-        return storageBean.getUserStatistics().get(user.getId()).size();
+        return ResponseEntity.status(HttpStatus.OK).body(storageBean.getUserStatistics().get(user.getId()).size());
     }
 
     /**
      * Get filtered statistics base on range and start date of a slice for a given user.
      *
-     * @param  token X-Authentication token from the request header
      * @param  range Range of a slice: day, week, month, quarter or a year
      * @param  dateString Starting date of a range slice in ISO timestamp format
-     * @return       list for stat data
+     * @param  token X-Authentication token from the request header
+     * @return       list for stat data or {'message': string} in case of error
      */
-    @RequestMapping("/statistics")
-    public List<StatData> getFilteredStat(@RequestParam(value = "range") String range,
-                                        @RequestParam(value = "date") String dateString,
-                                        @RequestHeader("X-Authentication") String token) {
+    @RequestMapping("/api/statistics")
+    public ResponseEntity getFilteredStat(@RequestParam(value = "range") String range,
+                                  @RequestParam(value = "date") String dateString,
+                                  @RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
         if (user == null) {
             logger.error("[getFilteredStat] User lookup failed");
-            return null;
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ResponseMessage("No user found"));
         }
 
         if (range != null && dateString != null && !range.isEmpty() && !dateString.isEmpty()) {
             List<StatData> statistics = storageBean.getUserStatistics().get(user.getId());
             if (statistics.isEmpty()) {
-                return List.of();
+                return ResponseEntity.status(HttpStatus.OK).body(List.of());
             }
 
             Stream<StatData> staticsStream = statistics.stream();
@@ -173,7 +175,8 @@ public class DumbController {
                 date = Date.from(i);
             } catch (Exception e) {
                 logger.error(e.toString());
-                return null;
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Wrong start date " +
+                        "format"));
             }
 
             switch (range.toLowerCase()) {
@@ -209,9 +212,10 @@ public class DumbController {
                             staticsStream.filter(c -> (c.getTimeStamp().getYear() == date.getYear()));
                     break;
             }
-            return staticsStream.collect(Collectors.toList());
+            return  ResponseEntity.status(HttpStatus.OK).body(staticsStream.collect(Collectors.toList()));
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("No range or start date " +
+                "specified"));
     }
 
     /**
@@ -220,7 +224,7 @@ public class DumbController {
      * @param req JSON of user data in the format of {username: string, password: string}
      * @return     Object of user token and role in the format of {token: string, role: string}
      */
-    @PostMapping("/auth/login")
+    @PostMapping("/api/auth/login")
     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest req) {
         Optional<User> userOpt = storageBean.getUsers().stream()
                 .filter((u) -> u.getUsername().equals(req.username) && u.getPassword().equals(req.password)).findAny();
@@ -240,7 +244,7 @@ public class DumbController {
      * @param token JX-Authentication token from the request header
      * @return      Object of user token and role in the format of {token: string, role: string}
      */
-    @RequestMapping("/auth/check")
+    @RequestMapping("/api/auth/check")
     public AuthenticationResponse checkAuthentication(@RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
         if (user == null) {
@@ -264,6 +268,12 @@ public class DumbController {
     public static class AuthenticationRequest {
         private String username;
         private String password;
+    }
+
+    @Data
+    @AllArgsConstructor
+    public static class ResponseMessage {
+        private String message;
     }
 
     @Data

@@ -49,6 +49,11 @@
           }
         }
       },
+      "toast": {
+        "success": "Success",
+        "errorGettingData": "Error in fetching statistics",
+        "errorCount": "Error in fetching stats count"
+      },
       "pagination": {
         "more": "More",
         "up": "Up"

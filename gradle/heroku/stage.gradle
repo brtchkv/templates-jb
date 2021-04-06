@@ -1,4 +1,3 @@
 apply plugin: 'base'
 
-task stage(dependsOn: ['clean', 'build'])
-build.mustRunAfter clean
+task stage(dependsOn: 'build')

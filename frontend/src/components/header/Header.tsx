@@ -13,14 +13,16 @@ import Fade from "../../helpers/animation/Fade";
 import Image from "../image/Image";
 import jb from "./styles/jetbrains.svg"
 import {
-    HeaderStyled,
+    HeaderStyled, MenuButtonSettingsStyled,
     MenuButtonStyled,
-    MenuProfileButtonStyled,
+    MenuProfileButtonStyled, MenuProfileWrapper, MenuSettingsWrapper,
     MenuStyled,
-    MenuWrapper,
-    StyledNav
+    StyledMoon,
+    StyledNav, StyledSun, ThemeSwitcherStyled,
 } from "./styles/header";
 import {handleTextSelected} from "../../helpers/speechSynthesis";
+import {theme as themeDark} from "../../core-styles/theme/themes/darkTheme";
+import {theme as themeDefault} from "../../core-styles/theme/themes/defaultTheme";
 
 interface HeaderProps {
     themeController: any
@@ -41,7 +43,7 @@ const Header = (props: HeaderProps) => {
         setSpeechSynthesisVolume: setSpeechSynthesisVolume
     };
 
-    function getMute(): boolean  {
+    function getMute(): boolean {
         const localBvi = window.localStorage.getItem('bvi-speech');
         if (localBvi) {
             return JSON.parse(localBvi);
@@ -51,15 +53,15 @@ const Header = (props: HeaderProps) => {
 
     useEffect(() => {
         window.localStorage.setItem('bvi-speech', JSON.stringify(speechSynthesisVolume));
-        if (!speechSynthesisVolume || !speechSynthesis){
+        if (!speechSynthesisVolume || !speechSynthesis) {
             window.removeEventListener('mouseup', handleTextSelected);
-        } else if (speechSynthesis && speechSynthesisVolume){
+        } else if (speechSynthesis && speechSynthesisVolume) {
             window.addEventListener('mouseup', handleTextSelected);
         }
         return () => {
             window.removeEventListener('mouseup', handleTextSelected);
         };
-    }, [speechSynthesisVolume]);
+    });
 
     const toggleBvi = () => {
         showBvi(!bvi)
@@ -84,6 +86,26 @@ const Header = (props: HeaderProps) => {
         menuProfile.current.toggle(event)
     }
 
+    function setWhiteTheme() {
+        props.themeController.setTheme(
+            {
+                ...props.themeController.theme,
+                styles: themeDefault,
+                themeName: "default"
+            }
+        )
+    }
+
+    function setDarkTheme() {
+        props.themeController.setTheme(
+            {
+                ...props.themeController.theme,
+                styles: themeDark,
+                themeName: "dark"
+            }
+        )
+    }
+
     const Logo = () => (
         <div className="col-auto px-sm-0">
             <Link to={NonAuthRoutes.landing}>
@@ -102,7 +124,7 @@ const Header = (props: HeaderProps) => {
     );
 
     const Settings = () => (
-        <MenuWrapper className="col-auto d-flex">
+        <MenuSettingsWrapper className="d-flex">
             <MenuStyled model={[
                 {
                     label: t('header.settings.a11'), icon: "pi pi-eye", command: () => {
@@ -115,13 +137,13 @@ const Header = (props: HeaderProps) => {
                     }
                 }
             ]} popup={true} ref={menuSettings} id="popup_menu_settings"/>
-            <MenuButtonStyled icon="pi pi-cog" onClick={toggleSettings}
+            <MenuButtonSettingsStyled icon="pi pi-cog" onClick={toggleSettings}
                               aria-controls="popup_menu_settings" aria-haspopup={true}/>
-        </MenuWrapper>
+        </MenuSettingsWrapper>
     );
 
     const ProfileStudentMenu = (props: { entity: { setUser: Dispatch<SetStateAction<UserCredentials>> } }) => (
-        <div className="ml-auto ml-md-0">
+        <MenuProfileWrapper className="ml-auto ml-md-0">
             <MenuStyled model={[
                 {
                     label: t('header.authMenu.profile'),
@@ -140,7 +162,7 @@ const Header = (props: HeaderProps) => {
             <MenuProfileButtonStyled label={t('header.authMenu.title')} icon="fas fa-user-circle fa-2x"
                                      onClick={toggleProfileStudent}
                                      aria-controls="popup_menu_profile" aria-haspopup={true}/>
-        </div>
+        </MenuProfileWrapper>
     );
 
     const ProfileBasicMenu = (props: { entity: { setUser: Dispatch<SetStateAction<UserCredentials>> } }) => (
@@ -160,7 +182,15 @@ const Header = (props: HeaderProps) => {
         </div>
     );
 
-
+    const ThemeSwitcher = () => (
+        <ThemeSwitcherStyled className="px-3 py-2">
+            {props.themeController.theme.themeName === "dark" ? (
+                <StyledSun size={32} onClick={() => setWhiteTheme()}/>
+            ) : (
+                <StyledMoon size={32} onClick={() => setDarkTheme()}/>
+            )}
+        </ThemeSwitcherStyled>
+    );
     return (
         <HeaderStyled className="header">
             <div className="main-menu">
@@ -178,6 +208,7 @@ const Header = (props: HeaderProps) => {
                                 return <></>
                             }}
                         </userContext.Consumer>
+                        <ThemeSwitcher/>
                         <Settings/>
                         <Fade show={bvi}>
                             <Bvi showToggler={toggleBvi} speechController={speechController}

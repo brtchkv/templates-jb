@@ -10,11 +10,16 @@ node {
     download = true
 }
 
+ext {
+    mode = System.getProperty("env", "development")
+    port = System.getProperty("port", "8080")
+}
+
 /**
-     * Cleans everything that is created by the node plugin, i.e. the node installation and the node_modules with
-     * .gradle folder
-*/
-task cleanAll(type: Delete){
+ * Cleans everything that is created by the node plugin, i.e. the node installation and the node_modules with
+ * .gradle folder
+ */
+task cleanAll(type: Delete) {
     delete "build"
     delete "node_modules"
     delete ".gradle"
@@ -23,26 +28,26 @@ task cleanAll(type: Delete){
 clean.dependsOn(cleanAll)
 
 /**
-     * Packs project with yarn build command
+ * Packs project with yarn build command
  */
 task bundle(type: YarnTask, dependsOn: yarn_install) {
-    environment = ["NODE_ENV": "development"]
-    if (project.hasProperty('env')) {
-        if (project.property('env').toString() == "prod") {
-            environment = ["NODE_ENV": "production"]
-            println "Building prod front package"
-        } else {
-            println "Building dev front package"
-        }
+    environment = ["API_ENV": mode]
+    args = ["--API_ENV=${mode}", "build"]
+    doLast {
+        println "Bundled ${mode} build"
+        println "NODE_ENV: ${System.getProperty("API_ENV")}"
     }
-    args = ['build']
 }
 
 /**
-     * Runs project with yarn start
+ * Runs project with yarn start
  */
 task run(type: YarnTask) {
+    environment = ["NODE_ENV": mode]
     args = ['start']
+    doLast {
+        println "Running ${mode} build"
+    }
 }
 
 assemble.dependsOn(bundle)

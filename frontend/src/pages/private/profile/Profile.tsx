@@ -11,12 +11,12 @@ const StudentCourses = () => {
     const toast = useRef(null);
     const context = useContext(userContext);
 
-    const showErrorToast = () => {
+    const showErrorToast = (error: {message: string}) => {
         // @ts-ignore
         toast.current.show({
             severity: 'error',
             summary: `${t("profile.error")}`,
-            detail: `${t("profile.errorUpload")}`
+            detail: error.message
         })
     }
 
@@ -35,8 +35,8 @@ const StudentCourses = () => {
                 () => {
                     showSuccessToast();
                 },
-                () => {
-                    showErrorToast();
+                (error) => {
+                    showErrorToast(error);
                 });
     };
 

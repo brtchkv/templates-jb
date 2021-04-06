@@ -11,10 +11,10 @@
 
 /* filters */
 
-.course-filters {
+.date-filters {
     display: flex;
 }
-.course-filters .course-filter {
+.date-filters .date-filter {
     width: 30%;
     flex-basis: 30%;
     flex-grow: 1;
