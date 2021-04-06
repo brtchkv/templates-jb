@@ -12,9 +12,9 @@ export const useTheme = () => {
         const localTheme = window.localStorage.getItem('theme');
         if (localTheme) {
             const localThemeJson = JSON.parse(localTheme);
-            if (localThemeJson.themeName === "dark") {
+            if (localThemeJson.themeName === "dark" || localThemeJson.themeName === "dark-bvi") {
                 localThemeJson.styles = themeDark;
-            } else if (localThemeJson.themeName === "white") {
+            } else if (localThemeJson.themeName === "white" || localThemeJson.themeName === "white-bvi") {
                 localThemeJson.styles = themeWhite;
             } else {
                 localThemeJson.styles = themeDefault;
