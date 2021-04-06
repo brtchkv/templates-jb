@@ -36,7 +36,8 @@
     8. *Recharts* для рендера графиков
 
 * **Backend**:
-    1. *Spring Boot* 
+    1. *JAVA 11*
+    1. *Spring Boot*
     2. *Univocity-parsers* для парсинга *CSV*
 
 * **Devops**:
