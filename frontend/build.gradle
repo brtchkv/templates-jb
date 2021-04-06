@@ -32,10 +32,13 @@ clean.dependsOn(cleanAll)
  */
 task bundle(type: YarnTask, dependsOn: yarn_install) {
     environment = ["API_ENV": mode]
-    args = ["--API_ENV=${mode}", "build"]
+    if (mode == "production") {
+        args = ["build-prod"]
+    } else {
+        args = ["build-dev"]
+    }
     doLast {
         println "Bundled ${mode} build"
-        println "NODE_ENV: ${System.getProperty("API_ENV")}"
     }
 }
 
@@ -43,8 +46,8 @@ task bundle(type: YarnTask, dependsOn: yarn_install) {
  * Runs project with yarn start
  */
 task run(type: YarnTask) {
-    environment = ["NODE_ENV": mode]
-    args = ['start']
+    environment = ["API_ENV": mode]
+    args = ["start", "--API_ENV=${mode}"]
     doLast {
         println "Running ${mode} build"
     }
