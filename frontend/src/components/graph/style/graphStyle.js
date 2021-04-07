@@ -7,11 +7,12 @@ export const GraphWrapper = styled.div`
     margin: auto;
   }
   
-  @media (max-width: 768px) and (min-width: 401px){
+  @media (max-width: 768px) {
     height: 200px;
   }
+  
   @media (max-width: 400px){
-    height: 140px;
+    height: 170px;
   }
 `;
 

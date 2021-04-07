@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {ArrowThickLeft, ArrowThickRight} from 'styled-icons/zondicons';
 
 export const FilterPanelContainerStyled = styled.div`
     background: ${({theme}) => theme.styles.main.filterPanel.background};
@@ -20,11 +21,28 @@ export const FilterForm = styled.form`
     width: 100%;
 `
 
-export const Button = styled.button`
+export const ArrowRightStyled = styled(ArrowThickRight)`
+  color: ${({theme}) => theme.styles.header.color};
+`;
+
+export const ArrowLeftStyled = styled(ArrowThickLeft)`
+  color: ${({theme}) => theme.styles.header.color};
+`;
+
+export const ButtonStyled = styled.div`
   cursor: pointer;
   border: none;
   vertical-align:middle;
   background-color: inherit;
+  transition: background 0.2s ease-in-out 0s;
+  padding: 0.3rem 1rem;
+  border-radius: 4px;
+  &:hover {
+    color: rgb(0, 0, 0) !important;
+    background-color: rgb(236, 239, 242) !important;
+    border-color: rgb(236, 239, 242) !important;
+    filter: brightness(85%);
+  }
 `;
 
 export const ButtonContainer = styled.div`

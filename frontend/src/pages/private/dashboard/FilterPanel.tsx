@@ -2,10 +2,13 @@ import Form from 'react-bootstrap/Form'
 import "./styles/filterPanel.css"
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
-import {SelectorStyled, FilterForm, Button, ButtonContainer} from "./styles/filterPanel";
-import left from "./images/left.png";
-import right from "./images/right.png";
-import Image from "../../../components/image/Image";
+import {
+    SelectorStyled,
+    FilterForm,
+    ButtonContainer,
+    ArrowRightStyled,
+    ArrowLeftStyled, ButtonStyled
+} from "./styles/filterPanel";
 import {Dayjs} from "dayjs";
 import {addRange, getStartOf, subtractRange} from "../../../helpers/date";
 
@@ -32,7 +35,7 @@ function FilterPanel(props: PropsFilter) {
         {value: "year", label: t('dashboard.filterPanel.filterSelector.sorting.options.year')},
     ];
 
-    const onSubmit = (preferences: {range: string}) => {
+    const onSubmit = (preferences: { range: string }) => {
         props.setFilteredData(getStartOf(props.startDate), preferences.range);
     };
 
@@ -50,9 +53,9 @@ function FilterPanel(props: PropsFilter) {
         <FilterForm onChange={handleSubmit(onSubmit)}>
             <div className="date-filters">
                 <ButtonContainer>
-                    <Button id="prev-date" onClick={(event) => prevDate(event)}>
-                        <Image src={left} size={{width: "25px"}} recolor={true} invert={true}/>
-                    </Button>
+                    <ButtonStyled>
+                        <ArrowLeftStyled size={32} id="prev-date" onClick={(event) => prevDate(event)}/>
+                    </ButtonStyled>
                 </ButtonContainer>
                 <div className="date-filter">
                     <Form.Control
@@ -67,9 +70,9 @@ function FilterPanel(props: PropsFilter) {
                     </Form.Control>
                 </div>
                 <ButtonContainer>
-                    <Button id="next-date" onClick={(event)  => nextDate(event)}>
-                        <Image src={right} size={{width: "25px"}} recolor={true} invert={true}/>
-                    </Button>
+                    <ButtonStyled>
+                        <ArrowRightStyled size={32} id="next-date" onClick={(event) => nextDate(event)}/>
+                    </ButtonStyled>
                 </ButtonContainer>
             </div>
         </FilterForm>
