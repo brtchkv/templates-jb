@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ArrowThickLeft, ArrowThickRight} from 'styled-icons/zondicons';
+import {ArrowLeft, ArrowRight} from 'styled-icons/evaicons-solid';
 
 export const FilterPanelContainerStyled = styled.div`
     background: ${({theme}) => theme.styles.main.filterPanel.background};
@@ -21,11 +21,11 @@ export const FilterForm = styled.form`
     width: 100%;
 `
 
-export const ArrowRightStyled = styled(ArrowThickRight)`
+export const ArrowRightStyled = styled(ArrowRight)`
   color: ${({theme}) => theme.styles.header.color};
 `;
 
-export const ArrowLeftStyled = styled(ArrowThickLeft)`
+export const ArrowLeftStyled = styled(ArrowLeft)`
   color: ${({theme}) => theme.styles.header.color};
 `;
 
