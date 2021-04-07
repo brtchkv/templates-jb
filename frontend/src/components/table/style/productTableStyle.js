@@ -15,7 +15,7 @@ export const Td = styled.td`
   text-align: center;
 `;
 
-export const FirstTr = styled.tr`
+export const Tr = styled.tr`
   background: ${({theme}) => theme.styles.main.filterPanel.background};
   color: ${({theme}) => theme.styles.main.catalog.dataTable.color};
 `;

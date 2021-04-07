@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {useTranslation} from "react-i18next";
-import {FirstTr, Table, Td} from "./style/productTableStyle";
+import {Tr, Table, Td} from "./style/productTableStyle";
 
 interface ItemsI {
     data: Array<{
@@ -18,12 +18,12 @@ const ProductTable = (props: ItemsI) => {
         <>
             <Table className={"d-none d-md-table"}>
                 <tbody>
-                <FirstTr>
+                <Tr>
                     <Td>{t('dashboard.table.product')}</Td>
                     <Td>{t('dashboard.table.minUsage')}</Td>
                     <Td>{t('dashboard.table.maxUsage')}</Td>
                     <Td>{t('dashboard.table.averageUsage')}</Td>
-                </FirstTr>
+                </Tr>
                 {props.data.map((element, index) =>
                     <tr key={index}>
                         <Td>{element.name}</Td>
@@ -36,12 +36,12 @@ const ProductTable = (props: ItemsI) => {
             </Table>
             <Table className={"d-md-none"}>
                 <tbody>
-                <FirstTr>
+                <Tr>
                     <Td>{t('dashboard.table.productMobile')}</Td>
                     {props.data.map((element, index) =>
                         <Td key={index}>{element.name}</Td>
                     )}
-                </FirstTr>
+                </Tr>
                 <tr>
                     <Td>{t('dashboard.table.minUsageMobile')}</Td>
                     {props.data.map((element, index) =>
