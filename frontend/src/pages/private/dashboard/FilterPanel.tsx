@@ -53,8 +53,8 @@ function FilterPanel(props: PropsFilter) {
         <FilterForm onChange={handleSubmit(onSubmit)}>
             <div className="date-filters">
                 <ButtonContainer>
-                    <ButtonStyled>
-                        <ArrowLeftStyled size={32} id="prev-date" onClick={(event) => prevDate(event)}/>
+                    <ButtonStyled onClick={(event) => prevDate(event)}>
+                        <ArrowLeftStyled size={32} id="prev-date"/>
                     </ButtonStyled>
                 </ButtonContainer>
                 <div className="date-filter">
@@ -70,8 +70,8 @@ function FilterPanel(props: PropsFilter) {
                     </Form.Control>
                 </div>
                 <ButtonContainer>
-                    <ButtonStyled>
-                        <ArrowRightStyled size={32} id="next-date" onClick={(event) => nextDate(event)}/>
+                    <ButtonStyled onClick={(event) => nextDate(event)}>
+                        <ArrowRightStyled size={32} id="next-date"/>
                     </ButtonStyled>
                 </ButtonContainer>
             </div>
