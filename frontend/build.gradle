@@ -28,7 +28,8 @@ task cleanAll(type: Delete) {
 clean.dependsOn(cleanAll)
 
 /**
- * Packs project with yarn build command
+ * Packs project with yarn build command. Use -Denv to specify runtime environment, either production or development
+ * By default, development env is used
  */
 task bundle(type: YarnTask, dependsOn: yarn_install) {
     environment = ["API_ENV": mode]
@@ -43,7 +44,8 @@ task bundle(type: YarnTask, dependsOn: yarn_install) {
 }
 
 /**
- * Runs project with yarn start
+ * Runs project with yarn start. Use -Denv to specify runtime environment, either production or development
+ * By default, development env is used
  */
 task run(type: YarnTask) {
     environment = ["API_ENV": mode]

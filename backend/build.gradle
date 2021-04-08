@@ -38,7 +38,7 @@ dependencies {
 }
 
 /**
-     * Adds front build files to jar recourses for production
+ * Adds front build files to jar recourses for production
  */
 processResources {
     from("$rootProject.projectDir/frontend/build") {
@@ -47,7 +47,7 @@ processResources {
 }
 
 /**
-    * Adds front build files to jar recourses for development
+ * Adds front build files to jar recourses for development
  */
 task copyFrontBuildForRun(type: Copy) {
     project.copy {
@@ -62,8 +62,7 @@ task copyFrontBuildForRun(type: Copy) {
 bootRun.dependsOn(copyFrontBuildForRun)
 
 /**
- * Cleans everything that is created by the gradle, i.e. the node installation and the spring and .gradle
- * folder.
+ * Cleans everything that is created by the gradle, i.e. spring build files and .gradle dependencies
  */
 task cleanAll(type: Delete){
     delete "build"
