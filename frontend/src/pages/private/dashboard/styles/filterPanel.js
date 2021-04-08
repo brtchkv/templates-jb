@@ -22,11 +22,17 @@ export const FilterForm = styled.form`
 `
 
 export const ArrowRightStyled = styled(ArrowRight)`
-  color: ${({theme}) => theme.styles.header.color};
+  color: ${({theme}) => theme.styles.main.filterPanel.button.color};
+  &:hover {
+    color: ${({theme}) => theme.styles.main.filterPanel.button.hover.color};
+  }
 `;
 
 export const ArrowLeftStyled = styled(ArrowLeft)`
-  color: ${({theme}) => theme.styles.header.color};
+  color: ${({theme}) => theme.styles.main.filterPanel.button.color};
+  &:hover {
+    color: ${({theme}) => theme.styles.main.filterPanel.button.hover.color};
+  }
 `;
 
 export const ButtonStyled = styled.div`
@@ -38,10 +44,12 @@ export const ButtonStyled = styled.div`
   padding: 0.3rem 1rem;
   border-radius: 4px;
   &:hover {
-    color: rgb(0, 0, 0) !important;
     background-color: rgb(236, 239, 242) !important;
     border-color: rgb(236, 239, 242) !important;
     filter: brightness(85%);
+    svg {
+        color: ${({theme}) => theme.styles.main.filterPanel.button.hover.color};
+    }
   }
 `;
 

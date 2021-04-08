@@ -150,6 +150,12 @@ export const theme = {
             },
             label: {
                 color: whiteTheme.mainColorText
+            },
+            button: {
+                color: whiteTheme.mainColorText,
+                hover: {
+                    color: whiteTheme.mainColorText
+                }
             }
         },
         authentication: {

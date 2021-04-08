@@ -3,7 +3,7 @@ export const blackTheme = {
     mainColorDarker: "#000000",
     mainColorLighter: "#1e1e1e",
     mainColorText: "#fff",
-    mainColorTextDark: "#777777",
+    mainColorTextDark: "#8e8e8e",
     mainColorBright: "#4e5255",
     loaderColor: "#fff"
 }
