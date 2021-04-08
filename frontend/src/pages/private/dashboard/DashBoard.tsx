@@ -133,7 +133,7 @@ function DashBoard() {
 
                             <h2 className="title">
                                 <Trans
-                                    i18nKey="dashboard.filterPanel.totalCourses"
+                                    i18nKey="dashboard.filterPanel.totalStats"
                                     values={{count: count, total: maxRecords}}
                                     components={{1: <span className="comment"/>}}
                                 />

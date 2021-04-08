@@ -33,7 +33,7 @@
     },
     "dashboard": {
       "filterPanel": {
-        "totalCourses": "Total of {{count}}<1> records out of {{total}}</1>",
+        "totalStats": "Total of {{count}}<1> records out of {{total}}</1>",
         "dateRange": "From {{start}}<1> till {{end}}</1>",
         "filterSelector": {
           "sorting": {
