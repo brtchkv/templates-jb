@@ -39,8 +39,8 @@ public class DumbController {
     /**
      * Method for testing csv parse with statistics bean.
      *
-     * @param  file  file which will be uploaded to the for parser test
-     * @return       parsed collection
+     * @param file file which will be uploaded to the for parser test
+     * @return parsed collection
      */
     @PostMapping("/api/upload-csv-file-test")
     public String uploadCSVFileTest(@RequestParam("file") MultipartFile file) {
@@ -58,9 +58,9 @@ public class DumbController {
     /**
      * Method for csv stats file upload for a user based on the auth token.
      *
-     * @param  file  file which will be uploaded to the for parser test
-     * @param  token X-Authentication token from the request header
-     * @return       response status or {'message': string} in case of error
+     * @param file  file which will be uploaded to the for parser test
+     * @param token X-Authentication token from the request header
+     * @return response status or {'message': string} in case of error
      */
     @PostMapping("/api/upload-csv-file")
     public ResponseEntity uploadCSVFileForUser(@RequestParam("file") MultipartFile file, @RequestHeader("X-Authentication") String token) {
@@ -72,16 +72,14 @@ public class DumbController {
         }
         if (!storageBean.getUserTokens().containsKey(user.getId())) {
             logger.info("[uploadCSVFileForUser] New Stats for user -- ".concat(user.getUsername()));
-            if (!file.isEmpty()) {
-                try (Reader inputReader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-                    statistics = parseCSVStatData(inputReader);
-                    storageBean.getUserStatistics().put(user.getId(), statistics);
-                    logger.info("size ".concat(String.valueOf(storageBean.getUserStatistics().size())));
-                } catch (Exception e) {
-                    logger.error(e.toString());
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Wrong file " +
-                            "format: parse error"));
-                }
+            try (Reader inputReader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+                statistics = parseCSVStatData(inputReader);
+                storageBean.getUserStatistics().put(user.getId(), statistics);
+                logger.info("size ".concat(String.valueOf(storageBean.getUserStatistics().size())));
+            } catch (Exception e) {
+                logger.error(e.toString());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("Wrong file " +
+                        "format: parse error"));
             }
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage("Successfully uploaded"));
         } else {
@@ -107,8 +105,8 @@ public class DumbController {
     /**
      * Get all stats for a given user.
      *
-     * @param  token X-Authentication token from the request header
-     * @return       list of statData rows or {'message': string} in case of error
+     * @param token X-Authentication token from the request header
+     * @return list of statData rows or {'message': string} in case of error
      */
     @RequestMapping("/api/statistics/all")
     public ResponseEntity getAllStat(@RequestHeader("X-Authentication") String token) {
@@ -125,8 +123,8 @@ public class DumbController {
     /**
      * Get the total count of statistics records for a given user.
      *
-     * @param  token X-Authentication token from the request header
-     * @return       int or {'message': string} in case of error
+     * @param token X-Authentication token from the request header
+     * @return int or {'message': string} in case of error
      */
     @RequestMapping("/api/statistics/count")
     public ResponseEntity getAllStatCount(@RequestHeader("X-Authentication") String token) {
@@ -143,15 +141,15 @@ public class DumbController {
     /**
      * Get filtered statistics base on range and start date of a slice for a given user.
      *
-     * @param  range Range of a slice: day, week, month, quarter or a year
-     * @param  dateString Starting date of a range slice in ISO timestamp format
-     * @param  token X-Authentication token from the request header
-     * @return       list for stat data or {'message': string} in case of error
+     * @param range      Range of a slice: day, week, month, quarter or a year
+     * @param dateString Starting date of a range slice in ISO timestamp format
+     * @param token      X-Authentication token from the request header
+     * @return list for stat data or {'message': string} in case of error
      */
     @RequestMapping("/api/statistics")
     public ResponseEntity getFilteredStat(@RequestParam(value = "range") String range,
-                                  @RequestParam(value = "date") String dateString,
-                                  @RequestHeader("X-Authentication") String token) {
+                                          @RequestParam(value = "date") String dateString,
+                                          @RequestHeader("X-Authentication") String token) {
         User user = getUser(token);
         if (user == null) {
             logger.error("[getFilteredStat] User lookup failed");
@@ -210,7 +208,7 @@ public class DumbController {
                             staticsStream.filter(c -> (c.getTimeStamp().getYear() == date.getYear()));
                     break;
             }
-            return  ResponseEntity.status(HttpStatus.OK).body(staticsStream.collect(Collectors.toList()));
+            return ResponseEntity.status(HttpStatus.OK).body(staticsStream.collect(Collectors.toList()));
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage("No range or start date " +
                 "specified"));
@@ -220,7 +218,7 @@ public class DumbController {
      * Get filtered statistics base on range and start date of a slice for a given user.
      *
      * @param req JSON of user data in the format of {username: string, password: string}
-     * @return     Object of user token and role in the format of {token: string, role: string}
+     * @return Object of user token and role in the format of {token: string, role: string}
      */
     @PostMapping("/api/auth/login")
     public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest req) {
@@ -240,7 +238,7 @@ public class DumbController {
      * Check whether user exists with a given token.
      *
      * @param token JX-Authentication token from the request header
-     * @return      Object of user token and role in the format of {token: string, role: string}
+     * @return Object of user token and role in the format of {token: string, role: string}
      */
     @RequestMapping("/api/auth/check")
     public AuthenticationResponse checkAuthentication(@RequestHeader("X-Authentication") String token) {
