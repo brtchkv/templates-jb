@@ -157,14 +157,13 @@ function DashBoard() {
                         </NoDataLabel>
                     }
                 </div>
-                {(count > 0) ?
+                {(count > 0) &&
                     <div className="scroll-btn-container">
                         <AnchorContainerStyled>
                             <AnchorLink href="#top-of-catalog" offset='130'
                                         className="scroll-to-btn">{t('dashboard.pagination.up')}</AnchorLink>
                         </AnchorContainerStyled>
                     </div>
-                    : <></>
                 }
             </>
         );
