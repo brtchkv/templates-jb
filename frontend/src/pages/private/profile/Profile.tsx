@@ -7,7 +7,7 @@ import {Toast} from "primereact/toast";
 import {FileWithPath} from "file-selector";
 import {checkLocalStorage} from "../../../helpers/user";
 
-const StudentCourses = () => {
+const Profile = () => {
     const {t} = useTranslation();
     const toast = useRef(null);
     const context = useContext(userContext);
@@ -60,4 +60,4 @@ const StudentCourses = () => {
     );
 }
 
-export default StudentCourses;
+export default Profile;

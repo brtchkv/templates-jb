@@ -4,7 +4,7 @@ setTimeout(() => {
     console.log(window.speechSynthesis.getVoices());
 }, 100);
 
-function findVoice(voices, lang) {
+function findVoice(voices: any, lang: string) {
     for (let i = 0; i < voices.length; i++) {
         if (voices[i].lang.includes(lang)) {
             return voices[i];
@@ -13,13 +13,12 @@ function findVoice(voices, lang) {
     return null;
 }
 
-export const handleTextSelected = event => {
-    if (!window.getSelection().toString()) return;
-    console.log(window.getSelection().toString());
-    speak(window.getSelection().toString());
+export const handleTextSelected = () => {
+    if (!window.getSelection()?.toString()) return;
+    speak(window.getSelection()?.toString() || "");
 };
 
-export function speak(s) {
+export function speak(s: string) {
     let voices = window.speechSynthesis.getVoices();
     if (!window.speechSynthesis || window.speechSynthesis.getVoices().length === 0) {
         return;
