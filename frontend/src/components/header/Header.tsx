@@ -171,7 +171,8 @@ const Header = (props: HeaderProps) => {
 
     const ThemeSwitcher = () => (
         <ThemeSwitcherStyled className="px-3 py-2">
-            {props.themeController.theme.themeName === "dark" ? (
+            {props.themeController.theme.themeName === "dark" ||
+             props.themeController.theme.themeName === "dark-bvi"? (
                 <StyledSun size={32} onClick={() => setWhiteTheme()}/>
             ) : (
                 <StyledMoon size={32} onClick={() => setDarkTheme()}/>
