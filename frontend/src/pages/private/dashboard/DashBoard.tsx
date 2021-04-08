@@ -2,10 +2,10 @@ import {useContext, useEffect, useState} from "react";
 import './styles/dashBoard.css';
 import Loading from "../../stubs/Loading";
 import * as API from '../../../service/api/serviceAPI';
-import FilterPanel from "./FilterPanel";
+import FilterPanel from "../../../components/filterPanel/FilterPanel";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {Trans, useTranslation} from 'react-i18next'
-import {FilterPanelContainerStyled} from "./styles/filterPanel";
+import {FilterPanelContainerStyled} from "../../../components/filterPanel/styles/filterPanel";
 import {AnchorContainerStyled, NoDataLabel} from "./styles/dashBoard";
 import _ from "lodash";
 import dayjs from 'dayjs';

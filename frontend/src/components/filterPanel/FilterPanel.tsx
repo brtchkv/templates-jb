@@ -10,7 +10,7 @@ import {
     ArrowLeftStyled, ButtonStyled
 } from "./styles/filterPanel";
 import {Dayjs} from "dayjs";
-import {addRange, getStartOf, subtractRange} from "../../../helpers/date";
+import {addRange, getStartOf, subtractRange} from "../../helpers/date";
 
 interface PropsFilter {
     startDate: Dayjs,

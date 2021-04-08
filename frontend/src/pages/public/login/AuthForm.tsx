@@ -1,5 +1,5 @@
 import TabContainer from "react-bootstrap/TabContainer";
-import Login from "../../../components/auth-form/Login";
+import Login from "../../../components/authForm/Login";
 import {Link, RouteComponentProps, withRouter} from "react-router-dom";
 import "./styles/Auth.css"
 import {Tab} from 'react-bootstrap';
