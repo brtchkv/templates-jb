@@ -16,8 +16,7 @@ ext {
 }
 
 /**
- * Cleans everything that is created by the node plugin, i.e. the node installation and the node_modules with
- * .gradle folder
+ * Cleans everything that is created by the node plugin, i.e. build folder, node_modules and gradle dependencies
  */
 task cleanAll(type: Delete) {
     delete "build"
