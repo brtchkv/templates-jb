@@ -39,7 +39,7 @@ interface EnumItemsI extends Array<ItemsI> {
 function DashBoard() {
     dayjs.extend(quarterOfYear)
     dayjs.extend(localizedFormat)
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(true);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState<EnumItemsI>([]);
     const [count, setCount] = useState(0);
@@ -105,7 +105,7 @@ function DashBoard() {
 
     if (error) {
         return (
-            <div className="container courses-container cols-4">
+            <div className="container cols-4">
                 <NoDataLabel className="title">
                     {t('dashboard.toast.errorGettingData')}
                 </NoDataLabel>

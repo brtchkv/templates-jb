@@ -215,7 +215,7 @@ public class DumbController {
     }
 
     /**
-     * Get filtered statistics base on range and start date of a slice for a given user.
+     * Get filtered statistics based on range and start date of a slice for a given user.
      *
      * @param req JSON of user data in the format of {username: string, password: string}
      * @return Object of user token and role in the format of {token: string, role: string}
@@ -237,7 +237,7 @@ public class DumbController {
     /**
      * Check whether user exists with a given token.
      *
-     * @param token JX-Authentication token from the request header
+     * @param token X-Authentication token from the request header
      * @return Object of user token and role in the format of {token: string, role: string}
      */
     @RequestMapping("/api/auth/check")
