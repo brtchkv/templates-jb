@@ -116,7 +116,7 @@ function DashBoard() {
     } else {
         return (
             <>
-                <div id="top-of-catalog"/>
+                <div id="top-of-dashboard"/>
                 <FilterPanelContainerStyled className="search-tools">
                     <div className="container">
                         <div className="row d-flex flex-row justify-content-between">
@@ -160,7 +160,7 @@ function DashBoard() {
                 {(count > 0) &&
                     <div className="scroll-btn-container">
                         <AnchorContainerStyled>
-                            <AnchorLink href="#top-of-catalog" offset='130'
+                            <AnchorLink href="#top-of-dashboard" offset='130'
                                         className="scroll-to-btn">{t('dashboard.pagination.up')}</AnchorLink>
                         </AnchorContainerStyled>
                     </div>
