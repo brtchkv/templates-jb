@@ -39,7 +39,7 @@ interface EnumItemsI extends Array<ItemsI> {
 function DashBoard() {
     dayjs.extend(quarterOfYear)
     dayjs.extend(localizedFormat)
-    const [error, setError] = useState(true);
+    const [error, setError] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [items, setItems] = useState<EnumItemsI>([]);
     const [count, setCount] = useState(0);
